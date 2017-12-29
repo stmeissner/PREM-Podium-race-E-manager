@@ -12,7 +12,12 @@ require_once("functions.php"); // import mysql function
 $link = mysqlconnect(); // call mysql function to get the link to the database
 
 // Get season information
-$query = "SELECT s.*, d.name dname, COUNT(r.id) racecount FROM season s JOIN division d ON (s.division = d.id) LEFT JOIN race r ON (r.season = s.id) WHERE s.id=$season GROUP BY s.id";
+$query = "SELECT s.*, d.name dname, COUNT(r.id) racecount
+					FROM season s
+					JOIN division d ON (s.division = d.id)
+					LEFT JOIN race r ON (r.season = s.id)
+					WHERE s.id=$season GROUP BY s.id";
+
 $result = mysqli_query($link,$query);
 if(!$result) {
 	show_error("MySQL Error: " . mysqli_error($link) . "\n");
@@ -42,13 +47,14 @@ while($rsitem = mysqli_fetch_array($rsresult)) {
 
 // Get all teams and driver for this season
 $drquery = "SELECT d.id did, d.name dname, rd.dplate dplate, d.country dcountry, t.id tid, t.name tname
-	    FROM season_team st
+	    			FROM season_team st
             JOIN team t ON (st.team = t.id)
             JOIN team_driver td ON (td.team = t.id)
             JOIN driver d ON (d.id = td.driver)
             JOIN race_driver rd ON (rd.team_driver = td.id)
             WHERE st.season = $season
             ORDER BY t.name ASC, d.name ASC";
+
 $drresult = mysqli_query($link,$drquery);
 if(!$drresult) {
 	show_error("MySQL Error: " . mysql_error() . "\n");
@@ -75,17 +81,13 @@ while($dritem = mysqli_fetch_array($drresult)) {
 	$driver[$dritem['did']]['provisionals'] = array();
 }
 
-$rquery = <<<EOF
-SELECT
-	r.id race, r.name rname, r.track rtrack, r.ruleset, r.ruleset_qualifying,
-	td.driver, td.team,
-	rd.fastest_lap, rd.grid, rd.status
-FROM race r
-	JOIN race_driver rd ON (rd.race = r.id)
-	JOIN team_driver td ON (td.id = rd.team_driver)
-WHERE r.season=$season AND r.progress = 2 AND (rd.status = 0 OR rd.status = 1)
-ORDER BY r.date ASC, rd.position ASC
-EOF;
+$rquery = "SELECT r.id race, r.name rname, r.track rtrack, r.ruleset, r.ruleset_qualifying, td.driver, td.team, rd.fastest_lap, rd.grid, rd.status
+				   FROM race r
+					 JOIN race_driver rd ON (rd.race = r.id)
+					 JOIN team_driver td ON (td.id = rd.team_driver)
+					 WHERE r.season=$season AND r.progress = 2 AND (rd.status = 0 OR rd.status = 1)
+					 ORDER BY r.date ASC, rd.position ASC";
+
 $rresult = mysqli_query($link,$rquery);
 if(!$rresult) {
 	show_error("MySQL Error: " . mysql_error() . "\n");
@@ -237,7 +239,7 @@ usort($team, "point_sort");
 <tr class="w3-grey">
 	<td width="20%">Division:</td>
 	<td width="30%"><?=$item['dname']?></td>
-	<td width="20%">Ruleset:</td>
+	<td width="20%">&nbsp;</td>
 	<td width="30%"><?=$ruleset['name']?><?if(isset($ruleset_qualifying)) echo " (qual: " . $ruleset_qualifying['name'] . ")"?></td>
 </tr>
 <tr class="w3-green">
