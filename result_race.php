@@ -6,7 +6,25 @@ $race = addslashes($_GET['race']);
 
 require_once("functions.php"); // import mysql function
 $link = mysqlconnect(); // call mysql function to get the link to the database
-$query = "SELECT r.*, s.name sname, d.name dname, rs.name rsname, qrs.name qrsname FROM race r LEFT JOIN season s ON (s.id = r.season) JOIN division d ON (d.id = r.division) JOIN point_ruleset rs ON (rs.id = r.ruleset) LEFT JOIN point_ruleset qrs ON (qrs.id = r.ruleset_qualifying) WHERE r.id='$race'";
+<<<<<<< HEAD
+$query = "SELECT r.*, s.name sname, d.name dname, rs.name rsname, qrs.name qrsname
+					FROM race r
+					LEFT JOIN season s ON (s.id = r.season)
+					JOIN division d ON (d.id = r.division)
+					JOIN point_ruleset rs ON (rs.id = r.ruleset)
+					LEFT JOIN point_ruleset qrs ON (qrs.id = r.ruleset_qualifying)
+					WHERE r.id='$race'";
+=======
+$query = "SELECT r.*, s2.*, s.name sname, d.name dname, rs.name rsname, qrs.name qrsname
+ 					FROM race r
+ 					LEFT JOIN season s ON (s.id = r.season)
+ 					JOIN division d ON (d.id = r.division)
+ 					JOIN season s2 ON (s2.id = r.season)
+ 					JOIN point_ruleset rs ON (rs.id = r.ruleset)
+ 					LEFT JOIN point_ruleset qrs ON (qrs.id = r.ruleset_qualifying)
+ 					WHERE r.id='$race'";
+
+>>>>>>> logo_simresults
 $result = mysqli_query($link,$query);
 if(!$result) {
 	show_error("MySQL Error: " . mysqli_error($link) . "\n");
@@ -20,14 +38,38 @@ if(mysqli_num_rows($result) == 0) {
 $item = mysqli_fetch_array($result);
 $date = strtotime($item['date']);
 
-$dquery = "SELECT rd.*, d.name dname, d.country dcountry, t.name tname FROM race_driver rd JOIN team_driver td ON (td.id = rd.team_driver) JOIN team t ON (t.id = td.team) JOIN driver d ON (d.id = td.driver) WHERE rd.race='$race' AND (rd.status = 0) ORDER BY rd.position ASC";
+$dquery = "SELECT rd.*, d.name dname, d.country dcountry, t.name tname
+					 FROM race_driver rd
+					 JOIN team_driver td ON (td.id = rd.team_driver)
+					 JOIN team t ON (t.id = td.team)
+					 JOIN driver d ON (d.id = td.driver)
+					 WHERE rd.race='$race' AND (rd.status = 0)
+					 ORDER BY rd.position ASC";
+<<<<<<< HEAD
+=======
+
+>>>>>>> logo_simresults
 $dresult = mysqli_query($link,$dquery);
 if(!$dresult) {
 	show_error("MySQL Error: " . mysqli_error($link) . "\n");
 	return;
 }
 
-$ndquery = "SELECT rd.*, d.name dname, d.country dcountry, t.name tname FROM race_driver rd JOIN team_driver td ON (td.id = rd.team_driver) JOIN team t ON (t.id = td.team) JOIN driver d ON (d.id = td.driver) WHERE rd.race='$race' AND (rd.status != 0) ORDER BY rd.position ASC";
+$ndquery = "SELECT rd.*, d.name dname, d.country dcountry, t.name tname
+<<<<<<< HEAD
+					  FROM race_driver rd
+=======
+						FROM race_driver rd
+>>>>>>> logo_simresults
+						JOIN team_driver td ON (td.id = rd.team_driver)
+						JOIN team t ON (t.id = td.team)
+						JOIN driver d ON (d.id = td.driver)
+						WHERE rd.race='$race' AND (rd.status != 0)
+						ORDER BY rd.position ASC";
+<<<<<<< HEAD
+=======
+
+>>>>>>> logo_simresults
 $ndresult = mysqli_query($link,$ndquery);
 if(!$dresult) {
 	show_error("MySQL Error: " . mysqli_error($link) . "\n");
@@ -93,7 +135,7 @@ if($item['ruleset_qualifying'] != 0) {
     <td>Replay:</td>
     <td><a href="<?=$item['replay']?>" target="_blank"><img src="images/replay.png" alt="replay"></a></td>
 		<td>Link to Forumthread:</td>
-    <td><!--<a href="<?//=$item['simresults']?>" target="_blank"><img src="images/simresults.png" alt="view_simresults">--><a href="<?=$item['forumlink']?>" target="_blank"><img src="images/forum.png" alt="Discussion"></a></td>
+    <td><a href="<?=$item['forumlink']?>" target="_blank"><img src="images/forum.png" alt="Discussion"></a></td>
 
 </tr>
 <tr class="w3-amber">
@@ -129,9 +171,10 @@ if($item['ruleset_qualifying'] != 0) {
 <div class="w3-responsive">
 <table class="w3-table-all">
 <tr class="w3-dark-grey">
-	<td>&nbsp;</td>
+	<td>Pos&nbsp;</td>
 	<td>Driver</td>
-	<td>&nbsp;</td>
+	<td>Car #</td>
+	<td>Country</td>
 	<td>Team</td>
 	<? if($item['progress'] != RACE_NEW) { ?>
 	<td align="right">Qual</td>
@@ -180,6 +223,7 @@ while($ditem = mysqli_fetch_array($dresult)) {
 <tr class="w3-hover-green">
 	<td align="right"><?=++$position?>&nbsp;</td>
 	<td><?=$ditem['dname']?></td>
+	<td><?=$ditem['dplate']?></td>
 	<td><img src="flags/<?=$ditem['dcountry']?>.png"></td>
 	<td><?=$ditem['tname']?></td>
 	<? if($item['progress'] != RACE_NEW) { ?>
@@ -229,6 +273,7 @@ while($ditem = mysqli_fetch_array($ndresult)) {
 <tr class="w3-hover-green">
 	<td align="right">-&nbsp;</td>
 	<td><?=$ditem['dname']?></td>
+	<td><?=$ditem['dplate']?></td>
   <td><img src="flags/<?=$ditem['dcountry']?>.png"></td>
 	<td><?=$ditem['tname']?></td>
 	<? if($item['progress'] != RACE_NEW) { ?>
@@ -251,6 +296,6 @@ while($ditem = mysqli_fetch_array($ndresult)) {
 </br>
 <div class="w3-container">
 <div class="w3-responsive">
-<iframe src="<?=$item['simresults'];?>?logo=http%3A%2F%2Fwww.netracingeurope.org%2Fmedia%2Fnre_stuff%2Flogosmall.png&logo_link=http%3A%2F%2Fwww.netracingeurope.org&hid" width="100%" height="1080px"></iframe>
+<iframe src="<?=$item['simresults'];?>?logo=<?=$item['series_logo_simresults'];?>" width="100%" height="1080px"></iframe>
 </div>
 </div>
