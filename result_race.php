@@ -6,7 +6,7 @@ $race = addslashes($_GET['race']);
 
 require_once("functions.php"); // import mysql function
 $link = mysqlconnect(); // call mysql function to get the link to the database
-$query = "SELECT r.*, s.name sname, d.name dname, rs.name rsname, qrs.name qrsname
+$query = "SELECT r.*, s.name sname, s.series_logo_simresults slogo, d.name dname, rs.name rsname, qrs.name qrsname
 					FROM race r
 					LEFT JOIN season s ON (s.id = r.season)
 					JOIN division d ON (d.id = r.division)
@@ -272,6 +272,6 @@ while($ditem = mysqli_fetch_array($ndresult)) {
 </br>
 <div class="w3-container">
 <div class="w3-responsive">
-<iframe src="<?=$item['simresults'];?>?logo=<?=$item['series_logo_simresults'];?>" width="100%" height="1080px"></iframe>
+<iframe src="<?=$item['simresults'];?>?logo=<?=$item['slogo'];?>" width="100%" height="1080px"></iframe>
 </div>
 </div>
