@@ -33,7 +33,8 @@ $teamcount = mysqli_num_rows($tresult);
 	<td width="120">Name:</td>
 	<td><input type="text" name="name" value="<?=$item['name']?>" maxlength="30"></td>
 	<td width="40">Car Number:</td>
-	<td><input type="number" name="plate" value="<?=$item['plate']?>" min="1" max="999"></td>
+	<td><input type="number" name="plate" value="<?=$item['plate']?>" min="1" max="999"></td></tr>
+<tr class="w3-dark-grey">
 	<td width="40">Country:</td>
 	<td>
 		<select name="country">
