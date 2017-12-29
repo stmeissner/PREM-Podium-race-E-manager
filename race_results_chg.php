@@ -114,7 +114,7 @@ if(!$rdresult) {
 	<td><?=$item['maxplayers']?></td>
 <tr>
     <td>Replay link:</td>
-	<td><i class="fa fa-link"></i><input type="url" name="replay" value="<?=$item['replay']?>" maxlength="200"></td>
+	<td><i class="fa fa-link"></i><input type="url" style="width:500px;" name="replay" value="<?=$item['replay']?>" maxlength="200"></td>
 </tr>
 <tr>
 	<td>Upload result file to Simresults:</a></td>
@@ -123,7 +123,7 @@ if(!$rdresult) {
 <tr>
     <td>Simresults URL:</td>
 	<td><div class="input-group margin-bottom-sm">
-	<i class="fa fa-link"></i><input type="url" name="simresults" value="<?=$item['simresults']?>" maxlength="200"></div></td>
+	<i class="fa fa-link"></i><input type="url" style="width:500px;" name="simresults" value="<?=$item['simresults']?>" maxlength="200"></div></td>
 </tr>
 <tr>
 	<td>
