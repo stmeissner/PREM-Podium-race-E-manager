@@ -8,17 +8,11 @@ define("SHOW_POSITIONS", 2);
 
 $season = $_GET['season'];
 $show = isset($_GET['show']) ? $_GET['show'] : 0;
-
 require_once("functions.php"); // import mysql function
 $link = mysqlconnect(); // call mysql function to get the link to the database
+
 // Get season information
-$query = "SELECT s.*, d.name dname, COUNT(r.id) racecount
-					FROM season s
-					INNER JOIN division d
-					ON (s.division = d.id)
-					LEFT JOIN race r ON (r.season = s.id)
-					WHERE s.id='$season'
-					GROUP BY s.id";
+$query = "SELECT s.*, d.name dname, COUNT(r.id) racecount FROM season s JOIN division d ON (s.division = d.id) LEFT JOIN race r ON (r.season = s.id) WHERE s.id=$season GROUP BY s.id";
 $result = mysqli_query($link,$query);
 if(!$result) {
 	show_error("MySQL Error: " . mysqli_error($link) . "\n");
@@ -35,7 +29,7 @@ $item = mysqli_fetch_array($result);
 $rsquery = "SELECT * FROM point_ruleset";
 $rsresult = mysqli_query($link,$rsquery);
 if(!$rsresult) {
-	show_error("MySQL Error: " . mysqli_error($link) . "\n");
+	show_error("MySQL Error: " . mysql_error() . "\n");
 	return;
 }
 if(mysqli_num_rows($rsresult) == 0) {
@@ -48,16 +42,16 @@ while($rsitem = mysqli_fetch_array($rsresult)) {
 
 // Get all teams and driver for this season
 $drquery = "SELECT d.id did, d.name dname, rd.dplate dplate, d.country dcountry, t.id tid, t.name tname
-						FROM season_team st
-						JOIN team t ON (st.team = t.id)
-						JOIN team_driver td ON (td.team = t.id)
-						JOIN driver d ON (d.id = td.driver)
-						JOIN race_driver rd ON (rd.team_driver = td.id)
-						WHERE st.season = '$season'
-						ORDER BY t.name ASC, d.name ASC";
+	    FROM season_team st
+            JOIN team t ON (st.team = t.id)
+            JOIN team_driver td ON (td.team = t.id)
+            JOIN driver d ON (d.id = td.driver)
+            JOIN race_driver rd ON (rd.team_driver = td.id)
+            WHERE st.season = $season
+            ORDER BY t.name ASC, d.name ASC";
 $drresult = mysqli_query($link,$drquery);
 if(!$drresult) {
-	show_error("MySQL Error: " . mysqli_error($link) . "\n");
+	show_error("MySQL Error: " . mysql_error() . "\n");
 	return;
 }
 
@@ -70,7 +64,7 @@ while($dritem = mysqli_fetch_array($drresult)) {
 		$team[$dritem['tid']]['pointsrace'] = array();
 		$team[$dritem['tid']]['pointsraceinc'] = array();
 		$team[$dritem['tid']]['provisionals'] = array();
-		}
+	}
 	$driver[$dritem['did']]['name'] = $dritem['dname'];
 	$driver[$dritem['did']]['team'] = $dritem['tname'];
 	$driver[$dritem['did']]['dplate'] = $dritem['dplate'];
@@ -89,12 +83,12 @@ SELECT
 FROM race r
 	JOIN race_driver rd ON (rd.race = r.id)
 	JOIN team_driver td ON (td.id = rd.team_driver)
-WHERE r.season='$season' AND r.progress = 2 AND (rd.status = 0 OR rd.status = 1)
+WHERE r.season=$season AND r.progress = 2 AND (rd.status = 0 OR rd.status = 1)
 ORDER BY r.date ASC, rd.position ASC
 EOF;
 $rresult = mysqli_query($link,$rquery);
 if(!$rresult) {
-	show_error("MySQL Error: " . mysqli_error($link) . "\n");
+	show_error("MySQL Error: " . mysql_error() . "\n");
 	return;
 }
 
@@ -119,7 +113,6 @@ while($ritem = mysqli_fetch_array($rresult)) {
 		$position++;
 		$driver[$ritem['driver']]['points'] += points_total($position, $ritem['grid'], $ritem['fastest_lap'], $ruleset[$ritem['ruleset']]);
 		$driver[$ritem['driver']]['pointsrace'][$race] = points_total($position, $ritem['grid'], $ritem['fastest_lap'], $ruleset[$ritem['ruleset']]);
-		$driver[$ritem['driver']]['pointsraceinc'][$race] += $driver[$ritem['driver']]['points'];
 		$driver[$ritem['driver']]['position'][$race] = $position;
 
 		// Assign points for the team
@@ -208,7 +201,7 @@ if (count($driver) > 2) {
 						// add those to the provisional points of the team
 						$teamProvisionalPoints += $driverProvisionalPoints;
 						// take other team driver into account
-						if (array_key_exists($x, $titem['provisionals'])) {
+						if (array_key_exists($x, $titem)) {
 
 							$titem['provisionals'][$x] = $titem['provisionals'][$x] + $driverProvisionalPoints;
 
@@ -265,53 +258,52 @@ usort($team, "point_sort");
 <tr class="w3-dark-grey">
 	<td style="vertical-align:bottom" align="center">Pos</td>
 	<td style="vertical-align:bottom" align="center">Driver</td>
-	<td style="vertical-align:bottom" align="center">Car#</td>
-	<td style="vertical-align:bottom" align="center">Country</td>
+        <td style="vertical-align:bottom" align="center">Car#</td>
+        <td style="vertical-align:bottom" align="center">Country</td>
 	<td style="vertical-align:bottom" align="center">Team</td>
 <? for($x = 1; $x <= $race; $x++) { ?>
-	<td width="1" align="right"><javascript:void(0)" class="tablink" title="Click to more details"><div class="w3-topbar w3-bottombar w3-hover-border-red"><a href="?page=result_race&amp;race=<?=$races[$x]['id']?>"><img src="img_season_race.php?text=<?=urlencode($races[$x]['name'])?>&amp;text2=<?=urlencode($races[$x]['track'])?>" alt="<?=$x?>"></a></td>
+	<td width="1" align="center"><javascript:void(0)" class="tablink" title="Click to more details"><div class="w3-topbar w3-bottombar w3-hover-border-red"><a href="?page=result_race&amp;race=<?=$races[$x]['id']?>"><img src="img_season_race.php?text=<?=urlencode($races[$x]['name'])?>&amp;text2=<?=urlencode($races[$x]['track'])?>" alt="<?=$x?>"></a></td>
 <? } ?>
-	<td style="vertical-align:bottom" width="1" align="right">Pts</td>
+	<td style="width:50px;vertical-align:bottom;background-color:transparent;text-align:right;color:white;font-weight:bold;">Pts</td>
 </tr>
 <?
 $style = "odd";
 $pos = 0;
-foreach($driver as $id => $ditem){
+foreach($driver as $id => $ditem) {
 ?>
 <tr class="w3-hover-green">
-	<td width="1" align="right"><?=++$pos?>&nbsp;</td>
-	<td><?=$ditem['name']?></td>
+	<td width="1" align="center"><?=++$pos?>&nbsp;</td>
+	<td align="center"><?=$ditem['name']?></td>
 	<td><?=$ditem['dplate']?></td>
-	<td><img src="flags/<?=$ditem['dcountry']?>.png"></td>
-	<td><?=$ditem['team']?></td>
-
+        <td align="center"><img src="flags/<?=$ditem['dcountry']?>.png"></td>
+	<td align="center"><?=$ditem['team']?></td>
 <?
 $total = 0;
 for($x = 1; $x <= $race; $x++) {
 	switch($show) {
-		case SHOW_POINTS:
+	case SHOW_POINTS:
 		$data = !empty($ditem['pointsrace'][$x]) ? $ditem['pointsrace'][$x] : "-";
 		$provisionals = $ditem['provisionals'];
 		if (array_key_exists($x, $provisionals)) {
 			// mark provisional in reddish color
-			 $color = "style=\"background-color:rgba(255, 99, 71, 0.5); color:white\"";
+			 $color = "style=\"background-color:rgba(255, 99, 71, 0.5); text-align: right; color:white\"";
 			 // show original points
 			 $data = $provisionals[$x];
 		} else {
 			// do not mark valuable results in a different color
-			$color = "";
+			$color = "style=\"background-color:transparent; text-align: right; color:black\"";
 		}
 		break;
 	case SHOW_INCREMENTAL:
 		$provisionals = $ditem['provisionals'];
 		if (array_key_exists($x, $provisionals)) {
 			// mark provisional in reddish color
-			 $color = "style=\"background-color:rgba(255, 99, 71, 0.5); color:white\"";
+			 $color = "style=\"background-color:rgba(255, 99, 71, 0.5); text-align: right; color:white\"";
 			 // show original points but do not take them into account
 			 $data = $provisionals[$x];
 		} else {
 			// do not mark valuable results in a different color
-			$color = "";
+			$color = "style=\"background-color:transparent; text-align: right; color:black\"";
 			// take points into account
 			$total += $ditem['pointsrace'][$x];
 			$data = $total;
@@ -322,17 +314,17 @@ for($x = 1; $x <= $race; $x++) {
 		$provisionals = $ditem['provisionals'];
 		if (array_key_exists($x, $provisionals)) {
 			// mark provisional in reddish color
-			 $color = "style=\"background-color:rgba(255, 99, 71, 0.5); color:white\"";
+			 $color = "style=\"background-color:rgba(255, 99, 71, 0.5); text-align: right; color:white\"";
 		} else {
 			// do not mark valuable results in a different color
-			$color = "";
+			$color = "style=\"background-color:transparent; text-align: right; color:black\"";
 		}
 		break;
 	}
 	?>
-	<td width="1" align="right"><?=$data?></td>
+	<td width="1" <?=$color?>><?=$data?></td>
 <? } ?>
-	<td width="1" align="right"><strong><?=!empty($ditem['points']) ? $ditem['points'] : "0" ?></strong></td>
+	<td style="background-color:transparent; text-align: right; color:black; font-weight: bold;"><?=!empty($ditem['points']) ? $ditem['points'] : "0" ?></td>
 </tr>
 <?
 
@@ -346,12 +338,12 @@ for($x = 1; $x <= $race; $x++) {
 <div class="w3-responsive">
 <table class="w3-table-all">
 <tr class="w3-dark-grey">
-	<td>&nbsp;</td>
-	<td>Team</td>
+	<td style="vertical-align:bottom">Pos</td>
+	<td style="vertical-align:bottom">Team</td>
 <? for($x = 1; $x <= $race; $x++) { ?>
 	<td width="1" align="right"><javascript:void(0)" class="tablink" title="Click to more details"><div class="w3-topbar w3-bottombar w3-hover-border-red"><a href="?page=result_race&amp;race=<?=$races[$x]['id']?>"><img src="img_season_race.php?text=<?=urlencode($races[$x]['name'])?>&amp;text2=<?=urlencode($races[$x]['track'])?>" alt="<?=$x?>"></a></td>
 <? } ?>
-	<td width="1" align="right">Pts</td>
+	<td style="width:50px;vertical-align:bottom;background-color:transparent;text-align:right;color:white;font-weight:bold;">Pts</td>
 </tr>
 <?
 
@@ -368,17 +360,39 @@ for($x = 1; $x <= $race; $x++) {
 	switch($show) {
 	case SHOW_POINTS:
 	case SHOW_POSITIONS:
+		// show dash when DNS
 		$data = !empty($titem['pointsrace'][$x]) ? $titem['pointsrace'][$x] : "-";
+		// mark provisional results
+		$provisionals = $titem['provisionals'];
+		if (array_key_exists($x, $provisionals)) {
+			// mark provisional in reddish color
+			 $color = "style=\"background-color:rgba(255, 99, 71, 0.5); text-align: right; color:white\"";
+		} else {
+			// do not mark valuable results in a different color
+			$color = "style=\"background-color:transparent; text-align: right; color:black\"";
+		}
 		break;
 	case SHOW_INCREMENTAL:
-		$total += $titem['pointsrace'][$x];
-		$data = $total;
+		$provisionals = $titem['provisionals'];
+		if (array_key_exists($x, $provisionals)) {
+			// mark provisional in reddish color
+			 $color = "style=\"background-color:rgba(255, 99, 71, 0.5); text-align: right; color:white\"";
+			 // show original points but do not take them into account
+			 $data = !empty($titem['pointsrace'][$x]) ? $titem['pointsrace'][$x] : "-";
+			 //$data = $titem['pointsrace'][$x];
+		} else {
+			// do not mark valuable results in a different color
+			$color = "style=\"background-color:transparent; text-align: right; color:black\"";
+			// take points into account
+			$total += $titem['pointsrace'][$x];
+			$data = $total;
+		}
 		break;
 	}
 	?>
-	<td width="1" align="right"><?=$data?></td>
+	<td width="1" <?=$color?>><?=$data?></td>
 <? } ?>
-	<td width="1" align="right"><strong><?=!empty($titem['points']) ? $titem['points'] : "0" ?></strong></td>
+	<td style="background-color:transparent; text-align: right; color:black; font-weight: bold;"><?=!empty($titem['points']) ? $titem['points'] : "0" ?></td>
 </tr>
 <?
 
@@ -395,9 +409,8 @@ for($x = 1; $x <= $race; $x++) {
 <div class="w3-responsive">
 <table class="w3-table-all">
 <tr class="w3-dark-grey">
-	<td>&nbsp;</td>
+	<td>Pos</td>
 	<td>Driver</td>
-	<td>Car #</td>
 	<td>Team</td>
 <? for($x = 1; $x <= $race; $x++) { ?>
 	<td width="1" align="right"><javascript:void(0)" class="tablink" title="Click to more details"><div class="w3-topbar w3-bottombar w3-hover-border-red"><a href="?page=result_race&amp;race=<?=$races[$x]['id']?>"><img src="img_season_race.php?text=<?=urlencode($races[$x]['name'])?>&amp;text2=<?=urlencode($races[$x]['track'])?>" alt="<?=$x?>"></a></td>
@@ -415,9 +428,9 @@ foreach($driver as $id => $ditem) {
 	<td><?=$ditem['name']?></td>
 	<td><?=$ditem['team']?></td>
 <? for($x = 1; $x <= $race; $x++) { ?>
-	<td width="1" align="right"><?=!empty($ditem['pointsqualifyingrace'][$x]) ? $ditem['pointsqualifyingrace'][$x] : "-"?></td>
+	<td style="background-color:transparent; text-align: right; color:black;"><?=!empty($ditem['pointsqualifyingrace'][$x]) ? $ditem['pointsqualifyingrace'][$x] : "-"?></td>
 <? } ?>
-	<td width="1" align="right"><strong><?=!empty($ditem['pointsqualifying']) ? $ditem['pointsqualifying'] : "0" ?></strong></td>
+	<td style="background-color:transparent; text-align: right; color:black; font-weight: bold;"><?=!empty($ditem['pointsqualifying']) ? $ditem['pointsqualifying'] : "0" ?></td>
 </tr>
 <?
 
