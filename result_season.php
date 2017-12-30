@@ -288,11 +288,7 @@ for($x = 1; $x <= $race; $x++) {
 		$provisionals = $ditem['provisionals'];
 		if (array_key_exists($x, $provisionals)) {
 			// mark provisional in reddish color
-			 $color = "style=\"background-color:rgba(255, 99, 71, 0.5); color:white; text-align: center;
-			                border-style: solid;
-											border-width: thin;
-											border-color: black;
-											padding: 1px\"";
+			 $color = "style=\"background-color:rgba(255, 99, 71, 0.5); color:white; text-align: center; padding: 1px\"";
 			 // show original points but do not take them into account
 			 $data = $provisionals[$x];
 		} else {
@@ -304,11 +300,7 @@ for($x = 1; $x <= $race; $x++) {
 		$provisionals = $ditem['provisionals'];
 		if (array_key_exists($x, $provisionals)) {
 			// mark provisional in reddish color
-			$color = "style=\"background-color:rgba(255, 99, 71, 0.5); color:white; text-align: center;
-										 border-style: solid;
-										 border-width: thin;
-										 border-color: black;
-										 padding: 1px\"";
+			$color = "style=\"background-color:rgba(255, 99, 71, 0.5); color:white; text-align: center; padding: 1px\"";
 			 // show original points but do not take them into account
 			 $data = $provisionals[$x];
 		} else {
@@ -324,11 +316,7 @@ for($x = 1; $x <= $race; $x++) {
 		$provisionals = $ditem['provisionals'];
 		if (array_key_exists($x, $provisionals)) {
 			// mark provisional in reddish color
-			$color = "style=\"background-color:rgba(255, 99, 71, 0.5); color:white; text-align: center;
-										 border-style: solid;
-										 border-width: thin;
-										 border-color: black;
-										 padding: 1px\"";
+			$color = "style=\"background-color:rgba(255, 99, 71, 0.5); color:white; text-align: center; padding: 1px\"";
 		} else {
 			// do not mark valuable results in a different color
 			$color = "style=\"background-color:transparent; padding: 1px; text-align: center; color:black\"";
@@ -380,11 +368,7 @@ for($x = 1; $x <= $race; $x++) {
 		$provisionals = $titem['provisionals'];
 		if (array_key_exists($x, $provisionals)) {
 			// mark provisional in reddish color
-			$color = "style=\"background-color:rgba(255, 99, 71, 0.5); color:white; text-align: center;
-										 border-style: solid;
-										 border-width: thin;
-										 border-color: black;
-										 padding: 1px\"";
+			$color = "style=\"background-color:rgba(255, 99, 71, 0.5); color:white; text-align: center; padding: 1px\"";
 		} else {
 			// do not mark valuable results in a different color
 			$color = "style=\"background-color:transparent; padding: 1px; text-align: center; color:black\"";
@@ -394,11 +378,7 @@ for($x = 1; $x <= $race; $x++) {
 		$provisionals = $titem['provisionals'];
 		if (array_key_exists($x, $provisionals)) {
 			// mark provisional in reddish color
-			$color = "style=\"background-color:rgba(255, 99, 71, 0.5); color:white; text-align: center;
-										 border-style: solid;
-										 border-width: thin;
-										 border-color: black;
-										 padding: 1px\"";
+			$color = "style=\"background-color:rgba(255, 99, 71, 0.5); color:white; text-align: center; padding: 1px\"";
 			 // show original points but do not take them into account
 			 $data = !empty($titem['pointsrace'][$x]) ? $titem['pointsrace'][$x] : "-";
 			 //$data = $titem['pointsrace'][$x];
