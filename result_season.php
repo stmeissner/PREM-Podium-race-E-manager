@@ -252,16 +252,15 @@ usort($team, "point_sort");
 </table>
 </div>
 </div>
-
-<h2>Drivers</h2>
+<table><tr><td><h2>Drivers</h2></td><td><p>&nbsp;(Red results are provisionals, 2 given)</p></tr></table>
 <div class="w3-container">
 <div class="w3-responsive">
 <table class="w3-table-all">
 <tr class="w3-dark-grey">
 	<td style="vertical-align:bottom" align="center">Pos</td>
 	<td style="vertical-align:bottom" align="center">Driver</td>
-        <td style="vertical-align:bottom" align="center">Car#</td>
-        <td style="vertical-align:bottom" align="center">Country</td>
+        <td style="vertical-align:bottom" align="center">Nr.</td>
+        <td style="vertical-align:bottom" align="center">Ctry.</td>
 	<td style="vertical-align:bottom" align="center">Team</td>
 <? for($x = 1; $x <= $race; $x++) { ?>
 	<td width="1" align="center"><javascript:void(0)" class="tablink" title="Click to more details"><div class="w3-topbar w3-bottombar w3-hover-border-red"><a href="?page=result_race&amp;race=<?=$races[$x]['id']?>"><img src="img_season_race.php?text=<?=urlencode($races[$x]['name'])?>&amp;text2=<?=urlencode($races[$x]['track'])?>" alt="<?=$x?>"></a></td>
@@ -338,7 +337,7 @@ for($x = 1; $x <= $race; $x++) {
 </div>
 </div>
 
-<h2>Teams</h2>
+<table><tr><td><h2>Teams</h2></td><td><p>&nbsp;(Red results containing provisionals of the teams drivers)</p></tr></table>
 <div class="w3-container">
 <div class="w3-responsive">
 <table class="w3-table-all">
