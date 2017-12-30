@@ -159,7 +159,7 @@ if($item['ruleset_qualifying'] != 0) {
 	<td align="right"><span class="abbr" title="Fastest Lap">FL</span></td>
 	<td align="right">Time</td>
 	<td align="right">Gap</td>
-	<td align="right">Pts</td>
+	<td style="width:50px;vertical-align:bottom;background-color:transparent;text-align:right;color:white;font-weight:bold;">Pts</td>
 	<? } ?>
 	<? } ?>
 </tr>
@@ -209,7 +209,7 @@ while($ditem = mysqli_fetch_array($dresult)) {
 	<td align="right"><?if($ditem['fastest_lap']=='1') echo "<img src=\"images/chrono.png\" alt=\"yes\">";?></td>
 	<td align="right"><?=$time?></td>
 	<td align="right"><?=$gap?></td>
-	<td align="right"><?=points_total($position, $ditem['grid'], $ditem['fastest_lap'], $ruleset)?></td>
+	<td style="background-color:transparent; text-align: right; color:black; font-weight: bold;"><?=points_total($position, $ditem['grid'], $ditem['fastest_lap'], $ruleset)?></td>
 	<? } ?>
 	<? } ?>
 </tr>
