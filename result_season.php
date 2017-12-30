@@ -288,24 +288,32 @@ for($x = 1; $x <= $race; $x++) {
 		$provisionals = $ditem['provisionals'];
 		if (array_key_exists($x, $provisionals)) {
 			// mark provisional in reddish color
-			 $color = "style=\"background-color:rgba(255, 99, 71, 0.5); text-align: center; color:white\"";
-			 // show original points
+			 $color = "style=\"background-color:rgba(255, 99, 71, 0.5); color:white; text-align: center;
+			                border-style: solid;
+											border-width: thin;
+											border-color: black;
+											padding: 1px\"";
+			 // show original points but do not take them into account
 			 $data = $provisionals[$x];
 		} else {
 			// do not mark valuable results in a different color
-			$color = "style=\"background-color:transparent; text-align: center; color:black\"";
+			$color = "style=\"background-color:transparent; padding: 1px; text-align: center; color:black\"";
 		}
 		break;
 	case SHOW_INCREMENTAL:
 		$provisionals = $ditem['provisionals'];
 		if (array_key_exists($x, $provisionals)) {
 			// mark provisional in reddish color
-			 $color = "style=\"background-color:rgba(255, 99, 71, 0.5); text-align: center; color:white\"";
+			$color = "style=\"background-color:rgba(255, 99, 71, 0.5); color:white; text-align: center;
+										 border-style: solid;
+										 border-width: thin;
+										 border-color: black;
+										 padding: 1px\"";
 			 // show original points but do not take them into account
 			 $data = $provisionals[$x];
 		} else {
 			// do not mark valuable results in a different color
-			$color = "style=\"background-color:transparent; text-align: center; color:black\"";
+			$color = "style=\"background-color:transparent; padding: 1px; text-align: center; color:black\"";
 			// take points into account
 			$total += $ditem['pointsrace'][$x];
 			$data = $total;
@@ -316,10 +324,14 @@ for($x = 1; $x <= $race; $x++) {
 		$provisionals = $ditem['provisionals'];
 		if (array_key_exists($x, $provisionals)) {
 			// mark provisional in reddish color
-			 $color = "style=\"background-color:rgba(255, 99, 71, 0.5); text-align: center; color:white\"";
+			$color = "style=\"background-color:rgba(255, 99, 71, 0.5); color:white; text-align: center;
+										 border-style: solid;
+										 border-width: thin;
+										 border-color: black;
+										 padding: 1px\"";
 		} else {
 			// do not mark valuable results in a different color
-			$color = "style=\"background-color:transparent; text-align: center; color:black\"";
+			$color = "style=\"background-color:transparent; padding: 1px; text-align: center; color:black\"";
 		}
 		break;
 	}
@@ -368,23 +380,31 @@ for($x = 1; $x <= $race; $x++) {
 		$provisionals = $titem['provisionals'];
 		if (array_key_exists($x, $provisionals)) {
 			// mark provisional in reddish color
-			 $color = "style=\"background-color:rgba(255, 99, 71, 0.5); text-align: center; color:white\"";
+			$color = "style=\"background-color:rgba(255, 99, 71, 0.5); color:white; text-align: center;
+										 border-style: solid;
+										 border-width: thin;
+										 border-color: black;
+										 padding: 1px\"";
 		} else {
 			// do not mark valuable results in a different color
-			$color = "style=\"background-color:transparent; text-align: center; color:black\"";
+			$color = "style=\"background-color:transparent; padding: 1px; text-align: center; color:black\"";
 		}
 		break;
 	case SHOW_INCREMENTAL:
 		$provisionals = $titem['provisionals'];
 		if (array_key_exists($x, $provisionals)) {
 			// mark provisional in reddish color
-			 $color = "style=\"background-color:rgba(255, 99, 71, 0.5); text-align: center; color:white\"";
+			$color = "style=\"background-color:rgba(255, 99, 71, 0.5); color:white; text-align: center;
+										 border-style: solid;
+										 border-width: thin;
+										 border-color: black;
+										 padding: 1px\"";
 			 // show original points but do not take them into account
 			 $data = !empty($titem['pointsrace'][$x]) ? $titem['pointsrace'][$x] : "-";
 			 //$data = $titem['pointsrace'][$x];
 		} else {
 			// do not mark valuable results in a different color
-			$color = "style=\"background-color:transparent; text-align: center; color:black\"";
+			$color = "style=\"background-color:transparent; padding: 1px; text-align: center; color:black\"";
 			// take points into account
 			$total += $titem['pointsrace'][$x];
 			$data = $total;
