@@ -276,7 +276,7 @@ foreach($driver as $id => $ditem) {
 	<td width="1" align="center"><?=++$pos?>&nbsp;</td>
 	<td align="center"><?=$ditem['name']?></td>
 	<td><?=$ditem['dplate']?></td>
-        <td align="center"><img src="flags/<?=$ditem['dcountry']?>.png"></td>
+        <td align="center"><img src="images/flags/<?=$ditem['dcountry']?>.png"></td>
 	<td align="center"><?=$ditem['team']?></td>
 <?
 $total = 0;

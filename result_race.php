@@ -200,7 +200,7 @@ while($ditem = mysqli_fetch_array($dresult)) {
 	<td align="right"><?=++$position?>&nbsp;</td>
 	<td><?=$ditem['dname']?></td>
 	<td><?=$ditem['dplate']?></td>
-	<td><img src="flags/<?=$ditem['dcountry']?>.png"></td>
+	<td><img src="images/flags/<?=$ditem['dcountry']?>.png"></td>
 	<td><?=$ditem['tname']?></td>
 	<? if($item['progress'] != RACE_NEW) { ?>
 	<td align="right"><?=$ditem['grid']?></td>
@@ -250,7 +250,7 @@ while($ditem = mysqli_fetch_array($ndresult)) {
 	<td align="right">-&nbsp;</td>
 	<td><?=$ditem['dname']?></td>
 	<td><?=$ditem['dplate']?></td>
-  <td><img src="flags/<?=$ditem['dcountry']?>.png"></td>
+  <td><img src="images/flags/<?=$ditem['dcountry']?>.png"></td>
 	<td><?=$ditem['tname']?></td>
 	<? if($item['progress'] != RACE_NEW) { ?>
 	<td align="right"><?=$ditem['grid']?></td>

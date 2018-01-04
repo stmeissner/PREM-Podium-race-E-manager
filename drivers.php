@@ -52,7 +52,7 @@ while($item = mysqli_fetch_array($result)) {
 	</td>
 	<td width=20% ><?=$item['name']?></td>
 	<td width=2% ><?=$item['plate']?></td>
-	<td align="center" width="40px"><img src="flags/<?=$item['country']?>.png"</td>
+	<td align="center" width="40px"><img src="images/flags/<?=$item['country']?>.png"</td>
 	<td width="20" align="center"><?=$item['teamcount']?></td>
 </tr>
 <?
