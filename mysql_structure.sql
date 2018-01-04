@@ -3,11 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
-<<<<<<< HEAD
--- Erstellungszeit: 23. Dez 2017 um 11:50
-=======
--- Erstellungszeit: 21. Dez 2017 um 20:47
->>>>>>> logo_simresults
+-- Erstellungszeit: 04. Jan 2018 um 22:52
 -- Server-Version: 5.7.20-0ubuntu0.16.04.1
 -- PHP-Version: 7.0.22-0ubuntu0.16.04.1
 
@@ -43,6 +39,25 @@ CREATE TABLE `blocks` (
 -- --------------------------------------------------------
 
 --
+-- Tabellenstruktur für Tabelle `cars`
+--
+
+CREATE TABLE `cars` (
+  `id` smallint(4) NOT NULL,
+  `sim` varchar(32) NOT NULL,
+  `brand` varchar(32) NOT NULL,
+  `name` varchar(32) NOT NULL,
+  `code` varchar(32) NOT NULL,
+  `badge` varchar(128) NOT NULL,
+  `horsepower` varchar(10) NOT NULL,
+  `torque` varchar(10) NOT NULL,
+  `weight` varchar(10) NOT NULL,
+  `description` varchar(2048) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Tabellenstruktur für Tabelle `division`
 --
 
@@ -61,7 +76,7 @@ CREATE TABLE `division` (
 CREATE TABLE `driver` (
   `id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL DEFAULT '',
-  `plate` smallint(3) DEFAULT NULL,
+  `plate` varchar(3) DEFAULT NULL,
   `country` varchar(2) CHARACTER SET ascii DEFAULT NULL,
   `1st` int(30) DEFAULT NULL,
   `2nd` int(30) DEFAULT NULL,
@@ -184,12 +199,13 @@ CREATE TABLE `race` (
 CREATE TABLE `race_driver` (
   `race` int(11) NOT NULL DEFAULT '0',
   `team_driver` int(11) NOT NULL DEFAULT '0',
-  `grid` int(11) NOT NULL DEFAULT '0',
-  `position` int(11) NOT NULL DEFAULT '0',
-  `fastest_lap` tinyint(1) NOT NULL DEFAULT '0',
-  `laps` int(11) NOT NULL DEFAULT '0',
-  `time` int(11) NOT NULL DEFAULT '0',
-  `status` int(11) NOT NULL DEFAULT '0'
+  `grid` int(11) DEFAULT NULL,
+  `position` int(11) DEFAULT NULL,
+  `fastest_lap` tinyint(1) DEFAULT NULL,
+  `laps` int(11) DEFAULT NULL,
+  `time` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `dplate` varchar(3) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -352,6 +368,12 @@ ALTER TABLE `blocks`
   ADD KEY `active` (`active`);
 
 --
+-- Indizes für die Tabelle `cars`
+--
+ALTER TABLE `cars`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indizes für die Tabelle `division`
 --
 ALTER TABLE `division`
@@ -464,6 +486,11 @@ ALTER TABLE `video`
 ALTER TABLE `blocks`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
+-- AUTO_INCREMENT für Tabelle `cars`
+--
+ALTER TABLE `cars`
+  MODIFY `id` smallint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+--
 -- AUTO_INCREMENT für Tabelle `division`
 --
 ALTER TABLE `division`
@@ -472,7 +499,7 @@ ALTER TABLE `division`
 -- AUTO_INCREMENT für Tabelle `driver`
 --
 ALTER TABLE `driver`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
 --
 -- AUTO_INCREMENT für Tabelle `languages`
 --
@@ -482,27 +509,27 @@ ALTER TABLE `languages`
 -- AUTO_INCREMENT für Tabelle `main_news`
 --
 ALTER TABLE `main_news`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT für Tabelle `point_ruleset`
 --
 ALTER TABLE `point_ruleset`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT für Tabelle `race`
 --
 ALTER TABLE `race`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT für Tabelle `rules_table`
 --
 ALTER TABLE `rules_table`
-  MODIFY `id` tinyint(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` tinyint(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT für Tabelle `season`
 --
 ALTER TABLE `season`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT für Tabelle `sim_results`
 --
@@ -517,12 +544,12 @@ ALTER TABLE `standing_pages`
 -- AUTO_INCREMENT für Tabelle `team`
 --
 ALTER TABLE `team`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 --
 -- AUTO_INCREMENT für Tabelle `team_driver`
 --
 ALTER TABLE `team_driver`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 --
 -- AUTO_INCREMENT für Tabelle `uploads`
 --

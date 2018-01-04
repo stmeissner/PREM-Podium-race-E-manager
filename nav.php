@@ -54,6 +54,7 @@
     <a href="?page=races" class="w3-hover-red">Races</a>
     <a href="?page=drivers" class="w3-hover-red">Drivers</a>
     <a href="?page=teams" class="w3-hover-red">Teams</a>
+    <a href="?page=cars" class="w3-hover-red">Cars</a>
     <a href="?page=show_rules_edit" class="w3-hover-red">Edit rules</a>
     <a href="?page=sim_results_add" class="w3-hover-red">Send Simresults url</a>
     <a href="?page=send_video_url" class="w3-hover-red">Send video url</a>
