@@ -41,10 +41,8 @@ if(mysqli_num_rows($result) == 0) {
 </tr>
 
 <?
-#$style = "odd";
 while($item = mysqli_fetch_array($result)) {
 ?>
-<!--<tr class="#<?=$style?>">-->
 <tr class="w3-hover-green">
 	<td>
 		<a href=".?page=driver_chg&amp;id=<?=$item['id']?>"><img src="images/edit16.png" alt="chg"></a>
