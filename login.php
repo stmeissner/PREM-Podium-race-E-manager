@@ -1,4 +1,4 @@
-<? if(!defined("CONFIG")) exit(); ?>
+<?PHP if(!defined("CONFIG")) exit(); ?>
 <?
 if(!defined("USE_MYSQL") || !defined("USE_LOGIN")) {
 	show_error("Login is disabled\n");
@@ -10,7 +10,7 @@ if(!defined("USE_MYSQL") || !defined("USE_LOGIN")) {
 <?=SUBTITLE?><br>
 <a href="<?=$config['org_link']?>"><?=$config['org']?></a><br>
 <br>
-<? mysql_login::print_login_form() ?>
+<?PHP mysql_login::print_login_form() ?>
 <br>
 <div class="small">Version <?=VERSION?><br></div><br>
 </div>

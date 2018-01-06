@@ -1,5 +1,5 @@
-<? if(!defined("CONFIG")) exit(); ?>
-<? if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
+<?PHP if(!defined("CONFIG")) exit(); ?>
+<?PHP if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
 <?
 $id = addslashes($_GET['id']);
 require_once("functions.php"); // import mysql function
@@ -38,12 +38,12 @@ $date = strtotime($item['date']);
 	<td>Laps:</td>
 	<td><?=$item['laps']?></td>
 </tr>
-<? if($item['season'] != 0) { ?>
+<?PHP if($item['season'] != 0) { ?>
 <tr>
 	<td>Season:</td>
 	<td><?=$item['sname']?></td>
 </tr>
-<? } else { ?>
+<?PHP } else { ?>
 <tr>
 	<td>Division:</td>
 	<td><?=$item['dname']?></td>
@@ -52,7 +52,7 @@ $date = strtotime($item['date']);
 	<td>Ruleset:</td>
 	<td><?=$item['rsname']?></td>
 </tr>
-<? } ?>
+<?PHP } ?>
 <tr>
 	<td>Date:</td>
 	<td><?=date("d-m-Y", $date)?></td>

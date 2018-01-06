@@ -1,5 +1,5 @@
-<? if(!defined("CONFIG")) exit(); ?>
-<? if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
+<?PHP if(!defined("CONFIG")) exit(); ?>
+<?PHP if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
 <?
 $id = addslashes($_GET['id']);
 
@@ -81,9 +81,9 @@ function show_driver_combo($did = 0, $enabled = true) {
 		echo "<br>\n";
 	}
 	?>
-	<? while($ditem = mysqli_fetch_array($dresult)) { ?>
+	<?PHP while($ditem = mysqli_fetch_array($dresult)) { ?>
 		<a href="?page=team_driver_rem&amp;id=<?=$ditem['id']?>"><img src="images/delete16.png" alt="delete"></a> <?=$ditem['name']?><br>
-	<? } ?>
+	<?PHP } ?>
 	</td>
 </tr>
 <tr>

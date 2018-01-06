@@ -1,5 +1,5 @@
-<? if(!defined("CONFIG")) exit(); ?>
-<? if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
+<?PHP if(!defined("CONFIG")) exit(); ?>
+<?PHP if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
 <?
 $id = addslashes($_GET['id']);
 
@@ -83,9 +83,9 @@ if(!$stresult) {
 	<td>Division:</td>
 	<td>
 	<select name="division">
-	<? while($diitem = mysqli_fetch_array($diresult)) { ?>
+	<?PHP while($diitem = mysqli_fetch_array($diresult)) { ?>
 		<option value="<?=$diitem['id']?>"<?=($diitem['id'] == $item['division']) ? " selected" : ""?>><?=$diitem['name']?></option>
-	<? } ?>
+	<?PHP } ?>
 	</select>
 	</td>
 </tr>
@@ -93,9 +93,9 @@ if(!$stresult) {
 	<td>Ruleset:</td>
 	<td>
 	<select name="ruleset">
-	<? while($rsitem = mysqli_fetch_array($rsresult)) { ?>
+	<?PHP while($rsitem = mysqli_fetch_array($rsresult)) { ?>
 		<option value="<?=$rsitem['id']?>"<?=($rsitem['id'] == $item['ruleset']) ? " selected" : ""?>><?=$rsitem['name']?></option>
-	<? } ?>
+	<?PHP } ?>
 	</select>
 	</td>
 </tr>
@@ -103,11 +103,11 @@ if(!$stresult) {
 	<td>Ruleset qualifying:</td>
 	<td>
 	<select name="ruleset_qualifying">
-	<? mysqli_data_seek($rsresult, 0); ?>
+	<?PHP mysqli_data_seek($rsresult, 0); ?>
 	<option value="0">&nbsp;</option>
-	<? while($rsitem = mysqli_fetch_array($rsresult)) { ?>
+	<?PHP while($rsitem = mysqli_fetch_array($rsresult)) { ?>
 		<option value="<?=$rsitem['id']?>"<?=($rsitem['id'] == $item['ruleset_qualifying']) ? " selected" : ""?>><?=$rsitem['name']?></option>
-	<? } ?>
+	<?PHP } ?>
 	</select>
 	</td>
 </tr>

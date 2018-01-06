@@ -1,5 +1,5 @@
-<? if(!defined("CONFIG")) exit(); ?>
-<? if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
+<?PHP if(!defined("CONFIG")) exit(); ?>
+<?PHP if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
 <?
 $id = addslashes($_GET['id']);
 
@@ -47,9 +47,9 @@ if(!$stresult) {
 <tr>
 	<td>Teams:</td>
 	<td>
-	<? while($stitem = mysqli_fetch_array($stresult)) { ?>
+	<?PHP while($stitem = mysqli_fetch_array($stresult)) { ?>
 		&bull; <?=$stitem['name']?><br>
-	<? } ?>
+	<?PHP } ?>
 	</td>
 </tr>
 <tr>

@@ -1,5 +1,5 @@
-<? if(!defined("CONFIG")) exit(); ?>
-<? if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
+<?PHP if(!defined("CONFIG")) exit(); ?>
+<?PHP if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
 <?
 $id = addslashes($_GET['id']);
 
@@ -38,9 +38,9 @@ if(!$sresult) {
 	<td>
 		<select id="season" name="season" onchange="showOptions();">
 		<option value="0">--NO SEASON--</option>
-		<? while($sitem = mysqli_fetch_array($sresult)) { ?>
+		<?PHP while($sitem = mysqli_fetch_array($sresult)) { ?>
 			<option value="<?=$sitem['id']?>"<?=$item['season'] == $sitem['id'] ? " selected=\"1\"" : ""?>><?=$sitem['name']?></option>
-		<? }
+		<?PHP }
         mysqli_free_result($sresult);
         mysqli_free_result($result);
          ?>

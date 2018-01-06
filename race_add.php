@@ -1,5 +1,5 @@
-<? if(!defined("CONFIG")) exit(); ?>
-<? if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
+<?PHP if(!defined("CONFIG")) exit(); ?>
+<?PHP if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
 <?
 $season = $_GET['season'];
 
@@ -55,9 +55,9 @@ if(!$rresult) {
 	<td>
 		<select id="season" name="season" onchange="showOptions();">
 		<option value="0">--NO SEASON--</option>
-		<? while($sitem = mysqli_fetch_array($sresult)) { ?>
+		<?PHP while($sitem = mysqli_fetch_array($sresult)) { ?>
 			<option value="<?=$sitem['id']?>"<?=$season == $sitem['id'] ? " selected=\"1\"" : ""?>><?=$sitem['name']?> (<?=$sitem['dname']?>)</option>
-		<? } ?>
+		<?PHP } ?>
 		</select>
 	</td>
 </tr>
@@ -69,9 +69,9 @@ if(!$rresult) {
 	<td>Division:</td>
 	<td>
 		<select name="division" onchange="void(0);">
-		<? while($ditem = mysqli_fetch_array($dresult)) { ?>
+		<?PHP while($ditem = mysqli_fetch_array($dresult)) { ?>
 			<option value="<?=$ditem['id']?>"><?=$ditem['name']?> (<?=$ditem['type']?>)</option>
-		<? } ?>
+		<?PHP } ?>
 		</select>
 	</td>
 </tr>
@@ -79,9 +79,9 @@ if(!$rresult) {
 	<td>Ruleset:</td>
 	<td>
 		<select name="ruleset" onchange="void(0);">
-		<? while($ritem = mysqli_fetch_array($rresult)) { ?>
+		<?PHP while($ritem = mysqli_fetch_array($rresult)) { ?>
 			<option value="<?=$ritem['id']?>"><?=$ritem['name']?></option>
-		<? } ?>
+		<?PHP } ?>
 		</select>
 	</td>
 </tr>
@@ -89,11 +89,11 @@ if(!$rresult) {
 	<td>Ruleset qualifying:</td>
 	<td>
 		<select name="ruleset_qualifying" onchange="void(0);">
-		<? mysqli_data_seek($rresult, 0); ?>
+		<?PHP mysqli_data_seek($rresult, 0); ?>
 		<option value="">&nbsp;</option>
-		<? while($ritem = mysqli_fetch_array($rresult)) { ?>
+		<?PHP while($ritem = mysqli_fetch_array($rresult)) { ?>
 			<option value="<?=$ritem['id']?>"><?=$ritem['name']?></option>
-		<? } ?>
+		<?PHP } ?>
 		</select>
 	</td>
 </tr>
@@ -101,20 +101,20 @@ if(!$rresult) {
 	<td>Date:</td>
 	<td>
 		<select name="day">
-		<? for($x = 1; $x <= 31; $x++) { ?>
+		<?PHP for($x = 1; $x <= 31; $x++) { ?>
 			<option<?=date("j") == $x ? " selected" : ""?>><?=sprintf("%02d", $x)?></option>
-		<? } ?>
+		<?PHP } ?>
 		</select>
 		<select name="month">
-		<? $months = array(1 => "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"); ?>
-		<? for($x = 1; $x <= 12; $x++) { ?>
+		<?PHP $months = array(1 => "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"); ?>
+		<?PHP for($x = 1; $x <= 12; $x++) { ?>
 			<option<?=date("n") == $x ? " selected" : ""?> value="<?=$x?>"><?=$months[$x]?></option>
-		<? } ?>
+		<?PHP } ?>
 		</select>
 		<select name="year">
-		<? for($x = 2000; $x <= 2050; $x++) { ?>
+		<?PHP for($x = 2000; $x <= 2050; $x++) { ?>
 			<option<?=date("Y") == $x ? " selected" : ""?>><?=sprintf("%04d", $x)?></option>
-		<? } ?>
+		<?PHP } ?>
 		</select>
 	</td>
 </tr>
@@ -122,14 +122,14 @@ if(!$rresult) {
 	<td>Time:</td>
 	<td>
 		<select name="hour">
-		<? for($x = 0; $x <= 23; $x++) { ?>
+		<?PHP for($x = 0; $x <= 23; $x++) { ?>
 			<option<?=$x == "12" ? " selected" : ""?>><?=sprintf("%02d", $x)?></option>
-		<? } ?>
+		<?PHP } ?>
 		</select> :
 		<select name="minute">
-		<? for($x = 0; $x <= 59; $x = $x + 5) { ?>
+		<?PHP for($x = 0; $x <= 59; $x = $x + 5) { ?>
 			<option><?=sprintf("%02d", $x)?></option>
-		<? } ?>
+		<?PHP } ?>
 		</select>
 	</td>
 </tr>

@@ -1,5 +1,5 @@
-<? if(!defined("CONFIG")) exit(); ?>
-<? require_once("functions.php");
+<?PHP if(!defined("CONFIG")) exit(); ?>
+<?PHP require_once("functions.php");
 $link = mysqlconnect();
 if ($link == null) {
 	show_error("MySQL Error\n");

@@ -1,5 +1,5 @@
-<? if(!defined("CONFIG")) exit(); ?>
-<? if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
+<?PHP if(!defined("CONFIG")) exit(); ?>
+<?PHP if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
 <?
 require_once("functions.php"); // import mysql function
 $link = mysqlconnect(); // call mysql function to get the link to the database
@@ -37,9 +37,9 @@ if(mysqli_num_rows($rsresult) == 0) {
 	<td>Division:</td>
 	<td>
 	<select name="division">
-	<? while($diitem = mysqli_fetch_array($diresult)) { ?>
+	<?PHP while($diitem = mysqli_fetch_array($diresult)) { ?>
 		<option value="<?=$diitem['id']?>"><?=$diitem['name']?></option>
-	<? } ?>
+	<?PHP } ?>
 	</select>
 	</td>
 </tr>
@@ -47,9 +47,9 @@ if(mysqli_num_rows($rsresult) == 0) {
 	<td>Ruleset:</td>
 	<td>
 	<select name="ruleset">
-	<? while($rsitem = mysqli_fetch_array($rsresult)) { ?>
+	<?PHP while($rsitem = mysqli_fetch_array($rsresult)) { ?>
 		<option value="<?=$rsitem['id']?>"><?=$rsitem['name']?></option>
-	<? } ?>
+	<?PHP } ?>
 	</select>
 	</td>
 </tr>
@@ -58,10 +58,10 @@ if(mysqli_num_rows($rsresult) == 0) {
 	<td>
 	<select name="ruleset_qualifying">
 	<option value="0">&nbsp;</option>
-	<? mysqli_data_seek($rsresult, 0); ?>
-	<? while($rsitem = mysqli_fetch_array($rsresult)) { ?>
+	<?PHP mysqli_data_seek($rsresult, 0); ?>
+	<?PHP while($rsitem = mysqli_fetch_array($rsresult)) { ?>
 		<option value="<?=$rsitem['id']?>"><?=$rsitem['name']?></option>
-	<? } ?>
+	<?PHP } ?>
 	</select>
 	</td>
 </tr>

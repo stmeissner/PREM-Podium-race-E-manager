@@ -1,4 +1,4 @@
-<? if(!defined("CONFIG")) exit(); ?>
+<?PHP if(!defined("CONFIG")) exit(); ?>
 
 <h1>Add driver</h1>
 

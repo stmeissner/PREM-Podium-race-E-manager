@@ -1,5 +1,5 @@
-<? if(!defined("CONFIG")) exit(); ?>
-<? if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
+<?PHP if(!defined("CONFIG")) exit(); ?>
+<?PHP if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
 <?
 if(isset($_GET['id']))
 	$id = addslashes($_GET['id']);
@@ -121,13 +121,13 @@ $date = strtotime($item['date']);
 <tr>
 	<td>Track:</td>
 	<td><?=$item['track']?></td>
-	<? if($item['season'] == 0) { ?>
+	<?PHP if($item['season'] == 0) { ?>
 	<td>Division/Ruleset:</td>
 	<td><?=$item['dname']?> / <?=$item['rsname']?></td>
-	<? } else { ?>
+	<?PHP } else { ?>
 	<td>Season / Division:</td>
 	<td><?=$item['sname']?> / <?=$item['dname']?></td>
-	<? } ?>
+	<?PHP } ?>
 </tr>
 <tr>
 	<td>Date/Time:</td>
@@ -138,7 +138,7 @@ $date = strtotime($item['date']);
 	<td><?=$item['maxplayers']?></td>
 </tr>
 </table>
-<? if(!$upload) { ?>
+<?PHP if(!$upload) { ?>
 <br/>
 <form action=".?page=race_result_import_lfspoints" method="post" enctype="multipart/form-data">
 <table border="0" cellspacing="0" cellpadding="2">
@@ -156,8 +156,8 @@ $date = strtotime($item['date']);
 </tr>
 </table>
 </form>
-<? } else { ?>
-<? require_once("results_functions.php"); ?>
+<?PHP } else { ?>
+<?PHP require_once("results_functions.php"); ?>
 <?
 if($item['season'] == 0)
 	$dquery = "SELECT td.id, t.name team, d.name driver FROM team_driver td JOIN team t ON (t.id = td.team) JOIN driver d ON (d.id = td.driver)";
@@ -205,8 +205,8 @@ function show_driver_combo($did = 0) {
 			<td align="center"><span class="abbr" title="Fastest Lap">FL</span></td>
 			<td>Status</td>
 		</tr>
-		<? $style = "odd"; ?>
-		<? for($x = 0; $x < $item['maxplayers']; $x++) {
+		<?PHP $style = "odd"; ?>
+		<?PHP for($x = 0; $x < $item['maxplayers']; $x++) {
 			if($x < count($driver)) {
 				$ditem = $driver[$x];
 				$drivername = $ditem['playername'];
@@ -241,7 +241,7 @@ function show_driver_combo($did = 0) {
 			}
 			?>
 			<tr class="<?=$style?>">
-				<td><?=$drivername . (!empty($drivername) ? "<br/>" : "")?><? show_driver_combo(); ?></td>
+				<td><?=$drivername . (!empty($drivername) ? "<br/>" : "")?><?PHP show_driver_combo(); ?></td>
 				<td align="center"><input type="text" name="grid[]" value="<?=$grid?>" size="2" maxlength="2"></td>
 				<td align="center"><input type="text" name="pos[]" value="<?=$position?>" size="2" maxlength="2"></td>
 				<td align="center"><input type="text" name="laps[]" value="<?=$laps?>" size="3" maxlength="3"></td>
@@ -254,14 +254,14 @@ function show_driver_combo($did = 0) {
 				<td align="center"><input type="checkbox" name="fl[<?=$x?>]"<?=$fl==1?" checked":""?>></td>
 				<td align="center">
 					<select name="status[]">
-						<? foreach($race_status_s as $i => $s) { ?>
+						<?PHP foreach($race_status_s as $i => $s) { ?>
 						<option value="<?=$i?>"<?=$i == $status ? " selected" : ""?>><?=$s?></option>
-						<? } ?>
+						<?PHP } ?>
 					</select>
 				</td>
 			</tr>
 		<?	$style = $style == "odd" ? "even" : "odd"; ?>
-		<? } ?>
+		<?PHP } ?>
 			<tr>
 				<td>&nbsp;</td>
 				<td colspan="6">
@@ -273,4 +273,4 @@ function show_driver_combo($did = 0) {
 			</tr>
 		</table>
 </form>
-<? } ?>
+<?PHP } ?>

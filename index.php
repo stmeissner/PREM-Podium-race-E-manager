@@ -98,17 +98,17 @@ if ($page != "error") {
 <body>
 
 <div id="nav">
-<? include ("nav.php"); ?>
+<?PHP include ("nav.php"); ?>
 </div>
 
 <div id="head">
-<? include ("header.php"); ?>
+<?PHP include ("header.php"); ?>
 </div>
 
 <div class="w3-container">
 <div id="content">
-<? include ("msg.php"); ?>
-<? include ("$page.php"); ?>
+<?PHP include ("msg.php"); ?>
+<?PHP include ("$page.php"); ?>
 </div>
 </div>
 <!-- Footer -->

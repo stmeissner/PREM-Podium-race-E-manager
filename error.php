@@ -1,4 +1,4 @@
-<? if(!defined("CONFIG")) exit(); ?>
+<?PHP if(!defined("CONFIG")) exit(); ?>
 <?
 $error = stripslashes(urldecode($error));
 $enter_regex = "/(<br\s*\/?>|\n|\r\n)/mi";

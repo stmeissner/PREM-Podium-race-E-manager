@@ -33,7 +33,7 @@ $active_next = $_POST["active_next"];
         </b> </b> <input type="submit" name="submit" value="Set">
         <br><br>
     </form>
-<? } ?>
+<?PHP } ?>
 
 
 
@@ -64,7 +64,7 @@ $active_last = $_POST["active_last"];
         </b> </b> <input type="submit" name="submit" value="Set">
         <br><br>
     </form>
-<? } ?>
+<?PHP } ?>
 
 
 <!--comms_viewer-->
@@ -93,7 +93,7 @@ $active_comms = $_POST["active_comms"];
         </b> </b> <input type="submit" name="submit" value="Set">
         <br><br>
     </form>
-<? } ?>
+<?PHP } ?>
 
 
 <!--standings block-->
@@ -122,7 +122,7 @@ $active_standings = $_POST["active_standings"];
         </b> </b> <input type="submit" name="submit" value="Set">
         <br><br>
     </form>
-<? } ?>
+<?PHP } ?>
 
 
 <!--Standing_block_pages-->

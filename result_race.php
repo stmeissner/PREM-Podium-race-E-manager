@@ -1,4 +1,4 @@
-<? if(!defined("CONFIG")) exit(); ?>
+<?PHP if(!defined("CONFIG")) exit(); ?>
 <?
 require_once("results_functions.php");
 
@@ -91,13 +91,13 @@ if($item['ruleset_qualifying'] != 0) {
 <tr class="w3-grey">
 	<td>Track:</td>
 	<td><?=$item['track']?></td>
-	<? if($item['season'] == 0) { ?>
+	<?PHP if($item['season'] == 0) { ?>
 	<td>Division/Ruleset:</td>
 	<td><?=$item['dname']?> / <?=$item['rsname']?><?=!empty($item['qrsname']) ? " (qualifying: " . $item['qrsname'] : ""?>)</td>
-	<? } else { ?>
+	<?PHP } else { ?>
 	<td>Season / Division:</td>
 	<td><?=$item['sname']?> / <?=$item['dname']?></td>
-	<? } ?>
+	<?PHP } ?>
 </tr>
 <tr class="w3-grey">
 	<td>Date/Time:</td>
@@ -152,16 +152,16 @@ if($item['ruleset_qualifying'] != 0) {
 	<td>Car #</td>
 	<td>Country</td>
 	<td>Team</td>
-	<? if($item['progress'] != RACE_NEW) { ?>
+	<?PHP if($item['progress'] != RACE_NEW) { ?>
 	<td align="right">Qual</td>
-	<? if($item['progress'] != RACE_QUALIFYING) { ?>
+	<?PHP if($item['progress'] != RACE_QUALIFYING) { ?>
 	<td align="right">Laps</td>
 	<td align="right"><span class="abbr" title="Fastest Lap">FL</span></td>
 	<td align="right">Time</td>
 	<td align="right">Gap</td>
 	<td style="width:50px;vertical-align:bottom;background-color:transparent;text-align:right;color:white;font-weight:bold;">Pts</td>
-	<? } ?>
-	<? } ?>
+	<?PHP } ?>
+	<?PHP } ?>
 </tr>
 <?
 
@@ -202,16 +202,16 @@ while($ditem = mysqli_fetch_array($dresult)) {
 	<td><?=$ditem['dplate']?></td>
 	<td><img src="images/flags/<?=$ditem['dcountry']?>.png"></td>
 	<td><?=$ditem['tname']?></td>
-	<? if($item['progress'] != RACE_NEW) { ?>
+	<?PHP if($item['progress'] != RACE_NEW) { ?>
 	<td align="right"><?=$ditem['grid']?></td>
-	<? if($item['progress'] != RACE_QUALIFYING) { ?>
+	<?PHP if($item['progress'] != RACE_QUALIFYING) { ?>
 	<td align="right"><?=$laps?></td>
 	<td align="right"><?if($ditem['fastest_lap']=='1') echo "<img src=\"images/chrono.png\" alt=\"yes\">";?></td>
 	<td align="right"><?=$time?></td>
 	<td align="right"><?=$gap?></td>
 	<td style="background-color:transparent; text-align: right; color:black; font-weight: bold;"><?=points_total($position, $ditem['grid'], $ditem['fastest_lap'], $ruleset)?></td>
-	<? } ?>
-	<? } ?>
+	<?PHP } ?>
+	<?PHP } ?>
 </tr>
 <?
 }
@@ -252,16 +252,16 @@ while($ditem = mysqli_fetch_array($ndresult)) {
 	<td><?=$ditem['dplate']?></td>
   <td><img src="images/flags/<?=$ditem['dcountry']?>.png"></td>
 	<td><?=$ditem['tname']?></td>
-	<? if($item['progress'] != RACE_NEW) { ?>
+	<?PHP if($item['progress'] != RACE_NEW) { ?>
 	<td align="right"><?=$ditem['grid']?></td>
-	<? if($item['progress'] != RACE_QUALIFYING) { ?>
+	<?PHP if($item['progress'] != RACE_QUALIFYING) { ?>
 	<td align="right"><?=$laps?></td>
 	<td align="right"><?if($ditem['fastest_lap']=='1') echo "<img src=\"images/chrono.png\" alt=\"yes\">";?></td>
 	<td align="right"><?=$race_status_s[$ditem['status']]?></td>
 	<td align="right">-</td>
 	<td align="right">-</td>
-	<? } ?>
-	<? } ?>
+	<?PHP } ?>
+	<?PHP } ?>
 </tr>
 <?
 }

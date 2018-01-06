@@ -1,5 +1,5 @@
-<? if(!defined("CONFIG")) exit(); ?>
-<? if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
+<?PHP if(!defined("CONFIG")) exit(); ?>
+<?PHP if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
 <?
 require_once("functions.php"); // import mysql function
 $link = mysqlconnect(); // call mysql function to get the link to the database
@@ -38,7 +38,7 @@ function show_driver_combo() {
 <tr>
 	<td width="120">Drivers:</td>
 	<td>
-		<? for($x = 0; $x < 5; $x++) {
+		<?PHP for($x = 0; $x < 5; $x++) {
 		show_driver_combo();
 		echo "<br>\n";
 		} ?>

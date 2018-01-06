@@ -1,4 +1,4 @@
-<? if (!defined("CONFIG"))
+<?PHP if (!defined("CONFIG"))
     exit();
 if ($simresultID = intval($_GET['sres']))
 	$sim_results = "SELECT simresults_url FROM sim_results WHERE `id` = '$simresultID' LIMIT 1";

@@ -1,4 +1,4 @@
-<? if(!defined("CONFIG")) exit();
+<?PHP if(!defined("CONFIG")) exit();
 if(!isset($login)) { show_error("You do not have administrator rights\n"); return; }
 $id = addslashes($_GET['id']);
 require_once("functions.php"); // import mysql function
@@ -311,9 +311,9 @@ $teamcount = mysqli_num_rows($tresult);
 <tr class="w3-hover-green">
 	<td>Teams (<?=$teamcount?>):</td>
 	<td>
-	<? while($titem = mysqli_fetch_array($tresult)) { ?>
+	<?PHP while($titem = mysqli_fetch_array($tresult)) { ?>
 		<a href="?page=team_driver_rem&amp;id=<?=$titem['id']?>"><img src="images/delete16.png" alt="delete"></a> <?=$titem['teamname']?><br>
-	<? } ?>
+	<?PHP } ?>
 	</td>
 </tr>
 <tr>

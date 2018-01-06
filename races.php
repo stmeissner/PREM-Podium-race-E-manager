@@ -1,5 +1,5 @@
-<? if(!defined("CONFIG")) exit(); ?>
-<? if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
+<?PHP if(!defined("CONFIG")) exit(); ?>
+<?PHP if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
 <?
 if(isset($_GET['season'])) $season = $_GET['season'];
 else $season = 0;
@@ -44,16 +44,16 @@ $noseasonracecount = $s2item['racecount'];
 <select name="season" onchange="this.form.submit();">
 <option value="0">NO SEASON - <?=$noseasonracecount?> race<?=$noseasonracecount == 1 ? "" : "s"?></option>
 <optgroup label="Seasons">
-<? while($sitem = mysqli_fetch_array($sresult)) { ?>
+<?PHP while($sitem = mysqli_fetch_array($sresult)) { ?>
 	<option value="<?=$sitem['id']?>"<?=$season == $sitem['id'] ? " selected" : ""?>><?=$sitem['name']?> - <?=$sitem['dname']?> - <?=$sitem['racecount']?> race<?=$sitem['racecount'] == 1 ? "" : "s"?></option>
-<? } ?>
+<?PHP } ?>
 </optgroup>
 </select>
 <input type="submit" class="button submit" value="ok">
 </form>
 </div>
 <a href=".?page=race_add&amp;season=<?=$season?>">Add race</a>
-<? if($season == "0") { ?>
+<?PHP if($season == "0") { ?>
 
 <h2>Seasons</h2>
 <div class="w3-container">
@@ -79,7 +79,7 @@ while($sitem = mysqli_fetch_array($sresult)) {
 </table>
 
 <h2>Events</h2>
-<? } ?>
+<?PHP } ?>
 <?
 if(mysqli_num_rows($result) == 0) {
 	show_msg("No races found\n");
@@ -91,19 +91,19 @@ if(mysqli_num_rows($result) == 0) {
 <tr class="w3-dark-grey">
 	<td>&nbsp;</td>
 	<td>Date</td>
-	<? if ($season == 0) { ?>
+	<?PHP if ($season == 0) { ?>
 	<td>Name<br>Track</td>
 	<td>Division<br>Ruleset</td>
 	<td align="center">Drivers</td>
 	<td align="center">Laps</td>
 	<td align="center">MaxPl</td>
-	<? } else { ?>
+	<?PHP } else { ?>
 	<td>Name</td>
 	<td>Track</td>
 	<td align="center">Drivers</td>
 	<td align="center">Laps</td>
 	<td align="center">MaxPl</td>
-	<? } ?>
+	<?PHP } ?>
 </tr>
 
 <?
@@ -118,19 +118,19 @@ while($item = mysqli_fetch_array($result)) {
 		<a href=".?page=race_rem&amp;id=<?=$item['id']?>"><img src="images/delete16.png" alt="rem"></a>
 	</td>
 	<td><?=date("d/m/y", $date)?></td>
-	<? if ($season == 0) { ?>
+	<?PHP if ($season == 0) { ?>
 	<td><?=$item['name']?><br><?=$item['track']?></td>
 	<td><?=$item['dname']?><br><?=$item['rsname']?><?=!empty($item['qrsname']) ? " / " . $item['qrsname'] : ""?></td>
 	<td width="40" align="center"><?=$item['drivers']?></td>
 	<td width="40" align="center"><?=$item['laps']?></td>
 	<td width="40" align="center"><?=$item['maxplayers']?></td>
-	<? } else { ?>
+	<?PHP } else { ?>
 	<td><?=$item['name']?></td>
 	<td><?=$item['track']?></td>
 	<td align="center"><?=$item['drivers']?></td>
 	<td align="center"><?=$item['laps']?></td>
 	<td align="center"><?=$item['maxplayers']?></td>
-	<? } ?>
+	<?PHP } ?>
 </tr>
 <?
 #	$style = $style == "odd" ? "even" : "odd";

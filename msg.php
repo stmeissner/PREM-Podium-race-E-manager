@@ -1,4 +1,4 @@
-<? if(!defined("CONFIG")) exit(); ?>
+<?PHP if(!defined("CONFIG")) exit(); ?>
 <?
 if(isset($msg) || isset($_GET['msg'])) {
 	if(!isset($msg) && isset($_GET['msg'])) $msg = $_GET['msg'];
@@ -16,4 +16,4 @@ if(isset($msg) || isset($_GET['msg'])) {
 ?>
 <div id="msg"><?=$msg?></div>
 <br>
-<? } ?>
+<?PHP } ?>

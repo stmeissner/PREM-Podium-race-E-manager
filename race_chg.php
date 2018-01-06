@@ -1,5 +1,5 @@
-<? if(!defined("CONFIG")) exit(); ?>
-<? if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
+<?PHP if(!defined("CONFIG")) exit(); ?>
+<?PHP if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
 <?
 $id = addslashes($_GET['id']);
 
@@ -83,9 +83,9 @@ if($item['season'] != 0) {
 	<td>
 		<select id="season" name="season" onchange="showOptions();">
 		<option value="0">--NO SEASON--</option>
-		<? while($sitem = mysqli_fetch_array($sresult)) { ?>
+		<?PHP while($sitem = mysqli_fetch_array($sresult)) { ?>
 			<option value="<?=$sitem['id']?>"<?=$item['season'] == $sitem['id'] ? " selected=\"1\"" : ""?>><?=$sitem['name']?> (<?=$sitem['dname']?>)</option>
-		<? } ?>
+		<?PHP } ?>
 		</select>
 	</td>
 </tr>
@@ -97,9 +97,9 @@ if($item['season'] != 0) {
 	<td>Division:</td>
 	<td>
 		<select name="division" onchange="void(0);">
-		<? while($ditem = mysqli_fetch_array($dresult)) { ?>
+		<?PHP while($ditem = mysqli_fetch_array($dresult)) { ?>
 			<option value="<?=$ditem['id']?>"<?=$item['division'] == $ditem['id'] ? " selected" : ""?>><?=$ditem['name']?> (<?=$ditem['type']?>)</option>
-		<? } ?>
+		<?PHP } ?>
 		</select>
 	</td>
 </tr>
@@ -107,9 +107,9 @@ if($item['season'] != 0) {
 	<td>Ruleset:</td>
 	<td>
 		<select name="ruleset" onchange="void(0);">
-		<? while($ritem = mysqli_fetch_array($rresult)) { ?>
+		<?PHP while($ritem = mysqli_fetch_array($rresult)) { ?>
 			<option value="<?=$ritem['id']?>"<?=$item['ruleset'] == $ritem['id'] ? " selected" : ""?>><?=$ritem['name']?></option>
-		<? } ?>
+		<?PHP } ?>
 		</select>
 	</td>
 </tr>
@@ -117,11 +117,11 @@ if($item['season'] != 0) {
 	<td>Ruleset qualifying:</td>
 	<td>
 		<select name="ruleset_qualifying" onchange="void(0);">
-		<? mysqli_data_seek($rresult, 0); ?>
+		<?PHP mysqli_data_seek($rresult, 0); ?>
 		<option value="">&nbsp;</option>
-		<? while($ritem = mysqli_fetch_array($rresult)) { ?>
+		<?PHP while($ritem = mysqli_fetch_array($rresult)) { ?>
 			<option value="<?=$ritem['id']?>"<?=$item['ruleset_qualifying'] == $ritem['id'] ? " selected" : ""?>><?=$ritem['name']?></option>
-		<? } ?>
+		<?PHP } ?>
 		</select>
 	</td>
 </tr>
@@ -129,20 +129,20 @@ if($item['season'] != 0) {
 	<td>Date:</td>
 	<td>
 		<select name="day">
-		<? for($x = 1; $x <= 31; $x++) { ?>
+		<?PHP for($x = 1; $x <= 31; $x++) { ?>
 			<option<?=date("j", $date) == $x ? " selected" : ""?>><?=sprintf("%02d", $x)?></option>
-		<? } ?>
+		<?PHP } ?>
 		</select>
 		<select name="month">
-		<? $months = array(1 => "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"); ?>
-		<? for($x = 1; $x <= 12; $x++) { ?>
+		<?PHP $months = array(1 => "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"); ?>
+		<?PHP for($x = 1; $x <= 12; $x++) { ?>
 			<option<?=date("n", $date) == $x ? " selected" : ""?> value="<?=$x?>"><?=$months[$x]?></option>
-		<? } ?>
+		<?PHP } ?>
 		</select>
 		<select name="year">
-		<? for($x = 2000; $x <= 2050; $x++) { ?>
+		<?PHP for($x = 2000; $x <= 2050; $x++) { ?>
 			<option<?=date("Y", $date) == $x ? " selected" : ""?>><?=sprintf("%04d", $x)?></option>
-		<? } ?>
+		<?PHP } ?>
 		</select>
 	</td>
 </tr>
@@ -150,14 +150,14 @@ if($item['season'] != 0) {
 	<td>Time:</td>
 	<td>
 		<select name="hour">
-		<? for($x = 0; $x <= 23; $x++) { ?>
+		<?PHP for($x = 0; $x <= 23; $x++) { ?>
 			<option<?=date("H", $date) == $x ? " selected" : ""?>><?=sprintf("%02d", $x)?></option>
-		<? } ?>
+		<?PHP } ?>
 		</select> :
 		<select name="minute">
-		<? for($x = 0; $x <= 59; $x = $x + 5) { ?>
+		<?PHP for($x = 0; $x <= 59; $x = $x + 5) { ?>
 			<option<?=date("i", $date) == $x ? " selected" : ""?>><?=sprintf("%02d", $x)?></option>
-		<? } ?>
+		<?PHP } ?>
 		</select>
 	</td>
 </tr>

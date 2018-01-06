@@ -1,6 +1,6 @@
-<? if(!defined("CONFIG")) exit(); ?>
-<? if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
-<?
+<?PHP if(!defined("CONFIG")) exit(); ?>
+<?PHP if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
+<?PHP
 require_once("functions.php"); // import mysql function
 $link = mysqlconnect(); // call mysql function to get the link to the database
 $query = "SELECT * FROM cars";
@@ -14,7 +14,7 @@ if(!$cars) {
 <h1>Cars</h1>
 <a href=".?page=car_edit_json_ac">Import car_ui.json with possibility to edit the file prior (fixing errors in it)</a></br>
 <a href=".?page=car_add">Add car manually</a>
-<?
+<?PHP
 if(mysqli_num_rows($cars) == 0) {
 	show_msg("No cars found\n");
 	return;
@@ -35,7 +35,7 @@ if(mysqli_num_rows($cars) == 0) {
 	<th>Weight</th>
 	<th>Description</th>
 </tr>
-<?
+<?PHP
 while($item = mysqli_fetch_array($cars)) {
 ?>
 <tr>
@@ -55,6 +55,6 @@ while($item = mysqli_fetch_array($cars)) {
 	<td><?=$item['weight']?></td>
 	<td style="white-space: normal"><?=$item['description']?></td>
 </tr>
-<? } ?>
+<?PHP } ?>
 </table>
 </div>

@@ -1,4 +1,4 @@
-<? if (!defined("CONFIG")) exit();
+<?PHP if (!defined("CONFIG")) exit();
 require_once("functions.php"); // import mysql function
 $link = mysqlconnect(); // call mysql function to get the link to the database
 
@@ -25,7 +25,7 @@ if (!$result) {
         <td>Image</td>
     </tr>
 
-<? while ($sitem = mysqli_fetch_array($result)) { ?>
+<?PHP while ($sitem = mysqli_fetch_array($result)) { ?>
 
     <tr class="w3-hover-blue">
         <td><?= $sitem['name'] ?></td>
@@ -35,7 +35,7 @@ if (!$result) {
         <td><a href="<?= $sitem['imagelink'] ?>" target="_blank"><img src="<?= $sitem['imagelink']; ?>" width="250" height="165"/></a></td>
     </tr>
 
-<? } ?>
+<?PHP } ?>
 </table>
 </div>
 </div>

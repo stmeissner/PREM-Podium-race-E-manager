@@ -1,4 +1,4 @@
-<? if(!defined("CONFIG")) exit(); ?>
+<?PHP if(!defined("CONFIG")) exit(); ?>
 <?
 require_once("results_functions.php");
 
@@ -262,9 +262,9 @@ usort($team, "point_sort");
         <td style="vertical-align:bottom" align="center">Nr.</td>
         <td style="vertical-align:bottom" align="center">Ctry.</td>
 	<td style="vertical-align:bottom" align="center">Team</td>
-<? for($x = 1; $x <= $race; $x++) { ?>
+<?PHP for($x = 1; $x <= $race; $x++) { ?>
 	<td width="1" align="center"><javascript:void(0)" class="tablink" title="Click to more details"><div class="w3-topbar w3-bottombar w3-hover-border-red"><a href="?page=result_race&amp;race=<?=$races[$x]['id']?>"><img src="img_season_race.php?text=<?=urlencode($races[$x]['name'])?>&amp;text2=<?=urlencode($races[$x]['track'])?>" alt="<?=$x?>"></a></td>
-<? } ?>
+<?PHP } ?>
 	<td style="width:50px;vertical-align:bottom;background-color:transparent;text-align:right;color:white;font-weight:bold;">Pts</td>
 </tr>
 <?
@@ -327,7 +327,7 @@ for($x = 1; $x <= $race; $x++) {
 	}
 	?>
 	<td width="1" <?=$color?>><?=$data?></td>
-<? } ?>
+<?PHP } ?>
 	<td style="background-color:transparent; text-align: right; color:black; font-weight: bold;"><?=!empty($ditem['points']) ? $ditem['points'] : "0" ?></td>
 </tr>
 <?
@@ -344,9 +344,9 @@ for($x = 1; $x <= $race; $x++) {
 <tr class="w3-dark-grey">
 	<td style="vertical-align:bottom">Pos</td>
 	<td style="vertical-align:bottom">Team</td>
-<? for($x = 1; $x <= $race; $x++) { ?>
+<?PHP for($x = 1; $x <= $race; $x++) { ?>
 	<td width="1" align="right"><javascript:void(0)" class="tablink" title="Click to more details"><div class="w3-topbar w3-bottombar w3-hover-border-red"><a href="?page=result_race&amp;race=<?=$races[$x]['id']?>"><img src="img_season_race.php?text=<?=urlencode($races[$x]['name'])?>&amp;text2=<?=urlencode($races[$x]['track'])?>" alt="<?=$x?>"></a></td>
-<? } ?>
+<?PHP } ?>
 	<td style="width:50px;vertical-align:bottom;background-color:transparent;text-align:right;color:white;font-weight:bold;">Pts</td>
 </tr>
 <?
@@ -397,7 +397,7 @@ for($x = 1; $x <= $race; $x++) {
 	}
 	?>
 	<td width="1" <?=$color?>><?=$data?></td>
-<? } ?>
+<?PHP } ?>
 	<td style="background-color:transparent; text-align: right; color:black; font-weight: bold;"><?=!empty($titem['points']) ? $titem['points'] : "0" ?></td>
 </tr>
 <?
@@ -407,7 +407,7 @@ for($x = 1; $x <= $race; $x++) {
 </div>
 </div>
 
-<? if($show_qualifypoint) {
+<?PHP if($show_qualifypoint) {
 	usort($driver, 'point_sort_qual');
 	?>
 <h2>Drivers qualifying</h2>
@@ -418,9 +418,9 @@ for($x = 1; $x <= $race; $x++) {
 	<td>Pos</td>
 	<td>Driver</td>
 	<td>Team</td>
-<? for($x = 1; $x <= $race; $x++) { ?>
+<?PHP for($x = 1; $x <= $race; $x++) { ?>
 	<td width="1" align="right"><javascript:void(0)" class="tablink" title="Click to more details"><div class="w3-topbar w3-bottombar w3-hover-border-red"><a href="?page=result_race&amp;race=<?=$races[$x]['id']?>"><img src="img_season_race.php?text=<?=urlencode($races[$x]['name'])?>&amp;text2=<?=urlencode($races[$x]['track'])?>" alt="<?=$x?>"></a></td>
-<? } ?>
+<?PHP } ?>
 	<td width="1" align="right">Pts</td>
 </tr>
 <?
@@ -433,9 +433,9 @@ foreach($driver as $id => $ditem) {
 	<td width="1" align="right"><?=++$pos?>&nbsp;</td>
 	<td><?=$ditem['name']?></td>
 	<td><?=$ditem['team']?></td>
-<? for($x = 1; $x <= $race; $x++) { ?>
+<?PHP for($x = 1; $x <= $race; $x++) { ?>
 	<td style="background-color:transparent; text-align: right; color:black;"><?=!empty($ditem['pointsqualifyingrace'][$x]) ? $ditem['pointsqualifyingrace'][$x] : "-"?></td>
-<? } ?>
+<?PHP } ?>
 	<td style="background-color:transparent; text-align: right; color:black; font-weight: bold;"><?=!empty($ditem['pointsqualifying']) ? $ditem['pointsqualifying'] : "0" ?></td>
 </tr>
 <?
@@ -444,4 +444,4 @@ foreach($driver as $id => $ditem) {
 </table>
 </div>
 </div>
-<? } ?>
+<?PHP } ?>

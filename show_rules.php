@@ -1,4 +1,4 @@
-<? if(!defined("CONFIG")) exit();
+<?PHP if(!defined("CONFIG")) exit();
 
 require_once("functions.php"); // import mysql function
 $link = mysqlconnect(); // call mysql function to get the link to the database

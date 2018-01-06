@@ -1,4 +1,4 @@
-<? if (!defined("CONFIG"))    exit();
+<?PHP if (!defined("CONFIG"))    exit();
 require_once("functions.php"); // import mysql function
 $link = mysqlconnect(); // call mysql function to get the link to the database
 $sql_drivers = "SELECT driver.id as driverID, driver.name as driverName, team.team as teamID FROM driver LEFT JOIN team_driver as team ON team.driver = driver.id ORDER BY driver.id LIMIT 0, 30";

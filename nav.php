@@ -1,5 +1,5 @@
-<? if(!defined("CONFIG")) exit() ?>
-<? if(defined("USER_MUST_LOGIN") && !isset($login)) return; ?>
+<?PHP if(!defined("CONFIG")) exit() ?>
+<?PHP if(defined("USER_MUST_LOGIN") && !isset($login)) return; ?>
 
 <!-- Navbar -->
 <nav>
@@ -41,10 +41,10 @@
 <li><a href="?page=show_drivers" class="w3-hover-none w3-hover-red w3-padding-large">HALL OF FAME</a></li>
 <li><a href="?page=show_videos" class="w3-hover-none w3-hover-red w3-padding-large">VIDEOS</a></li>
 
-<? if(defined("USE_MYSQL") && defined("USE_LOGIN")) { ?>
-<? if(!isset($login)) { ?>
+<?PHP if(defined("USE_MYSQL") && defined("USE_LOGIN")) { ?>
+<?PHP if(!isset($login)) { ?>
     <li class="w3-hide-small"><a href="?page=login" class="w3-padding-large"><img src="images/admin.png" alt="Admin Login" /></a></li>
-<? } else { ?>
+<?PHP } else { ?>
   <li class="w3-hide-small w3-dropdown-hover">
     <a href="javascript:void(0)" class="w3-hover-red w3-padding-large" title="Login Admin">Admin <i class="fa fa-caret-down"></i></a>
     <div class="w3-dropdown-content w3-white w3-card-4">
@@ -67,8 +67,8 @@
   </li>
 </ul>
 </div>
-<? } ?>
-<? } ?>
+<?PHP } ?>
+<?PHP } ?>
 
 <!-- Navbar on small screens -->
 <div id="navDemo" class="w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
@@ -84,10 +84,10 @@
     <li><a class="w3-padding-large" href="?page=driver_add_user">New_Driver</a>
     <li><a class="w3-padding-large" href="your_forum_url">Forum</a>
 
-<? if(defined("USE_MYSQL") && defined("USE_LOGIN")) { ?>
-<? if(!isset($login)) { ?>
+<?PHP if(defined("USE_MYSQL") && defined("USE_LOGIN")) { ?>
+<?PHP if(!isset($login)) { ?>
     <li><a class="w3-padding-large" href="?page=login">Login_Admin</a></li>
-<? } else { ?>
+<?PHP } else { ?>
     <li><a class="w3-padding-large" href="?page=drivers">Edit drivers</a></li>
     <li><a class="w3-padding-large" href="?page=teams">Edit teams</a></li>
     <li><a class="w3-padding-large" href="?page=main_news">News mainpage</a></li>
@@ -97,6 +97,6 @@
 
   </ul>
 </div>
-<? } ?>
-<? } ?>
+<?PHP } ?>
+<?PHP } ?>
 </nav>

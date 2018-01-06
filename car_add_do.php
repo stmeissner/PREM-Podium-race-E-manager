@@ -5,7 +5,6 @@ if(!isset($login)) error("You do not have administrator rights\n");
 require_once("functions.php"); // import mysql function
 $link = mysqlconnect(); // call mysql function to get the link to the database
 
-var_dump($_POST['sim']);
 $sim = htmlspecialchars($_POST['sim']);
 $brand = htmlspecialchars($_POST['brand']);
 $name = htmlspecialchars($_POST['name']);

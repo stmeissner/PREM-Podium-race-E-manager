@@ -1,5 +1,5 @@
-<? if(!defined("CONFIG")) exit(); ?>
-<? if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
+<?PHP if(!defined("CONFIG")) exit(); ?>
+<?PHP if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
 <?
 require_once("results_functions.php");
 
@@ -97,13 +97,13 @@ if(!$rdresult) {
 <tr>
 	<td>Track:</td>
 	<td><?=$item['track']?></td>
-	<? if($item['season'] == 0) { ?>
+	<?PHP if($item['season'] == 0) { ?>
 	<td>Division/Ruleset:</td>
 	<td><?=$item['dname']?> / <?=$item['rsname']?></td>
-	<? } else { ?>
+	<?PHP } else { ?>
 	<td>Season / Division:</td>
 	<td><?=$item['sname']?> / <?=$item['dname']?></td>
-	<? } ?>
+	<?PHP } ?>
 </tr>
 <tr>
 	<td>Date/Time:</td>
@@ -146,8 +146,8 @@ if(!$rdresult) {
 			<td align="center"><span class="abbr" title="Fastest Lap">FL</span></td>
 			<td>Status</td>
 		</tr>
-		<? $style = "odd"; ?>
-		<? for($x = 0; $x < $item['maxplayers']; $x++) {
+		<?PHP $style = "odd"; ?>
+		<?PHP for($x = 0; $x < $item['maxplayers']; $x++) {
 			if($rditem = mysqli_fetch_array($rdresult)) {
 				$driver = $rditem['team_driver'];
 				$dplate = $rditem['dplate'];
@@ -181,7 +181,7 @@ if(!$rdresult) {
 			}
 			?>
 			<tr class="<?=$style?>">
-				<td><? show_driver_combo($driver) ?></td>
+				<td><?PHP show_driver_combo($driver) ?></td>
 				<td align="center"><input type="text" name="dplate[]" value="<?=$dplate?>" size="3" maxlength="3"></td>
 				<td align="center"><input type="text" name="grid[]" value="<?=$grid?>" size="2" maxlength="2"></td>
 				<td align="center"><input type="text" name="pos[]" value="<?=$position?>" size="2" maxlength="2"></td>
@@ -195,14 +195,14 @@ if(!$rdresult) {
 				<td align="center"><input type="checkbox" name="fl[<?=$x?>]"<?=$fl==1?" checked":""?>></td>
 				<td align="center">
 					<select name="status[]">
-						<? foreach($race_status_s as $i => $s) { ?>
+						<?PHP foreach($race_status_s as $i => $s) { ?>
 						<option value="<?=$i?>"<?=$i == $status ? " selected" : ""?>><?=$s?></option>
-						<? } ?>
+						<?PHP } ?>
 					</select>
 				</td>
 			</tr>
 		<?	$style = $style == "odd" ? "even" : "odd"; ?>
-		<? } ?>
+		<?PHP } ?>
 		</table>
 	</td>
 </tr>

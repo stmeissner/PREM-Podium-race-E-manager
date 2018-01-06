@@ -1,5 +1,6 @@
-<? if(!defined("CONFIG")) exit(); ?>
-<? if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
+<?PHP
+if(!defined("CONFIG")) exit();
+if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
 
 <script type="text/javascript">
 var
@@ -15,7 +16,7 @@ function showCharsLeft() {
     charfield.value = charsRemaining;
 }
 </script>
-<?
+<?PHP
 $file = $_POST['json_file'];
 $json = json_decode($file, true);
 $name = $json["name"];
@@ -248,11 +249,10 @@ $description = $json["description"];
         		       $filename = basename($filename);
         		       echo "<option value='" . $filename . "'>".$filename."</option>";
         		    }
-        		?>
+              ?>
             </select>
         	  </td>
        </tr>
-
   			<tr><td>Horsepower</td>
           <td><input type="text" name="horsepower" value= "<?echo $horsepower;?>" size="20" maxlength="20"></td></tr>
   			<tr><td>Torque:</td>

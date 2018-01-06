@@ -1,4 +1,4 @@
-<? if (!defined("CONFIG"))
+<?PHP if (!defined("CONFIG"))
     exit();
 
 require_once("functions.php"); // import mysql function

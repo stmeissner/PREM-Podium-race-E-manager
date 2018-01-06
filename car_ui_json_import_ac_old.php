@@ -1,5 +1,5 @@
-<? if(!defined("CONFIG")) exit(); ?>
-<? if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
+<?PHP if(!defined("CONFIG")) exit(); ?>
+<?PHP if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
 
 <script type="text/javascript">
 var
@@ -55,7 +55,7 @@ if(isset($_POST['json'])) {
 <h1>Import Assetto Corsa ui_car.json</h1>
 <p>Be sure that the Description in the .json contains no /br, no spaces and no '!</p>
 
-<? if(!$upload) { ?>
+<?PHP if(!$upload) { ?>
 <br/>
 <form action=".?page=car_ui_json_import_ac_old" method="post" enctype="multipart/form-data">
 <table border="0" cellspacing="0" cellpadding="2">
@@ -73,7 +73,7 @@ if(isset($_POST['json'])) {
 </tr>
 </table>
 </form>
-<? } else { ?>
+<?PHP } else { ?>
 
 <form action="car_add_do.php" method="post">
 		<table border="0" cellspacing="0" cellpadding="1" width="100%">
@@ -324,4 +324,4 @@ if(isset($_POST['json'])) {
 			</tr>
 		</table>
 </form>
-<? } ?>
+<?PHP } ?>
