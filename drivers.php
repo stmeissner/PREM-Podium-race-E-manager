@@ -41,6 +41,7 @@ if(mysqli_num_rows($result) == 0) {
 </tr>
 
 <?
+
 while($item = mysqli_fetch_array($result)) {
 ?>
 <tr class="w3-hover-green">

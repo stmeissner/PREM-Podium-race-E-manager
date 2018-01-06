@@ -12,7 +12,7 @@ if(!$cars) {
 
 ?>
 <h1>Cars</h1>
-<a href=".?page=car_ui_json_import_ac">Add Assetto Corsa car from ui_car.json</a></br>
+<a href=".?page=car_edit_json_ac">Import car_ui.json with possibility to edit the file prior (fixing errors in it)</a></br>
 <a href=".?page=car_add">Add car manually</a>
 <?
 if(mysqli_num_rows($cars) == 0) {
@@ -27,8 +27,8 @@ if(mysqli_num_rows($cars) == 0) {
 	<th>&nbsp;</th>
 	<th>Sim</th>
 	<th style="white-space:nowrap">Brand</th>
-	<th style="white-space:nowrap";>Name</th>
-	<th style="white-space:nowrap";>Simcode</th>
+	<th style="white-space:nowrap">Name</th>
+	<th style="white-space:nowrap">Simcode</th>
 	<th style="text-align:center">Badge</th>
 	<th>Horsepower</th>
 	<th>Torque</th>

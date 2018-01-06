@@ -15,17 +15,67 @@ function showCharsLeft() {
     charfield.value = charsRemaining;
 }
 </script>
+
 <?
-$file = $_POST['json_file'];
-$json = json_decode($file, true);
-$name = $json["name"];
-$brand = $json["brand"];
-$horsepower = $json["specs"]["bhp"];
-$torque = $json["specs"]["torque"];
-$weight = $json["specs"]["weight"];
-$description = $json["description"];
+if(isset($_POST['json'])) {
+	$upload = false;
+	switch($_FILES['userfile']['error']) {
+	case UPLOAD_ERR_OK:
+		$upload = true;
+		break;
+	case UPLOAD_ERR_NO_FILE:
+		$error .= "No file selected for uploading\n";
+		break;
+	case UPLOAD_ERR_INI_SIZE:
+		$error .= "JSON file too big\n";
+		break;
+	case UPLOAD_ERR_PARTIAL:
+		$error .= "Upload of the JSON file was not completed\n";
+		break;
+	case UPLOAD_NO_TMP_DIR:
+		$error .= "Server error: missing tmp-directory\n";
+		break;
+	case UPLOAD_ERR_CANT_WRITE:
+		$error .= "Server error: cannot write file\n";
+		break;
+	}
+
+	# Parse the JSON file
+		$file = file_get_contents($_FILES['userfile']['tmp_name']);
+		$json = json_decode($file, true);
+    $name = $json["name"];
+    $brand = $json["brand"];
+    $horsepower = $json["specs"]["bhp"];
+    $torque = $json["specs"]["torque"];
+    $weight = $json["specs"]["weight"];
+    $description = $json["description"];
+	}
 ?>
-<form action=".?page=car_add_do" method="post">
+
+<h1>Import Assetto Corsa ui_car.json</h1>
+<p>Be sure that the Description in the .json contains no /br, no spaces and no '!</p>
+
+<? if(!$upload) { ?>
+<br/>
+<form action=".?page=car_ui_json_import_ac_old" method="post" enctype="multipart/form-data">
+<table border="0" cellspacing="0" cellpadding="2">
+<tr>
+	<td>JSON file:</td>
+	<td><input type="file" name="userfile"/></td>
+</tr>
+
+<tr>
+	<td>&nbsp;</td>
+	<td>
+		<input type="submit" class="button submit" value="Upload"/>
+		<input type="hidden" name="json" value="1"/>
+	</td>
+</tr>
+</table>
+</form>
+<? } else { ?>
+
+<form action="car_add_do.php" method="post">
 		<table border="0" cellspacing="0" cellpadding="1" width="100%">
 		<tr>
       <td width="100">Sim:</td>
@@ -274,3 +324,4 @@ $description = $json["description"];
 			</tr>
 		</table>
 </form>
+<? } ?>

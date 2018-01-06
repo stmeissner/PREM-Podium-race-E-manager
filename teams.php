@@ -39,11 +39,9 @@ if(mysqli_num_rows($result) == 0) {
 </tr>
 
 <?
-#$style = "odd";
 while($item = mysqli_fetch_array($result)) {
 ?>
 <tr class="w3-hover-green">
-<!--<tr class="<?=$style?>">-->
 	<td>
 		<a href=".?page=team_chg&amp;id=<?=$item['id']?>"><img src="images/edit16.png" alt="chg"></a>
 		<a href=".?page=team_rem&amp;id=<?=$item['id']?>"><img src="images/delete16.png" alt="rem"></a>
@@ -52,7 +50,6 @@ while($item = mysqli_fetch_array($result)) {
 	<td align="center"><?=$item['drivercount']?></td>
 </tr>
 <?
-#$style = $style == "odd" ? "even" : "odd";
 }
 ?>
 </table>
