@@ -11,7 +11,7 @@ if(isset($_POST['json_edit']))
   }
 ?>
 <h1>Edit Assetto Corsa ui_car.json</h1>
-<p>Be sure that the .json contains no /br, no spaces and no '! - Otherwise the file cannot get parsed!</p>
+<p>Be sure that the description of the .json contains no /br, no spaces, no " and no '! - Otherwise the file cannot get parsed!</p>
 
 <?PHP if(!$upload) { ?>
 <br/>
