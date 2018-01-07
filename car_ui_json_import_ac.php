@@ -37,9 +37,9 @@ $description = $json["description"];
     	  </td>
     	</tr>
 			<tr><td>Brand:</td>
-        <td><input type="text" name="brand" value= "<?echo $brand;?>" size="20" maxlength="20"></td></tr>
+        <td><input type="text" name="brand" value= "<?php echo $brand;?>" size="20" maxlength="20"></td></tr>
 			<tr><td>Name:</td>
-        <td><input type="text" name="name" value= "<?echo $name;?>" size="20" maxlength="20"></td></tr>
+        <td><input type="text" name="name" value= "<?php echo $name;?>" size="20" maxlength="20"></td></tr>
       <tr>
         	<td width="100">Simcode:</td>
         	<td>
@@ -254,16 +254,16 @@ $description = $json["description"];
         	  </td>
        </tr>
   			<tr><td>Horsepower</td>
-          <td><input type="text" name="horsepower" value= "<?echo $horsepower;?>" size="20" maxlength="20"></td></tr>
+          <td><input type="text" name="horsepower" value= "<?php echo $horsepower;?>" size="20" maxlength="20"></td></tr>
   			<tr><td>Torque:</td>
-          <td><input type="text" name="torque" value= "<?echo $torque;?>" min=1 max="9999"></td></tr>
+          <td><input type="text" name="torque" value= "<?php echo $torque;?>" min=1 max="9999"></td></tr>
   			<tr><td>Weight:</td>
-          <td><input type="text" name="weight" value= "<?echo $weight;?>" min=1 max="9999"></td></tr>
+          <td><input type="text" name="weight" value= "<?php echo $weight;?>" min=1 max="9999"></td></tr>
   		</table>
   		<table class="w3-table-all" border="0" cellspacing="0" cellpadding="1" width="100%">
         <tr>
         	<td width="120">Description (max. 2048 characters):</td>
-        	<td><textarea cols="60" rows="10" maxlength="2048" name="description"><?echo "$description";?></textarea></td>
+        	<td><textarea cols="60" rows="10" maxlength="2048" name="description"><?PHP echo "$description";?></textarea></td>
         </tr>
 			<tr>
 				<td>&nbsp;</td>

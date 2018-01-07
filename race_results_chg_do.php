@@ -11,6 +11,9 @@ $replay = htmlspecialchars($_POST['replay']);
 $simresults = htmlspecialchars($_POST['simresults']);
 $official = isset($_POST['official']) ? 1 : 0;
 $driver = $_POST['driver'];
+$cartype = $_POST['cartype'];
+$ballast = $_POST['ballast'];
+$restrictor = $_POST['restrictor'];
 $grid = $_POST['grid'];
 $pos = $_POST['pos'];
 $laps = $_POST['laps'];
@@ -78,6 +81,9 @@ if(is_array($driver)) {
 		$p = addslashes($pos[$x]);
 		$l = addslashes($laps[$x]);
 		$pl = addslashes($dplate[$x]);
+		$ct = addslashes($cartype[$x]);
+		$b = addslashes($ballast[$x]);
+		$r = addslashes($restrictor[$x]);
 		$m = $ms[$x];
 		if($m < 0) $m = 0;
 #		if($m != 0) {
@@ -88,7 +94,7 @@ if(is_array($driver)) {
 		$t = ($hour[$x] * 3600000) + ($minute[$x] * 60000) + ($second[$x] * 1000) + $m;
 		$f = isset($fl[$x]) ? 1 : 0;
 		$s = addslashes($status[$x]);
-		$query_values .= "('$id',  '$d', '$g', '$p', '$l', '$t', '$f', '$s', '$pl'), ";
+		$query_values .= "('$id',  '$d', '$g', '$p', '$l', '$t', '$f', '$s', '$pl','$ct','$b','$r'), ";
 	}
 	$query_values = substr($query_values, 0, -2);
 
@@ -103,7 +109,8 @@ if(is_array($driver)) {
 	if(!$result) error("MySQL Error: " . mysqli_error($link) . "\n");
 
 	if(!empty($query_values)) {
-		$query = "INSERT INTO race_driver (race, team_driver, grid, position, laps, time, fastest_lap, status, dplate) VALUES $query_values";
+		$query = "INSERT INTO race_driver (race, team_driver, grid, position, laps, time, fastest_lap, status, dplate,cartype,ballast,restrictor)
+							VALUES $query_values";
 		$result = mysqli_query($link,$query);
 		if(!$result) error("MySQL Error: " . mysqli_error($link) . "\n");
 	}

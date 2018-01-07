@@ -1,6 +1,6 @@
 <?PHP if(!defined("CONFIG")) exit(); ?>
 <?PHP if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
-<?
+<?PHP
 if(isset($_POST['json_edit']))
 		{$upload = false;
 		switch($_FILES['userfile']['error']) {case UPLOAD_ERR_OK:$upload = true;

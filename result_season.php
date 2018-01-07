@@ -46,12 +46,13 @@ while($rsitem = mysqli_fetch_array($rsresult)) {
 }
 
 // Get all teams and driver for this season
-$drquery = "SELECT d.id did, d.name dname, rd.dplate dplate, d.country dcountry, t.id tid, t.name tname
+$drquery = "SELECT d.id did, d.name dname, rd.dplate dplate, d.country dcountry, t.id tid, t.name tname, c.*
 	    			FROM season_team st
             JOIN team t ON (st.team = t.id)
             JOIN team_driver td ON (td.team = t.id)
             JOIN driver d ON (d.id = td.driver)
             JOIN race_driver rd ON (rd.team_driver = td.id)
+						JOIN cars c ON (c.code = rd.cartype)
             WHERE st.season = $season
             ORDER BY t.name ASC, d.name ASC";
 
@@ -74,6 +75,7 @@ while($dritem = mysqli_fetch_array($drresult)) {
 	$driver[$dritem['did']]['name'] = $dritem['dname'];
 	$driver[$dritem['did']]['team'] = $dritem['tname'];
 	$driver[$dritem['did']]['dplate'] = $dritem['dplate'];
+	$driver[$dritem['did']]['badge'] = $dritem['badge'];
 	$driver[$dritem['did']]['dcountry'] = $dritem['dcountry'];
 	$driver[$dritem['did']]['points'] = 0;
 	$driver[$dritem['did']]['pointsrace'] = array();
@@ -259,8 +261,9 @@ usort($team, "point_sort");
 <tr class="w3-dark-grey">
 	<td style="vertical-align:bottom" align="center">Pos</td>
 	<td style="vertical-align:bottom" align="center">Driver</td>
-        <td style="vertical-align:bottom" align="center">Nr.</td>
-        <td style="vertical-align:bottom" align="center">Ctry.</td>
+  <td style="vertical-align:bottom" align="center">Nr.</td>
+  <td style="vertical-align:bottom" align="center">Ctry.</td>
+	<td style="vertical-align:bottom" align="center">Car</td>
 	<td style="vertical-align:bottom" align="center">Team</td>
 <?PHP for($x = 1; $x <= $race; $x++) { ?>
 	<td width="1" align="center"><javascript:void(0)" class="tablink" title="Click to more details"><div class="w3-topbar w3-bottombar w3-hover-border-red"><a href="?page=result_race&amp;race=<?=$races[$x]['id']?>"><img src="img_season_race.php?text=<?=urlencode($races[$x]['name'])?>&amp;text2=<?=urlencode($races[$x]['track'])?>" alt="<?=$x?>"></a></td>
@@ -276,7 +279,8 @@ foreach($driver as $id => $ditem) {
 	<td width="1" align="center"><?=++$pos?>&nbsp;</td>
 	<td align="center"><?=$ditem['name']?></td>
 	<td><?=$ditem['dplate']?></td>
-        <td align="center"><img src="images/flags/<?=$ditem['dcountry']?>.png"></td>
+  <td align="center"><img src="images/flags/<?=$ditem['dcountry']?>.png"></td>
+	<td align="center"><img src="images/badges/thumbs/<?=$ditem['badge']?>"></td>
 	<td align="center"><?=$ditem['team']?></td>
 <?
 $total = 0;

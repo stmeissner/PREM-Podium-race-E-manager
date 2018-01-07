@@ -40,7 +40,7 @@ if(mysqli_num_rows($result) == 0) {
 	<td align="center">Teams</td>
 </tr>
 
-<?
+<?php
 
 while($item = mysqli_fetch_array($result)) {
 ?>

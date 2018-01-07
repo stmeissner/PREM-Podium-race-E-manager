@@ -1,4 +1,4 @@
-<?
+<?PHP
 require_once("session_start.php");
 if(!isset($login)) error("You do not have administrator rights\n");
 

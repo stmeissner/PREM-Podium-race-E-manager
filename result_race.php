@@ -26,8 +26,9 @@ if(mysqli_num_rows($result) == 0) {
 $item = mysqli_fetch_array($result);
 $date = strtotime($item['date']);
 
-$dquery = "SELECT rd.*, d.name dname, d.country dcountry, t.name tname
+$dquery = "SELECT rd.*, d.name dname, d.country dcountry, t.name tname, c.*
 					 FROM race_driver rd
+					 JOIN cars c ON (c.code = rd.cartype)
 					 JOIN team_driver td ON (td.id = rd.team_driver)
 					 JOIN team t ON (t.id = td.team)
 					 JOIN driver d ON (d.id = td.driver)
@@ -39,8 +40,9 @@ if(!$dresult) {
 	return;
 }
 
-$ndquery = "SELECT rd.*, d.name dname, d.country dcountry, t.name tname
+$ndquery = "SELECT rd.*, d.name dname, d.country dcountry, t.name tname, c.*
 					  FROM race_driver rd
+						JOIN cars c ON (c.code = rd.cartype)
 						JOIN team_driver td ON (td.id = rd.team_driver)
 						JOIN team t ON (t.id = td.team)
 						JOIN driver d ON (d.id = td.driver)
@@ -151,6 +153,7 @@ if($item['ruleset_qualifying'] != 0) {
 	<td>Driver</td>
 	<td>Car #</td>
 	<td>Country</td>
+	<td>Car</td>
 	<td>Team</td>
 	<?PHP if($item['progress'] != RACE_NEW) { ?>
 	<td align="right">Qual</td>
@@ -201,6 +204,7 @@ while($ditem = mysqli_fetch_array($dresult)) {
 	<td><?=$ditem['dname']?></td>
 	<td><?=$ditem['dplate']?></td>
 	<td><img src="images/flags/<?=$ditem['dcountry']?>.png"></td>
+	<td><img src="images/badges/thumbs/<?=$ditem['badge']?>"></td>
 	<td><?=$ditem['tname']?></td>
 	<?PHP if($item['progress'] != RACE_NEW) { ?>
 	<td align="right"><?=$ditem['grid']?></td>
@@ -250,7 +254,8 @@ while($ditem = mysqli_fetch_array($ndresult)) {
 	<td align="right">-&nbsp;</td>
 	<td><?=$ditem['dname']?></td>
 	<td><?=$ditem['dplate']?></td>
-  <td><img src="images/flags/<?=$ditem['dcountry']?>.png"></td>
+  <td><img src="images/flags/<?php echo $ditem['dcountry']?>.png"></td>
+	<td><img src="images/badges/thumbs/<?php echo $ditem['badge']?>"></td>
 	<td><?=$ditem['tname']?></td>
 	<?PHP if($item['progress'] != RACE_NEW) { ?>
 	<td align="right"><?=$ditem['grid']?></td>

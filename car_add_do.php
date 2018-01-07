@@ -25,7 +25,6 @@ if(empty($horsepower)) $error .= "You must fill in the BHP of the car\n";
 if(empty($torque)) $error .= "You must fill in the torque of the car\n";
 if(empty($weight)) $error .= "You must fill in the weight of the car\n";
 if(empty($description)) $error .= "You must fill in a description of the car\n";
-if(!empty($error)) error($error);
 
 $msg = "";
 

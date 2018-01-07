@@ -68,7 +68,10 @@ if(isset($_POST['json'])) {
 		foreach($json["Cars"] as $key => $row) {
 			$arr_race_cars[$row['CarId']] = array(
 				'DriverName' => $row['Driver']['Name'],
-				'DriverTeam' => $row['Driver']['Team']
+				'DriverTeam' => $row['Driver']['Team'],
+				'DriverModel' => $row['Model'],
+				'DriverBallastKG' => $row['BallastKG'],
+				'DriverRestrictor' => $row['Restrictor']
 			);
 		}
 
@@ -175,12 +178,12 @@ if($item['season'] == 0)
 						 JOIN team t ON (t.id = td.team)
 						 JOIN driver d ON (d.id = td.driver)";
 else
-		$dquery = "SELECT td.id, t.name team, d.name driver, d.plate dplate
-							 FROM season_team st
-							 JOIN team t ON (t.id = st.team)
-							 JOIN team_driver td ON (td.team = t.id)
-							 JOIN driver d ON (d.id = td.driver)
-							 WHERE st.season='{$item['season']}'";
+	$dquery = "SELECT td.id, t.name team, d.name driver, d.plate dplate
+						 FROM season_team st
+						 JOIN team t ON (t.id = st.team)
+						 JOIN team_driver td ON (td.team = t.id)
+						 JOIN driver d ON (d.id = td.driver)
+						 WHERE st.season='{$item['season']}'";
 
 $dresult = mysqli_query($link,$dquery);
 if(!$dresult) {
@@ -213,18 +216,22 @@ function show_driver_combo($dname = '') {
 	}
 	echo "</select>\n";
 }
+
 ?>
 <form action="race_results_chg_do.php" method="post">
 		<table border="0" cellspacing="0" cellpadding="1" width="100%">
 		<tr class="head">
 			<td>Driver (Team)</td>
 			<td align="center">Car #</td>
+			<td align="center">Car Type</td>
+			<td align="center">Ballast</td>
+			<td align="center">Restrictor</td>
 			<td align="center">Grid</td>
 			<td align="center">Pos</td>
 			<td align="center">Laps</td>
 			<td>Time</td>
 			<td align="center"><span class="abbr" title="Fastest Lap">FL</span></td>
-			<td>Status</td>
+			<td align="center">Status</td>
 		</tr>
 		<?PHP $style = "odd"; ?>
 		<?PHP for($x = 0; $x < $item['maxplayers']; $x++) {
@@ -233,6 +240,9 @@ function show_driver_combo($dname = '') {
 				$ditem = $arr_race_cars[$did];
 				$drivername = $ditem['DriverName'] . " (" . $ditem['DriverTeam'] . ")";
 				$driver_name = $ditem['DriverName'];
+				$driver_cartype = $ditem['DriverModel'];
+				$driver_ballast = $ditem['DriverBallastKG'];
+				$driver_restrictor = $ditem['DriverRestrictor'];
 				$dplatequery = "SELECT plate FROM driver where name = '$driver_name'";
 				$dplate = mysqli_fetch_assoc(mysqli_query($link,$dplatequery))['plate'];
 				$grid = $arr_race_result[$x]['Position'];
@@ -275,9 +285,12 @@ function show_driver_combo($dname = '') {
 			<tr class="<?=$style?>">
 				<td><?=$drivername . (!empty($drivername) ? "<br/>" : "")?><?PHP show_driver_combo($ditem['DriverName']); ?></td>
 				<td align="center"><input type="text" name="dplate[]" value="<?=$dplate?>" size="3" maxlength="3"></td>
+				<td align="center"><input type="text" name="cartype[]" value="<?=$driver_cartype?>" size="30" maxlength="50"></td>
+				<td align="center"><input type="number" name="ballast[]" value="<?=$driver_ballast?>" min="0" max="999"></td>
+				<td align="center"><input type="number" name="restrictor[]" value="<?=$driver_restrictor?>" min="0" max="100"></td>
 				<td align="center"><input type="text" name="grid[]" value="<?=$grid?>" size="2" maxlength="2"></td>
 				<td align="center"><input type="text" name="pos[]" value="<?=$position?>" size="2" maxlength="2"></td>
-				<td align="center"><input type="text" name="laps[]" value="<?=$laps?>" size="3" maxlength="3"></td>
+				<td align="center"><input type="text" name="laps[]" value="<?=$laps?>" size="2" maxlength="3"></td>
 				<td>
 					<input type="text" name="hour[]" value="<?=$hour?>" style="text-align:right;" size="1" maxlength="2">h
 					<input type="text" name="minute[]" value="<?=$minute?>" style="text-align:right;" size="1" maxlength="2">m
