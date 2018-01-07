@@ -28,7 +28,7 @@ $item = mysqli_fetch_array($result);
 </tr>
 <tr>
 	<td>&nbsp;</td>
-	<td>Are you sure that you want to delete this driver?</td>
+	<td>Are you sure that you want to delete this car?</td>
 </tr>
 <tr>
 	<td>&nbsp;</td>

@@ -286,24 +286,18 @@ function showCharsLeft() {
 	</select>
 	</td>
 </tr>
-<tr>
-	<td width="120">Horsepower:</td>
-	<td><input type="number" name="horsepower" min="1" max="9999"></td>
-</tr>
-<tr>
-	<td width="120">Torque:</td>
-	<td><input type="number" name="torque" min="1" max="9999"></td>
-</tr>
-<tr>
-	<td width="120">Weight:</td>
-	<td><input type="number" name="weight" min="1" max="9999"></td>
-</tr>
+<tr><td>Horsepower</td>
+  <td><input type="text" name="horsepower" value= "<?echo $horsepower;?>" size="20" maxlength="20"></td></tr>
+<tr><td>Torque:</td>
+  <td><input type="text" name="torque" value= "<?echo $torque;?>" min=1 max="9999"></td></tr>
+<tr><td>Weight:</td>
+  <td><input type="text" name="weight" value= "<?echo $weight;?>" min=1 max="9999"></td></tr>
 <tr>
 	<td width="120">Description:</td>
-	<td><textarea maxlength="500" id="nachricht" onchange="showCharsLeft()"
+	<td><textarea maxlength="2048" id="nachricht" onchange="showCharsLeft()"
 		 						onkeyup="showCharsLeft()" name="description"
-		 						cols="60" rows="10" onfocus="if (this.value == 'Type Description, max. 500 characters') { this.value = ''; }"
-                >Type Description, max. 500 characters</textarea></td>
+		 						cols="60" rows="10" onfocus="if (this.value == 'Type Description, max. 2048 characters') { this.value = ''; }"
+                >Type Description, max. 2048 characters</textarea></td>
 </tr>
 <tr>
 	<td>&nbsp;</td>

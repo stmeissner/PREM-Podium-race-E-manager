@@ -1,19 +1,19 @@
-<?
+<?PHP
 require_once("session_start.php");
 if(!isset($login)) error("You do not have administrator rights\n");
 
 require_once("functions.php"); // import mysql function
 $link = mysqlconnect(); // call mysql function to get the link to the database
 
-$sim = htmlspecialchars($_POST['sim']);
-$brand = htmlspecialchars($_POST['brand']);
-$name = htmlspecialchars($_POST['name']);
-$code = htmlspecialchars($_POST['code']);
-$badge = htmlspecialchars($_POST['badge']);
-$horsepower = htmlspecialchars($_POST['horsepower']);
-$torque = htmlspecialchars($_POST['torque']);
-$weight = htmlspecialchars($_POST['weight']);
-$description = htmlspecialchars($_POST['description']);
+$sim = mysqli_real_escape_string($link,$_POST['sim']);
+$brand = mysqli_real_escape_string($link,$_POST['brand']);
+$name = mysqli_real_escape_string($link,$_POST['name']);
+$code = mysqli_real_escape_string($link,$_POST['code']);
+$badge = mysqli_real_escape_string($link,$_POST['badge']);
+$horsepower = mysqli_real_escape_string($link,$_POST['horsepower']);
+$torque = mysqli_real_escape_string($link,$_POST['torque']);
+$weight = mysqli_real_escape_string($link,$_POST['weight']);
+$description = mysqli_real_escape_string($link,$_POST['description']);
 $error = "";
 
 if(empty($sim)) $error .= "You must fill in the used sim\n";

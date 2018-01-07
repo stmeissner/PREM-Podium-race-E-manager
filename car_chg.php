@@ -306,8 +306,8 @@ $item = mysqli_fetch_array($result);
 	<td><input type="text" name="weight" value = "<?echo $item['weight'];?>" maxlength="10"></td>
 </tr>
 <tr>
-	<td width="120">Description:</td>
-	<td><textarea cols= "70" rows= "10" maxlength="500" name="description"><?echo $item['description']?></textarea></td>
+	<td width="120">Description (max. 2048 Characters):</td>
+	<td><textarea maxlength="2048" cols="60" rows="10" name="description"><?echo $item['description']?></textarea></td>
 </tr>
 <tr>
 	<td>&nbsp;</td>
