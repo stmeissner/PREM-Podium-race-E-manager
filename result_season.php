@@ -262,8 +262,8 @@ usort($team, "point_sort");
 	<td style="vertical-align:bottom" align="center">Pos</td>
 	<td style="vertical-align:bottom" align="center">Driver</td>
   <td style="vertical-align:bottom" align="center">Nr.</td>
-  <td style="vertical-align:bottom" align="center">Ctry.</td>
-	<td style="vertical-align:bottom" align="center">Car</td>
+  <td style="vertical-align:bottom;text-align:center" align="center">Ctry.</td>
+	<td style="vertical-align:bottom;text-align:center" align="center">Car</td>
 	<td style="vertical-align:bottom" align="center">Team</td>
 <?PHP for($x = 1; $x <= $race; $x++) { ?>
 	<td width="1" align="center"><javascript:void(0)" class="tablink" title="Click to more details"><div class="w3-topbar w3-bottombar w3-hover-border-red"><a href="?page=result_race&amp;race=<?php echo $races[$x]['id']?>"><img src="img_season_race.php?text=<?php echo urlencode($races[$x]['name'])?>&amp;text2=<?php echo urlencode($races[$x]['track'])?>" alt="<?php echo $x?>"></a></td>
@@ -279,9 +279,9 @@ foreach($driver as $id => $ditem) {
 	<td width="1" align="center"><?php echo ++$pos?>&nbsp;</td>
 	<td align="center"><?php echo $ditem['name']?></td>
 	<td><?php echo $ditem['dplate']?></td>
-  <td align="center"><img src="images/flags/<?php echo $ditem['dcountry']?>.png"></td>
-	<td align="center">&nbsp;</td>
-	<td align="center"><?php echo $ditem['team']?></td>
+  <td style="text-align:center"><img src="images/flags/<?php echo $ditem['dcountry']?>.png"></td>
+	<td style="text-align:center"><img src="images/badges/thumbs/<?php echo $ditem['badge']?>"</td>
+	<td ><?php echo $ditem['team']?></td>
 <?
 $total = 0;
 for($x = 1; $x <= $race; $x++) {
