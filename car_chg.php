@@ -312,7 +312,7 @@ $item = mysqli_fetch_array($result);
 <tr>
 	<td>&nbsp;</td>
 	<td>
-		<input type="hidden" name="id" value="<?=$id?>">
+		<input type="hidden" name="id" value="<?php echo $id?>">
 		<input type="submit" class="button submit" value="Modify">
 		<input type="button" class="button cancel" value="Cancel" onclick="history.go(-1);">
 	</td>

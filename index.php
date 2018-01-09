@@ -28,7 +28,7 @@ if ($page != "error") {
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-	<title><?= TITLE ?> - <?= $config['org'] ?></title>
+	<title><?php echo  TITLE ?> - <?php echo  $config['org'] ?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="PREM-Podium-Racing-E-Manager is management software for races and race leagues. It can be used to create overviews of race results.">
 	<meta name="keywords" content="Podium, PREM, manager, racing, assetto corsa, Life for Speed, Rfactor">

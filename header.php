@@ -2,6 +2,6 @@
 
 
 <!--<?PHP if(!defined("CONFIG")) exit() ?>
-<br /><br /><h3><a href="<?=$config['org_link']?>"><?=$config['org']?></a></h3><?=TITLE?>&nbsp;<?=VERSION?><?PHP if(isset($login)) { ?>&nbsp;
-Logged in as <?=$username?><br>
+<br /><br /><h3><a href="<?php echo $config['org_link']?>"><?php echo $config['org']?></a></h3><?php echo TITLE?>&nbsp;<?php echo VERSION?><?PHP if(isset($login)) { ?>&nbsp;
+Logged in as <?php echo $username?><br>
 <?PHP } ?>-->

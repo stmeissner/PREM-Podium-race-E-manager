@@ -18,7 +18,7 @@ if ($simresultID) {
 	$sitem = mysqli_fetch_array($result);
 	?>
 	<h2><a href="?page=sim_results">&#8606; Go back</a></h2>
-	<iframe src="<?=$sitem['simresults_url'];?>" width="100%" height="600px"></iframe>
+	<iframe src="<?php echo $sitem['simresults_url'];?>" width="100%" height="600px"></iframe>
 	<?php
 	return;
 }
@@ -34,9 +34,9 @@ if ($simresultID) {
 		while ($sitem = mysqli_fetch_array($result)) {
 			?>
 			<tr class="w3-hover-green">
-				<td><?= $sitem['race_name'] ?></td>
-				<td><?= $sitem['season_name'] ?></td>
-				<td><a href="?page=sim_results&sres=<?=$sitem['id'];?>">simresults</a></td>
+				<td><?php echo  $sitem['race_name'] ?></td>
+				<td><?php echo  $sitem['season_name'] ?></td>
+				<td><a href="?page=sim_results&sres=<?php echo $sitem['id'];?>">simresults</a></td>
 			</tr>
 			<?
 		}

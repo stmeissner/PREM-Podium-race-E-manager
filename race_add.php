@@ -56,7 +56,7 @@ if(!$rresult) {
 		<select id="season" name="season" onchange="showOptions();">
 		<option value="0">--NO SEASON--</option>
 		<?PHP while($sitem = mysqli_fetch_array($sresult)) { ?>
-			<option value="<?=$sitem['id']?>"<?=$season == $sitem['id'] ? " selected=\"1\"" : ""?>><?=$sitem['name']?> (<?=$sitem['dname']?>)</option>
+			<option value="<?php echo $sitem['id']?>"<?php echo $season == $sitem['id'] ? " selected=\"1\"" : ""?>><?php echo $sitem['name']?> (<?php echo $sitem['dname']?>)</option>
 		<?PHP } ?>
 		</select>
 	</td>
@@ -70,7 +70,7 @@ if(!$rresult) {
 	<td>
 		<select name="division" onchange="void(0);">
 		<?PHP while($ditem = mysqli_fetch_array($dresult)) { ?>
-			<option value="<?=$ditem['id']?>"><?=$ditem['name']?> (<?=$ditem['type']?>)</option>
+			<option value="<?php echo $ditem['id']?>"><?php echo $ditem['name']?> (<?php echo $ditem['type']?>)</option>
 		<?PHP } ?>
 		</select>
 	</td>
@@ -80,7 +80,7 @@ if(!$rresult) {
 	<td>
 		<select name="ruleset" onchange="void(0);">
 		<?PHP while($ritem = mysqli_fetch_array($rresult)) { ?>
-			<option value="<?=$ritem['id']?>"><?=$ritem['name']?></option>
+			<option value="<?php echo $ritem['id']?>"><?php echo $ritem['name']?></option>
 		<?PHP } ?>
 		</select>
 	</td>
@@ -92,7 +92,7 @@ if(!$rresult) {
 		<?PHP mysqli_data_seek($rresult, 0); ?>
 		<option value="">&nbsp;</option>
 		<?PHP while($ritem = mysqli_fetch_array($rresult)) { ?>
-			<option value="<?=$ritem['id']?>"><?=$ritem['name']?></option>
+			<option value="<?php echo $ritem['id']?>"><?php echo $ritem['name']?></option>
 		<?PHP } ?>
 		</select>
 	</td>
@@ -102,18 +102,18 @@ if(!$rresult) {
 	<td>
 		<select name="day">
 		<?PHP for($x = 1; $x <= 31; $x++) { ?>
-			<option<?=date("j") == $x ? " selected" : ""?>><?=sprintf("%02d", $x)?></option>
+			<option<?php echo date("j") == $x ? " selected" : ""?>><?php echo sprintf("%02d", $x)?></option>
 		<?PHP } ?>
 		</select>
 		<select name="month">
 		<?PHP $months = array(1 => "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"); ?>
 		<?PHP for($x = 1; $x <= 12; $x++) { ?>
-			<option<?=date("n") == $x ? " selected" : ""?> value="<?=$x?>"><?=$months[$x]?></option>
+			<option<?php echo date("n") == $x ? " selected" : ""?> value="<?php echo $x?>"><?php echo $months[$x]?></option>
 		<?PHP } ?>
 		</select>
 		<select name="year">
 		<?PHP for($x = 2000; $x <= 2050; $x++) { ?>
-			<option<?=date("Y") == $x ? " selected" : ""?>><?=sprintf("%04d", $x)?></option>
+			<option<?php echo date("Y") == $x ? " selected" : ""?>><?php echo sprintf("%04d", $x)?></option>
 		<?PHP } ?>
 		</select>
 	</td>
@@ -123,12 +123,12 @@ if(!$rresult) {
 	<td>
 		<select name="hour">
 		<?PHP for($x = 0; $x <= 23; $x++) { ?>
-			<option<?=$x == "12" ? " selected" : ""?>><?=sprintf("%02d", $x)?></option>
+			<option<?php echo $x == "12" ? " selected" : ""?>><?php echo sprintf("%02d", $x)?></option>
 		<?PHP } ?>
 		</select> :
 		<select name="minute">
 		<?PHP for($x = 0; $x <= 59; $x = $x + 5) { ?>
-			<option><?=sprintf("%02d", $x)?></option>
+			<option><?php echo sprintf("%02d", $x)?></option>
 		<?PHP } ?>
 		</select>
 	</td>

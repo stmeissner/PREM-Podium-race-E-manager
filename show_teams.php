@@ -37,8 +37,8 @@ if (!$result) {
 	 if ($sitem['logo'] == '') { $url = 'images/logo.png' ; } else { $url = $sitem['logo']; }
 	?>
 	<tr class="w3-hover-green">
-	<!--<tr class="<?= $style ?>">-->
-	<td><?= $sitem['name'] ?></td><!--team name-->
+	<!--<tr class="<?php echo  $style ?>">-->
+	<td><?php echo  $sitem['name'] ?></td><!--team name-->
 	<td><!--driver name-->
 		<?php
 		if (is_array($driver[$sitem['id']])) {
@@ -48,7 +48,7 @@ if (!$result) {
 		}
 		?>
 	</td><!--driver name-->
-	<td><a><img src="<?=$url;?>" width="150" height="150"/></a></td><!--url logo-->
+	<td><a><img src="<?php echo $url;?>" width="150" height="150"/></a></td><!--url logo-->
 	</tr>
 	<?
 	#$style = $style == "odd" ? "even" : "odd";

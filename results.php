@@ -32,9 +32,9 @@ if ($link == null) {
 while($sitem = mysqli_fetch_array($sresult)) { ?>
 
 <tr class="w3-hover-green">
-	<td><a href=".?page=result_season&amp;season=<?=$sitem['id']?>"><?=$sitem['name']?></a></td>
-	<td><?=$sitem['dname']?></td>
-	<td><?=$sitem['racecount']?></td>
+	<td><a href=".?page=result_season&amp;season=<?php echo $sitem['id']?>"><?php echo $sitem['name']?></a></td>
+	<td><?php echo $sitem['dname']?></td>
+	<td><?php echo $sitem['racecount']?></td>
 </tr>
 <?
 }
@@ -61,11 +61,11 @@ while($ritem = mysqli_fetch_array($rresult)) {
 	?>
 
 <tr class="w3-hover-green">
-	<td><a href=".?page=result_race&amp;race=<?=$ritem['id']?>"><?=$ritem['name']?></a></td>
-	<td><?=$ritem['track']?></td>
-	<td><?=date("d M Y", $date)?></td>
-	<td><?=$ritem['dname']?></td>
-	<td><?=$ritem['rsname']?><?=isset($ritem['qrsname']) ? " / " . $ritem['qrsname'] : ""?></td>
+	<td><a href=".?page=result_race&amp;race=<?php echo $ritem['id']?>"><?php echo $ritem['name']?></a></td>
+	<td><?php echo $ritem['track']?></td>
+	<td><?php echo date("d M Y", $date)?></td>
+	<td><?php echo $ritem['dname']?></td>
+	<td><?php echo $ritem['rsname']?><?php echo isset($ritem['qrsname']) ? " / " . $ritem['qrsname'] : ""?></td>
 </tr>
 <?
 }

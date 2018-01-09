@@ -29,7 +29,7 @@ if(!$sresult) {
 		<select id="season" name="season" onchange="showOptions();">
 		<option value="0">--NO SEASON--</option>
 		<?PHP while($sitem = mysqli_fetch_array($sresult)) { ?>
-			<option value="<?=$sitem['id']?>"<?=$season == $sitem['id'] ? " selected=\"1\"" : ""?>><?=$sitem['name']?></option>
+			<option value="<?php echo $sitem['id']?>"<?php echo $season == $sitem['id'] ? " selected=\"1\"" : ""?>><?php echo $sitem['name']?></option>
 		<?PHP }
         mysqli_free_result($sresult)
         ?>

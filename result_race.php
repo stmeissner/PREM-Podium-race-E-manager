@@ -86,34 +86,34 @@ if($item['ruleset_qualifying'] != 0) {
 <table class="w3-table-all">
 <tr class="w3-dark-grey">
 	<td width="20%">Name:</td>
-	<td width="30%"><?=$item['name']?></td>
+	<td width="30%"><?php echo $item['name']?></td>
 	<td width="20%">Laps:</td>
-	<td width="30%"><?=$item['laps']?></td>
+	<td width="30%"><?php echo $item['laps']?></td>
 </tr>
 <tr class="w3-grey">
 	<td>Track:</td>
-	<td><?=$item['track']?></td>
+	<td><?php echo $item['track']?></td>
 	<?PHP if($item['season'] == 0) { ?>
 	<td>Division/Ruleset:</td>
-	<td><?=$item['dname']?> / <?=$item['rsname']?><?=!empty($item['qrsname']) ? " (qualifying: " . $item['qrsname'] : ""?>)</td>
+	<td><?php echo $item['dname']?> / <?php echo $item['rsname']?><?php echo !empty($item['qrsname']) ? " (qualifying: " . $item['qrsname'] : ""?>)</td>
 	<?PHP } else { ?>
 	<td>Season / Division:</td>
-	<td><?=$item['sname']?> / <?=$item['dname']?></td>
+	<td><?php echo $item['sname']?> / <?php echo $item['dname']?></td>
 	<?PHP } ?>
 </tr>
 <tr class="w3-grey">
 	<td>Date/Time:</td>
 	<td>
-		<?=date("j F Y, H:i", $date)?>
+		<?php echo date("j F Y, H:i", $date)?>
 	</td>
 	<td>Max players:</td>
-	<td><?=$item['maxplayers']?></td>
+	<td><?php echo $item['maxplayers']?></td>
 </tr>
 <tr class="w3-grey">
     <td>Replay:</td>
-    <td><a href="<?=$item['replay']?>" target="_blank"><img src="images/replay.png" alt="replay"></a></td>
+    <td><a href="<?php echo $item['replay']?>" target="_blank"><img src="images/replay.png" alt="replay"></a></td>
 		<td>Link to Forumthread:</td>
-    <td><a href="<?=$item['forumlink']?>" target="_blank"><img src="images/forum.png" alt="Discussion"></a></td>
+    <td><a href="<?php echo $item['forumlink']?>" target="_blank"><img src="images/forum.png" alt="Discussion"></a></td>
 
 </tr>
 <tr class="w3-amber">
@@ -151,9 +151,9 @@ if($item['ruleset_qualifying'] != 0) {
 <tr class="w3-dark-grey">
 	<td>Pos&nbsp;</td>
 	<td>Driver</td>
-	<td>Car #</td>
-	<td>Country</td>
-	<td>Car</td>
+	<td style="text-align: right;">Nr.</td>
+	<td style="text-align: center;">Cntry.</td>
+	<td style="text-align: center;">Car</td>
 	<td>Team</td>
 	<?PHP if($item['progress'] != RACE_NEW) { ?>
 	<td align="right">Qual</td>
@@ -200,20 +200,20 @@ while($ditem = mysqli_fetch_array($dresult)) {
 ?>
 
 <tr class="w3-hover-green">
-	<td align="right"><?=++$position?>&nbsp;</td>
-	<td><?=$ditem['dname']?></td>
-	<td><?=$ditem['dplate']?></td>
-	<td><img src="images/flags/<?=$ditem['dcountry']?>.png"></td>
-	<td><img src="images/badges/thumbs/<?=$ditem['badge']?>"></td>
-	<td><?=$ditem['tname']?></td>
+	<td align="right"><?php echo ++$position?>&nbsp;</td>
+	<td><?php echo $ditem['dname']?></td>
+	<td style="text-align: right;"><?php echo $ditem['dplate']?></td>
+	<td style="text-align: center;"><img src="images/flags/<?php echo $ditem['dcountry']?>.png"></td>
+	<td style="text-align: center;"><img src="images/badges/thumbs/<?php echo $ditem['badge']?>"></td>
+	<td><?php echo $ditem['tname']?></td>
 	<?PHP if($item['progress'] != RACE_NEW) { ?>
-	<td align="right"><?=$ditem['grid']?></td>
+	<td align="right"><?php echo $ditem['grid']?></td>
 	<?PHP if($item['progress'] != RACE_QUALIFYING) { ?>
-	<td align="right"><?=$laps?></td>
+	<td align="right"><?php echo $laps?></td>
 	<td align="right"><?if($ditem['fastest_lap']=='1') echo "<img src=\"images/chrono.png\" alt=\"yes\">";?></td>
-	<td align="right"><?=$time?></td>
-	<td align="right"><?=$gap?></td>
-	<td style="background-color:transparent; text-align: right; color:black; font-weight: bold;"><?=points_total($position, $ditem['grid'], $ditem['fastest_lap'], $ruleset)?></td>
+	<td align="right"><?php echo $time?></td>
+	<td align="right"><?php echo $gap?></td>
+	<td style="background-color:transparent; text-align: right; color:black; font-weight: bold;"><?php echo points_total($position, $ditem['grid'], $ditem['fastest_lap'], $ruleset)?></td>
 	<?PHP } ?>
 	<?PHP } ?>
 </tr>
@@ -252,17 +252,17 @@ while($ditem = mysqli_fetch_array($ndresult)) {
 ?>
 <tr class="w3-hover-green">
 	<td align="right">-&nbsp;</td>
-	<td><?=$ditem['dname']?></td>
-	<td><?=$ditem['dplate']?></td>
-  <td><img src="images/flags/<?php echo $ditem['dcountry']?>.png"></td>
-	<td><img src="images/badges/thumbs/<?php echo $ditem['badge']?>"></td>
-	<td><?=$ditem['tname']?></td>
+	<td><?php echo $ditem['dname']?></td>
+	<td style="text-align: right;"><?php echo $ditem['dplate']?></td>
+  <td style="text-align: center;"><img src="images/flags/<?php echo $ditem['dcountry']?>.png"></td>
+	<td style="text-align: center;"><img src="images/badges/thumbs/<?php echo $ditem['badge']?>"></td>
+	<td><?php echo $ditem['tname']?></td>
 	<?PHP if($item['progress'] != RACE_NEW) { ?>
-	<td align="right"><?=$ditem['grid']?></td>
+	<td align="right"><?php echo $ditem['grid']?></td>
 	<?PHP if($item['progress'] != RACE_QUALIFYING) { ?>
-	<td align="right"><?=$laps?></td>
+	<td align="right"><?php echo $laps?></td>
 	<td align="right"><?if($ditem['fastest_lap']=='1') echo "<img src=\"images/chrono.png\" alt=\"yes\">";?></td>
-	<td align="right"><?=$race_status_s[$ditem['status']]?></td>
+	<td align="right"><?php echo $race_status_s[$ditem['status']]?></td>
 	<td align="right">-</td>
 	<td align="right">-</td>
 	<?PHP } ?>
@@ -277,6 +277,6 @@ while($ditem = mysqli_fetch_array($ndresult)) {
 </br>
 <div class="w3-container">
 <div class="w3-responsive">
-<iframe src="<?=$item['simresults'];?>?logo=<?=$item['slogo'];?>" width="100%" height="1080px"></iframe>
+<iframe src="<?php echo $item['simresults'];?>?logo=<?php echo $item['slogo'];?>" width="100%" height="1080px"></iframe>
 </div>
 </div>

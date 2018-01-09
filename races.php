@@ -42,17 +42,17 @@ $noseasonracecount = $s2item['racecount'];
 <input type="hidden" name="page" value="races">
 <!--<input type="text" class="search" name="filter" value="<?//=$_GET['filter']?>"><br>-->
 <select name="season" onchange="this.form.submit();">
-<option value="0">NO SEASON - <?=$noseasonracecount?> race<?=$noseasonracecount == 1 ? "" : "s"?></option>
+<option value="0">NO SEASON - <?php echo $noseasonracecount?> race<?php echo $noseasonracecount == 1 ? "" : "s"?></option>
 <optgroup label="Seasons">
 <?PHP while($sitem = mysqli_fetch_array($sresult)) { ?>
-	<option value="<?=$sitem['id']?>"<?=$season == $sitem['id'] ? " selected" : ""?>><?=$sitem['name']?> - <?=$sitem['dname']?> - <?=$sitem['racecount']?> race<?=$sitem['racecount'] == 1 ? "" : "s"?></option>
+	<option value="<?php echo $sitem['id']?>"<?php echo $season == $sitem['id'] ? " selected" : ""?>><?php echo $sitem['name']?> - <?php echo $sitem['dname']?> - <?php echo $sitem['racecount']?> race<?php echo $sitem['racecount'] == 1 ? "" : "s"?></option>
 <?PHP } ?>
 </optgroup>
 </select>
 <input type="submit" class="button submit" value="ok">
 </form>
 </div>
-<a href=".?page=race_add&amp;season=<?=$season?>">Add race</a>
+<a href=".?page=race_add&amp;season=<?php echo $season?>">Add race</a>
 <?PHP if($season == "0") { ?>
 
 <h2>Seasons</h2>
@@ -69,9 +69,9 @@ mysqli_data_seek($sresult, 0);
 while($sitem = mysqli_fetch_array($sresult)) {
 	?>
 <tr class="w3-hover-green">
-	<td><a href="?page=races&amp;season=<?=$sitem['id']?>"><?=$sitem['name']?></a></td>
-	<td><?=$sitem['dname']?></td>
-	<td><?=$sitem['racecount']?></td>
+	<td><a href="?page=races&amp;season=<?php echo $sitem['id']?>"><?php echo $sitem['name']?></a></td>
+	<td><?php echo $sitem['dname']?></td>
+	<td><?php echo $sitem['racecount']?></td>
 </tr>
 <?
 #	$style = $style == "odd" ? "even" : "odd";
@@ -113,23 +113,23 @@ while($item = mysqli_fetch_array($result)) {
 ?>
 <tr class="w3-hover-green">
 	<td>
-		<a href=".?page=race_results_chg&amp;id=<?=$item['id']?>"><img src="images/properties16.png" alt="props"></a>
-		<a href=".?page=race_chg&amp;id=<?=$item['id']?>"><img src="images/edit16.png" alt="chg"></a>
-		<a href=".?page=race_rem&amp;id=<?=$item['id']?>"><img src="images/delete16.png" alt="rem"></a>
+		<a href=".?page=race_results_chg&amp;id=<?php echo $item['id']?>"><img src="images/properties16.png" alt="props"></a>
+		<a href=".?page=race_chg&amp;id=<?php echo $item['id']?>"><img src="images/edit16.png" alt="chg"></a>
+		<a href=".?page=race_rem&amp;id=<?php echo $item['id']?>"><img src="images/delete16.png" alt="rem"></a>
 	</td>
-	<td><?=date("d/m/y", $date)?></td>
+	<td><?php echo date("d/m/y", $date)?></td>
 	<?PHP if ($season == 0) { ?>
-	<td><?=$item['name']?><br><?=$item['track']?></td>
-	<td><?=$item['dname']?><br><?=$item['rsname']?><?=!empty($item['qrsname']) ? " / " . $item['qrsname'] : ""?></td>
-	<td width="40" align="center"><?=$item['drivers']?></td>
-	<td width="40" align="center"><?=$item['laps']?></td>
-	<td width="40" align="center"><?=$item['maxplayers']?></td>
+	<td><?php echo $item['name']?><br><?php echo $item['track']?></td>
+	<td><?php echo $item['dname']?><br><?php echo $item['rsname']?><?php echo !empty($item['qrsname']) ? " / " . $item['qrsname'] : ""?></td>
+	<td width="40" align="center"><?php echo $item['drivers']?></td>
+	<td width="40" align="center"><?php echo $item['laps']?></td>
+	<td width="40" align="center"><?php echo $item['maxplayers']?></td>
 	<?PHP } else { ?>
-	<td><?=$item['name']?></td>
-	<td><?=$item['track']?></td>
-	<td align="center"><?=$item['drivers']?></td>
-	<td align="center"><?=$item['laps']?></td>
-	<td align="center"><?=$item['maxplayers']?></td>
+	<td><?php echo $item['name']?></td>
+	<td><?php echo $item['track']?></td>
+	<td align="center"><?php echo $item['drivers']?></td>
+	<td align="center"><?php echo $item['laps']?></td>
+	<td align="center"><?php echo $item['maxplayers']?></td>
 	<?PHP } ?>
 </tr>
 <?

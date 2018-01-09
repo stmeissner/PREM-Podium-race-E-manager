@@ -38,7 +38,7 @@ if(mysqli_num_rows($dresult) > 0) {
 <table border="0">
 <tr>
 	<td width="120">Name:</td>
-	<td><?=$item['name']?></td>
+	<td><?php echo $item['name']?></td>
 </tr>
 <tr>
 	<td>&nbsp;</td>
@@ -47,7 +47,7 @@ if(mysqli_num_rows($dresult) > 0) {
 <tr>
 	<td>&nbsp;</td>
 	<td>
-		<input type="hidden" name="id" value="<?=$id?>">
+		<input type="hidden" name="id" value="<?php echo $id?>">
 		<input type="submit" class="button submit" value="Yes">
 		<input type="button" class="button cancel" value="No" onclick="history.go(-1);">
 	</td>

@@ -24,9 +24,9 @@
 <li class="w3-hide-small w3-dropdown-hover">
     <a href="?page=main" class="w3-hover-red w3-padding-large" title="RESULTS">SERIES <i class="fa fa-caret-down"></i></a>
     <div class="w3-dropdown-content w3-white w3-card-4">
-       <a href="?page=result_season&season=1" class="w3-hover-red">..change this at nav.php..</a>
-       <a href="?page=result_season&season=2" class="w3-hover-red">Display Season id 1</a>
-       <a href="?page=result_season&season=3" class="w3-hover-red">Display Season id 2</a>
+       <a href="?page=result_season&season=12" class="w3-hover-red">PRC17-EUR</a>
+       <a href="?page=result_season&season=14" class="w3-hover-red">Display Season id 1</a>
+       <a href="?page=result_season&season=16" class="w3-hover-red">Display Season id 2</a>
     </div>
 </li>
 

@@ -31,14 +31,14 @@ $teamcount = mysqli_num_rows($tresult);
 <table class="w3-table-all">
 <tr class="w3-dark-grey">
 	<td width="120">Name:</td>
-	<td><input type="text" name="name" value="<?=$item['name']?>" maxlength="30"></td>
+	<td><input type="text" name="name" value="<?php echo $item['name']?>" maxlength="30"></td>
 	<td width="40">Car Number:</td>
-	<td><input type="number" name="plate" value="<?=$item['plate']?>" min="1" max="999"></td></tr>
+	<td><input type="number" name="plate" value="<?php echo $item['plate']?>" min="1" max="999"></td></tr>
 <tr class="w3-dark-grey">
 	<td width="40">Country:</td>
 	<td>
 		<select name="country">
-			<option value="<?=$item['country']?>">Press F5</option>
+			<option value="<?php echo $item['country']?>">Press F5</option>
 			<optgroup label="European Countries">
 				<option disabled>────────────────</option>
 				<option value="ax">Åland Islands</option>
@@ -306,20 +306,20 @@ $teamcount = mysqli_num_rows($tresult);
     </select>
   </td>
     <td width="120">Photo:</td>
-	<td><input type="url" name="driver_photo" value="<?=$item['driver_photo']?>" maxlength="200"></td>
+	<td><input type="url" name="driver_photo" value="<?php echo $item['driver_photo']?>" maxlength="200"></td>
 </tr>
 <tr class="w3-hover-green">
-	<td>Teams (<?=$teamcount?>):</td>
+	<td>Teams (<?php echo $teamcount?>):</td>
 	<td>
 	<?PHP while($titem = mysqli_fetch_array($tresult)) { ?>
-		<a href="?page=team_driver_rem&amp;id=<?=$titem['id']?>"><img src="images/delete16.png" alt="delete"></a> <?=$titem['teamname']?><br>
+		<a href="?page=team_driver_rem&amp;id=<?php echo $titem['id']?>"><img src="images/delete16.png" alt="delete"></a> <?php echo $titem['teamname']?><br>
 	<?PHP } ?>
 	</td>
 </tr>
 <tr>
 	<td>&nbsp;</td>
 	<td>
-		<input type="hidden" name="id" value="<?=$id?>">
+		<input type="hidden" name="id" value="<?php echo $id?>">
 		<input type="submit" class="button submit" value="Modify">
 		<input type="button" class="button cancel" value="Cancel" onclick="history.go(-1);">
 	</td>

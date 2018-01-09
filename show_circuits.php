@@ -28,11 +28,11 @@ if (!$result) {
 <?PHP while ($sitem = mysqli_fetch_array($result)) { ?>
 
     <tr class="w3-hover-blue">
-        <td><?= $sitem['name'] ?></td>
-        <td><?= $sitem['track'] ?></td>
-        <td><?= $sitem['division_name'] ?></td>
-        <td><?= $sitem['date'] ?></td>
-        <td><a href="<?= $sitem['imagelink'] ?>" target="_blank"><img src="<?= $sitem['imagelink']; ?>" width="250" height="165"/></a></td>
+        <td><?php echo  $sitem['name'] ?></td>
+        <td><?php echo  $sitem['track'] ?></td>
+        <td><?php echo  $sitem['division_name'] ?></td>
+        <td><?php echo  $sitem['date'] ?></td>
+        <td><a href="<?php echo  $sitem['imagelink'] ?>" target="_blank"><img src="<?php echo  $sitem['imagelink']; ?>" width="250" height="165"/></a></td>
     </tr>
 
 <?PHP } ?>

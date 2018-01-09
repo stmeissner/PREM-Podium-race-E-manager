@@ -106,7 +106,7 @@ return;
  {
   ?>
         <tr class="w3-hover-green">
-        <td><a href=".?page=upload_rem&amp;id=<?=$row['id']?>"><img src="images/delete16.png" alt="rem"></a></td>
+        <td><a href=".?page=upload_rem&amp;id=<?php echo $row['id']?>"><img src="images/delete16.png" alt="rem"></a></td>
         <td><?php echo $row['file'] ?></td>
         <td><?php echo $row['type'] ?></td>
         <td><?php echo $row['size'] ?></td>

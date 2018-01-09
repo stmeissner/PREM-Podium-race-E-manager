@@ -18,6 +18,6 @@ $rules = htmlspecialchars($rules);
 ?>
 <form method="post" action="index.php?page=edit_rules_mods">
   <textarea id="tinyeditor" name="rules" cols="50" rows="15"><?php echo $rules; ?></textarea>
-   <input type="hidden" name="id" value="<?=$id;?>">
+   <input type="hidden" name="id" value="<?php echo $id;?>">
    <input type="submit" value="Save" />
 </form>

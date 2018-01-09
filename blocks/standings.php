@@ -67,7 +67,7 @@ mysqli_free_result($exe_point_ruleset);
 		<?php
 		foreach ($standing_pages as $spID => $spDetails) {
 			?>
-			<li><a href="javascript:void(0)" class="tablink" onclick="openLink(event, 'standing_<?=$spID;?>');" title="<?=$spDetails['seasonName'];?>/<?=$spDetails['seasonDivision'];?>"><i class="w3-margin-center"></i><?=$spDetails['page'];?></a></li>
+			<li><a href="javascript:void(0)" class="tablink" onclick="openLink(event, 'standing_<?php echo $spID;?>');" title="<?php echo $spDetails['seasonName'];?>/<?php echo $spDetails['seasonDivision'];?>"><i class="w3-margin-center"></i><?php echo $spDetails['page'];?></a></li>
 			<?php
 		}
 		?>
@@ -77,11 +77,11 @@ mysqli_free_result($exe_point_ruleset);
 	foreach ($standing_pages as $spID => $spDetails) {
 
 		?>
-		<div id="standing_<?=$spID;?>" class="myLink">
+		<div id="standing_<?php echo $spID;?>" class="myLink">
 
 
 			<!--Team standing-->
-			<div class="w3-center w3-black w3-text-white"><h2><?=$spDetails['seasonName'];?><br /><?=$spDetails['seasonDivision'];?></div></h2><div class="w3-center w3-indigo w3-text-white"><h3>Team Standings</h3></div>
+			<div class="w3-center w3-black w3-text-white"><h2><?php echo $spDetails['seasonName'];?><br /><?php echo $spDetails['seasonDivision'];?></div></h2><div class="w3-center w3-indigo w3-text-white"><h3>Team Standings</h3></div>
 			<?php
 			$sql_teams = "SELECT t.id, t.name FROM `team` AS t LEFT JOIN `season_team` AS st ON st.team = t.id WHERE st.season = ".intval($spDetails['season']);
 			$exe_teams = mysqli_query($link,$sql_teams);

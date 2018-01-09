@@ -23,7 +23,7 @@ $tresult = mysqli_query($link,$tquery);
 <tr>
 	<td>&nbsp;</td>
 	<td>
-		<input type="hidden" name="id" value="<?=$id?>">
+		<input type="hidden" name="id" value="<?php echo $id?>">
 		<input type="submit" class="button submit" value="Yes">
 		<input type="button" class="button cancel" value="No" onclick="history.go(-1);">
 	</td>

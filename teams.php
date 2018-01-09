@@ -20,7 +20,7 @@ if(!$result) {
 <div align="right">
 <form action="." method="GET">
 <input type="hidden" name="page" value="teams">
-<input type="text" class="search" name="filter" value="<?=$_GET['filter']?>">
+<input type="text" class="search" name="filter" value="<?php echo $_GET['filter']?>">
 </form>
 </div>
 <a href=".?page=team_add">Add team</a>
@@ -43,11 +43,11 @@ while($item = mysqli_fetch_array($result)) {
 ?>
 <tr class="w3-hover-green">
 	<td>
-		<a href=".?page=team_chg&amp;id=<?=$item['id']?>"><img src="images/edit16.png" alt="chg"></a>
-		<a href=".?page=team_rem&amp;id=<?=$item['id']?>"><img src="images/delete16.png" alt="rem"></a>
+		<a href=".?page=team_chg&amp;id=<?php echo $item['id']?>"><img src="images/edit16.png" alt="chg"></a>
+		<a href=".?page=team_rem&amp;id=<?php echo $item['id']?>"><img src="images/delete16.png" alt="rem"></a>
 	</td>
-	<td><?=$item['name']?></td>
-	<td align="center"><?=$item['drivercount']?></td>
+	<td><?php echo $item['name']?></td>
+	<td align="center"><?php echo $item['drivercount']?></td>
 </tr>
 <?
 }

@@ -46,7 +46,7 @@ function show_driver_combo() {
 </tr>
 <tr>
     <td width="120">Logo image url:</td>
-	<td><input type="url" name="logo" value="<?=$item['logo']?>" maxlength="200"></td>
+	<td><input type="url" name="logo" value="<?php echo $item['logo']?>" maxlength="200"></td>
 </tr>
 <tr>
 	<td>&nbsp;</td>

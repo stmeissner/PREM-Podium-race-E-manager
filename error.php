@@ -11,4 +11,4 @@ for($x = $enter_count; $x < 3; $x++) {
 	$error .= "<br>\n";	
 }
 ?>
-<div id="error"><?=$error?></div>
+<div id="error"><?php echo $error?></div>

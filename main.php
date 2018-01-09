@@ -58,9 +58,9 @@ if ($blocks) {
 			?>
 			<div>
 
-				<div class="w3-center w3-black w3-text-white"><h2><?=$blockDetails['title'];?></h2></div>
+				<div class="w3-center w3-black w3-text-white"><h2><?php echo $blockDetails['title'];?></h2></div>
 				<div class="w3-responsive w3-padding-tiny">
-					<?=$blockDetails['content'];?>
+					<?php echo $blockDetails['content'];?>
 				</div>
 
 			</div>
@@ -86,9 +86,9 @@ if ($exe_news) {
 	while (list($id, $title, $news, $day) = mysqli_fetch_array($exe_news)) {
 		?>
 
-			<div class="w3-center w3-black w3-text-white"><h3><?=$title;?>&nbsp;<?=$day;?></h3></div>
+			<div class="w3-center w3-black w3-text-white"><h3><?php echo $title;?>&nbsp;<?php echo $day;?></h3></div>
 
-			<p><div class="w3-padding-large"><?=$news;?></div> </p>
+			<p><div class="w3-padding-large"><?php echo $news;?></div> </p>
 
 		<?php
 	}

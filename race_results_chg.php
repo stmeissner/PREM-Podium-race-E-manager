@@ -32,8 +32,8 @@ if($item['season'] == 0)
 						 JOIN team t ON (t.id = td.team)
 						 JOIN driver d ON (d.id = td.driver)";
 else
-	$dquery = "SELECT td.id, t.name team, d.name driver, d.plate dplate
-	           FROM season_team st
+	$dquery = "SELECT td.*, t.name team, d.name driver, d.plate dplate
+						 FROM season_team st
 						 JOIN team t ON (t.id = st.team)
 						 JOIN team_driver td ON (td.team = t.id)
 						 JOIN driver d ON (d.id = td.driver)
@@ -53,6 +53,9 @@ $drivers = array();
 while($ditem = mysqli_fetch_array($dresult)) {
 	$drivers[$ditem['id']]['name'] = $ditem['driver'];
 	$drivers[$ditem['id']]['team'] = $ditem['team'];
+	$drivers[$ditem['id']]['cartype'] = $ditem['cartype'];
+	$drivers[$ditem['id']]['ballast'] = $ditem['ballast'];
+	$drivers[$ditem['id']]['restrictor'] = $ditem['restrictor'];
 }
 
 function show_driver_combo($did = 0) {
@@ -80,9 +83,9 @@ if(!$rdresult) {
 <h1>Modify race results</h1>
 
 <br/>
-<a href="?page=race_result_import_rfactor&amp;id=<?=$id?>"><img src="images/properties16.png" alt=""/> Import rFactor XML</a> |
-<a href="?page=race_result_import_lfspoints&amp;id=<?=$id?>"><img src="images/properties16.png" alt=""/> Import LFSPoints XML</a> |
-<a href="?page=race_result_import_ac&amp;id=<?=$id?>"><img src="images/properties16.png" alt=""/> Import Assetto Corsa JSON</a><br/>
+<a href="?page=race_result_import_rfactor&amp;id=<?php echo $id?>"><img src="images/properties16.png" alt=""/> Import rFactor XML</a> |
+<a href="?page=race_result_import_lfspoints&amp;id=<?php echo $id?>"><img src="images/properties16.png" alt=""/> Import LFSPoints XML</a> |
+<a href="?page=race_result_import_ac&amp;id=<?php echo $id?>"><img src="images/properties16.png" alt=""/> Import Assetto Corsa JSON</a><br/>
 
 <br/>
 
@@ -90,31 +93,31 @@ if(!$rdresult) {
 <table border="0" width="100%">
 <tr>
 	<td width="120">Name:</td>
-	<td><?=$item['name']?></td>
+	<td><?php echo $item['name']?></td>
 	<td>Laps:</td>
-	<td><?=$item['laps']?></td>
+	<td><?php echo $item['laps']?></td>
 </tr>
 <tr>
 	<td>Track:</td>
-	<td><?=$item['track']?></td>
+	<td><?php echo $item['track']?></td>
 	<?PHP if($item['season'] == 0) { ?>
 	<td>Division/Ruleset:</td>
-	<td><?=$item['dname']?> / <?=$item['rsname']?></td>
+	<td><?php echo $item['dname']?> / <?php echo $item['rsname']?></td>
 	<?PHP } else { ?>
 	<td>Season / Division:</td>
-	<td><?=$item['sname']?> / <?=$item['dname']?></td>
+	<td><?php echo $item['sname']?> / <?php echo $item['dname']?></td>
 	<?PHP } ?>
 </tr>
 <tr>
 	<td>Date/Time:</td>
 	<td>
-		<?=date("j F Y, H:i", $date)?>
+		<?php echo date("j F Y, H:i", $date)?>
 	</td>
 	<td>Max players:</td>
-	<td><?=$item['maxplayers']?></td>
+	<td><?php echo $item['maxplayers']?></td>
 <tr>
     <td>Replay link:</td>
-	<td><i class="fa fa-link"></i><input type="url" style="width:500px;" name="replay" value="<?=$item['replay']?>" maxlength="200"></td>
+	<td><i class="fa fa-link"></i><input type="url" style="width:500px;" name="replay" value="<?php echo $item['replay']?>" maxlength="200"></td>
 </tr>
 <tr>
 	<td>Upload result file to Simresults:</a></td>
@@ -123,14 +126,14 @@ if(!$rdresult) {
 <tr>
     <td>Simresults URL:</td>
 	<td><div class="input-group margin-bottom-sm">
-	<i class="fa fa-link"></i><input type="url" style="width:500px;" name="simresults" value="<?=$item['simresults']?>" maxlength="200"></div></td>
+	<i class="fa fa-link"></i><input type="url" style="width:500px;" name="simresults" value="<?php echo $item['simresults']?>" maxlength="200"></div></td>
 </tr>
 <tr>
 	<td>
 	Official result?
 	</td>
 	<td colspan="3">
-	<input type="checkbox" name="official"<?=$item['result_official']=='1'?" checked=\"1\"":""?>>
+	<input type="checkbox" name="official"<?php echo $item['result_official']=='1'?" checked=\"1\"":""?>>
 	</td>
 </tr>
 <tr>
@@ -139,6 +142,9 @@ if(!$rdresult) {
 		<tr class="head">
 			<td>Driver (Team)</td>
 			<td align="center">Car #</td>
+			<td align="center">Car Type</td>
+			<td align="center">Ballast</td>
+			<td align="center">Restrictor</td>
 			<td align="center">Grid</td>
 			<td align="center">Pos</td>
 			<td align="center">Laps</td>
@@ -151,6 +157,9 @@ if(!$rdresult) {
 			if($rditem = mysqli_fetch_array($rdresult)) {
 				$driver = $rditem['team_driver'];
 				$dplate = $rditem['dplate'];
+				$driver_cartype = $rditem['cartype'];
+				$driver_ballast = $rditem['ballast'];
+				$driver_restrictor = $rditem['restrictor'];
 				$grid = $rditem['grid'];
 				if($grid == 0) $grid = "";
 				$position = $rditem['position'];
@@ -180,23 +189,26 @@ if(!$rdresult) {
 				$status = 0;
 			}
 			?>
-			<tr class="<?=$style?>">
+			<tr class="<?php echo $style?>">
 				<td><?PHP show_driver_combo($driver) ?></td>
-				<td align="center"><input type="text" name="dplate[]" value="<?=$dplate?>" size="3" maxlength="3"></td>
-				<td align="center"><input type="text" name="grid[]" value="<?=$grid?>" size="2" maxlength="2"></td>
-				<td align="center"><input type="text" name="pos[]" value="<?=$position?>" size="2" maxlength="2"></td>
-				<td align="center"><input type="text" name="laps[]" value="<?=$laps?>" size="3" maxlength="3"></td>
+				<td align="center"><input type="text" name="dplate[]" value="<?php echo $dplate?>" size="3" maxlength="3"></td>
+				<td align="center"><input type="text" name="cartype[]" value="<?php echo $driver_cartype?>" size="30" maxlength="50"></td>
+				<td align="center"><input type="number" name="ballast[]" value="<?php echo $driver_ballast?>" min="0" max="999"></td>
+				<td align="center"><input type="number" name="restrictor[]" value="<?php echo $driver_restrictor?>" min="0" max="100"></td>
+				<td align="center"><input type="text" name="grid[]" value="<?php echo $grid?>" size="2" maxlength="2"></td>
+				<td align="center"><input type="text" name="pos[]" value="<?php echo $position?>" size="2" maxlength="2"></td>
+				<td align="center"><input type="text" name="laps[]" value="<?php echo $laps?>" size="3" maxlength="3"></td>
 				<td>
-					<input type="text" name="hour[]" value="<?=$hour?>" style="text-align:right;" size="1" maxlength="2">h
-					<input type="text" name="minute[]" value="<?=$minute?>" style="text-align:right;" size="1" maxlength="2">m
-					<input type="text" name="second[]" value="<?=$second?>" style="text-align:right;" size="1" maxlength="2">s
-					<input type="text" name="ms[]" value="<?=$ms?>" size="2" maxlength="3">
+					<input type="text" name="hour[]" value="<?php echo $hour?>" style="text-align:right;" size="1" maxlength="2">h
+					<input type="text" name="minute[]" value="<?php echo $minute?>" style="text-align:right;" size="1" maxlength="2">m
+					<input type="text" name="second[]" value="<?php echo $second?>" style="text-align:right;" size="1" maxlength="2">s
+					<input type="text" name="ms[]" value="<?php echo $ms?>" size="2" maxlength="3">
 				</td>
-				<td align="center"><input type="checkbox" name="fl[<?=$x?>]"<?=$fl==1?" checked":""?>></td>
+				<td align="center"><input type="checkbox" name="fl[<?php echo $x?>]"<?php echo $fl==1?" checked":""?>></td>
 				<td align="center">
 					<select name="status[]">
 						<?PHP foreach($race_status_s as $i => $s) { ?>
-						<option value="<?=$i?>"<?=$i == $status ? " selected" : ""?>><?=$s?></option>
+						<option value="<?php echo $i?>"<?php echo $i == $status ? " selected" : ""?>><?php echo $s?></option>
 						<?PHP } ?>
 					</select>
 				</td>
@@ -209,8 +221,8 @@ if(!$rdresult) {
 <tr>
 	<td>&nbsp;</td>
 	<td colspan="3">
-		<input type="hidden" name="id" value="<?=$id?>">
-		<input type="hidden" name="season" value="<?=$item['season']?>">
+		<input type="hidden" name="id" value="<?php echo $id?>">
+		<input type="hidden" name="season" value="<?php echo $item['season']?>">
 		<input type="submit" class="button submit" value="Save results">
 		<input type="button" class="button cancel" value="Cancel" onclick="history.go(-1);">
 	</td>

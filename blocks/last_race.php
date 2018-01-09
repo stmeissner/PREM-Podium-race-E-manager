@@ -38,11 +38,11 @@ mysqli_free_result($result);
 <table class="w3-table-all">
     <td class="w3-dark-grey"><strong>Division:&nbsp;</strong>
     <tr></tr>
-    <td><?=$item['dname']?></td>
+    <td><?php echo $item['dname']?></td>
     <tr></tr>
 	<td class="w3-dark-grey"><strong>Track:&nbsp;</strong></td>
     <tr></tr>
-    <td><?=$item['track']?></td>
+    <td><?php echo $item['track']?></td>
     <tr></tr>
 </table>
     <tr></tr>
@@ -50,9 +50,9 @@ mysqli_free_result($result);
     <td class="w3-dark-grey"><strong>Pos</strong></td><td class="w3-dark-grey"><strong>Driver</strong></td><td class="w3-dark-grey"><strong>Team</strong></td>
     <?PHP while($ditem = mysqli_fetch_array($dresult)) {    ?>
     <tr class="w3-hover-blue">
-    <td class="w3-dark-grey"><?=$ditem['position']?></td>
-    <td><?=$ditem['dname']?></td>
-	<td><?=$ditem['tname']?></td>
+    <td class="w3-dark-grey"><?php echo $ditem['position']?></td>
+    <td><?php echo $ditem['dname']?></td>
+	<td><?php echo $ditem['tname']?></td>
     </tr>
     <?PHP     } mysqli_free_result($dresult);    ?>
 </table>

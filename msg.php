@@ -14,6 +14,6 @@ if(isset($msg) || isset($_GET['msg'])) {
 		$msg .= "<br>\n";	
 	}
 ?>
-<div id="msg"><?=$msg?></div>
+<div id="msg"><?php echo $msg?></div>
 <br>
 <?PHP } ?>

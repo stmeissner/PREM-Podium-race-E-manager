@@ -284,7 +284,7 @@
 </tr>
 <tr>
     <td width="120">Photo:</td>
-	<td><input type="url" name="driver_photo" value="<?=$item['driver_photo']?>" maxlength="200"></td>
+	<td><input type="url" name="driver_photo" value="<?php echo $item['driver_photo']?>" maxlength="200"></td>
 </tr>
 <tr>
 	<td>&nbsp;</td>

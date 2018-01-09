@@ -40,20 +40,20 @@ while($item = mysqli_fetch_array($cars)) {
 ?>
 <tr>
 	<td>
-		<a href=".?page=car_chg&amp;id=<?=$item['id']?>"><img src="images/edit16.png" alt="chg"></a>
+		<a href=".?page=car_chg&amp;id=<?php echo $item['id']?>"><img src="images/edit16.png" alt="chg"></a>
 	</td>
 	<td>
-		<a href=".?page=car_rem&amp;id=<?=$item['id']?>"><img src="images/delete16.png" alt="rem"></a>
+		<a href=".?page=car_rem&amp;id=<?php echo $item['id']?>"><img src="images/delete16.png" alt="rem"></a>
 	</td>
-	<td><?=$item['sim']?></td>
-	<td style="white-space:nowrap";><?=$item['brand']?></td>
-	<td style="white-space:nowrap";><?=$item['name']?></td>
-	<td style="white-space:nowrap";><?=$item['code']?></td>
-	<td style="text-align:center"><img src="images/badges/<?=$item['badge']?>" height="30" alt="<?$item['brand']?>"></td>
-	<td><?=$item['horsepower']?></td>
-	<td><?=$item['torque']?></td>
-	<td><?=$item['weight']?></td>
-	<td style="white-space: normal"><?=$item['description']?></td>
+	<td><?php echo $item['sim']?></td>
+	<td style="white-space:nowrap";><?php echo $item['brand']?></td>
+	<td style="white-space:nowrap";><?php echo $item['name']?></td>
+	<td style="white-space:nowrap";><?php echo $item['code']?></td>
+	<td style="text-align:center"><img src="images/badges/<?php echo $item['badge']?>" height="30" alt="<?$item['brand']?>"></td>
+	<td><?php echo $item['horsepower']?></td>
+	<td><?php echo $item['torque']?></td>
+	<td><?php echo $item['weight']?></td>
+	<td style="white-space: normal"><?php echo $item['description']?></td>
 </tr>
 <?PHP } ?>
 </table>

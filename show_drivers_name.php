@@ -41,11 +41,11 @@ while ($sitem = mysqli_fetch_array($exe_drivers)) {
 	if ($sitem['driver_photo'] == '') { $url = 'images/helmet.png' ; } else { $url = $sitem['driver_photo']; }
 	?>
 	<tr class="w3-hover-green">
-	<td><?= $sitem['name'] ?></td>
-	<td><?= $sitem['pos_1'] ?></td>
-	<td><?= $sitem['pos_2'] ?></td>
-	<td><?= $sitem['pos_3'] ?></td>
-	<td><a><img src="<?=$url;?>" width="150" height="150"/></a></td>
+	<td><?php echo  $sitem['name'] ?></td>
+	<td><?php echo  $sitem['pos_1'] ?></td>
+	<td><?php echo  $sitem['pos_2'] ?></td>
+	<td><?php echo  $sitem['pos_3'] ?></td>
+	<td><a><img src="<?php echo $url;?>" width="150" height="150"/></a></td>
 	</tr>
 	<?
 }

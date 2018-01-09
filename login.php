@@ -6,11 +6,11 @@ if(!defined("USE_MYSQL") || !defined("USE_LOGIN")) {
 }
 ?>
 <div id="login">
-<h1><?=TITLE?></h1>
-<?=SUBTITLE?><br>
-<a href="<?=$config['org_link']?>"><?=$config['org']?></a><br>
+<h1><?php echo TITLE?></h1>
+<?php echo SUBTITLE?><br>
+<a href="<?php echo $config['org_link']?>"><?php echo $config['org']?></a><br>
 <br>
 <?PHP mysql_login::print_login_form() ?>
 <br>
-<div class="small">Version <?=VERSION?><br></div><br>
+<div class="small">Version <?php echo VERSION?><br></div><br>
 </div>

@@ -77,14 +77,14 @@ if(!$stresult) {
 <table border="0">
 <tr>
 	<td width="120">Name:</td>
-	<td><input type="text" name="name" value="<?=$item['name']?>" maxlength="20"></td>
+	<td><input type="text" name="name" value="<?php echo $item['name']?>" maxlength="20"></td>
 </tr>
 <tr>
 	<td>Division:</td>
 	<td>
 	<select name="division">
 	<?PHP while($diitem = mysqli_fetch_array($diresult)) { ?>
-		<option value="<?=$diitem['id']?>"<?=($diitem['id'] == $item['division']) ? " selected" : ""?>><?=$diitem['name']?></option>
+		<option value="<?php echo $diitem['id']?>"<?php echo ($diitem['id'] == $item['division']) ? " selected" : ""?>><?php echo $diitem['name']?></option>
 	<?PHP } ?>
 	</select>
 	</td>
@@ -94,7 +94,7 @@ if(!$stresult) {
 	<td>
 	<select name="ruleset">
 	<?PHP while($rsitem = mysqli_fetch_array($rsresult)) { ?>
-		<option value="<?=$rsitem['id']?>"<?=($rsitem['id'] == $item['ruleset']) ? " selected" : ""?>><?=$rsitem['name']?></option>
+		<option value="<?php echo $rsitem['id']?>"<?php echo ($rsitem['id'] == $item['ruleset']) ? " selected" : ""?>><?php echo $rsitem['name']?></option>
 	<?PHP } ?>
 	</select>
 	</td>
@@ -106,18 +106,18 @@ if(!$stresult) {
 	<?PHP mysqli_data_seek($rsresult, 0); ?>
 	<option value="0">&nbsp;</option>
 	<?PHP while($rsitem = mysqli_fetch_array($rsresult)) { ?>
-		<option value="<?=$rsitem['id']?>"<?=($rsitem['id'] == $item['ruleset_qualifying']) ? " selected" : ""?>><?=$rsitem['name']?></option>
+		<option value="<?php echo $rsitem['id']?>"<?php echo ($rsitem['id'] == $item['ruleset_qualifying']) ? " selected" : ""?>><?php echo $rsitem['name']?></option>
 	<?PHP } ?>
 	</select>
 	</td>
 </tr>
 <tr>
 	<td>Max teams:</td>
-	<td><input type="text" name="maxteams" maxlength="3" size="2" value="<?=$item['maxteams']?>"></td>
+	<td><input type="text" name="maxteams" maxlength="3" size="2" value="<?php echo $item['maxteams']?>"></td>
 </tr>
 <tr>
 	<td>Series logo for Simresults:</td>
-	<td><input type="url" name="series_logo_simresults" maxlength="200" value="<?=$item['series_logo_simresults']?>"</td>
+	<td><input type="url" name="series_logo_simresults" maxlength="200" value="<?php echo $item['series_logo_simresults']?>"</td>
 </tr>
 <tr>
 	<td>Teams:</td>
@@ -136,7 +136,7 @@ if(!$stresult) {
 <tr>
 	<td>&nbsp;</td>
 	<td>
-		<input type="hidden" name="id" value="<?=$id?>">
+		<input type="hidden" name="id" value="<?php echo $id?>">
 		<input type="submit" class="button submit" value="Modify">
 		<input type="button" class="button cancel" value="Cancel" onclick="history.go(-1);">
 	</td>

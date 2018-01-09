@@ -35,7 +35,7 @@ if(!$sresult) {
 		<select id="season" name="season" onchange="showOptions();">
 		<option value="0">--NO SEASON--</option>
 		<?PHP while($sitem = mysqli_fetch_array($sresult)) { ?>
-			<option value="<?=$sitem['id']?>"<?=$season == $sitem['id'] ? " selected=\"1\"" : ""?>><?=$sitem['name']?> (<?=$sitem['dname']?>)</option>
+			<option value="<?php echo $sitem['id']?>"<?php echo $season == $sitem['id'] ? " selected=\"1\"" : ""?>><?php echo $sitem['name']?> (<?php echo $sitem['dname']?>)</option>
 		<?PHP } ?>
 		</select>
 	</td>
@@ -82,7 +82,7 @@ if(!$result) {
 <div align="right">
 	<form action="." method="GET">
 		<input type="hidden" name="page" value="sim_results_add">
-		<input type="text" class="search" name="filter" value="<?=$_GET['filter']?>">
+		<input type="text" class="search" name="filter" value="<?php echo $_GET['filter']?>">
 	</form>
 </div>
 
@@ -106,11 +106,11 @@ if(mysqli_num_rows($result) == 0) {
 		?>
 		<tr class="w3-hover-green">
 			<td>
-				<a href=".?page=sim_results_rem&amp;id=<?=$item['id']?>"><img src="images/delete16.png" alt="rem"></a>
+				<a href=".?page=sim_results_rem&amp;id=<?php echo $item['id']?>"><img src="images/delete16.png" alt="rem"></a>
 			</td>
-			<td><?=$item['race_name']?></td>
-            <td><?=$item['season_name']?></td>
-			<td><?=$item['simresults_url']?></td>
+			<td><?php echo $item['race_name']?></td>
+            <td><?php echo $item['season_name']?></td>
+			<td><?php echo $item['simresults_url']?></td>
 		</tr>
 		<?
 	}

@@ -109,7 +109,7 @@ if(is_array($driver)) {
 	if(!$result) error("MySQL Error: " . mysqli_error($link) . "\n");
 
 	if(!empty($query_values)) {
-		$query = "INSERT INTO race_driver (race, team_driver, grid, position, laps, time, fastest_lap, status, dplate,cartype,ballast,restrictor)
+		$query = "INSERT INTO race_driver (race, team_driver, grid, position, laps, time, fastest_lap, status, dplate, cartype, ballast, restrictor)
 							VALUES $query_values";
 		$result = mysqli_query($link,$query);
 		if(!$result) error("MySQL Error: " . mysqli_error($link) . "\n");

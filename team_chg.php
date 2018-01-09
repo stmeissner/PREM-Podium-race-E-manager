@@ -61,12 +61,12 @@ function show_driver_combo($did = 0, $enabled = true) {
 <table border="0">
 <tr>
 	<td width="120">Name:</td>
-	<td><input type="text" name="name" value="<?=$item['name']?>" maxlength="30"></td>
+	<td><input type="text" name="name" value="<?php echo $item['name']?>" maxlength="30"></td>
     <td width="120">logo:</td>
-	<td><input type="url" name="logo" value="<?=$item['logo']?>" maxlength="200"></td>
+	<td><input type="url" name="logo" value="<?php echo $item['logo']?>" maxlength="200"></td>
 </tr>
 <tr>
-	<td>Drivers (<?=$drivercount?>):</td>
+	<td>Drivers (<?php echo $drivercount?>):</td>
 	<td>
 	<?
 	for($x = 0; $x < 5; $x++) {
@@ -82,14 +82,14 @@ function show_driver_combo($did = 0, $enabled = true) {
 	}
 	?>
 	<?PHP while($ditem = mysqli_fetch_array($dresult)) { ?>
-		<a href="?page=team_driver_rem&amp;id=<?=$ditem['id']?>"><img src="images/delete16.png" alt="delete"></a> <?=$ditem['name']?><br>
+		<a href="?page=team_driver_rem&amp;id=<?php echo $ditem['id']?>"><img src="images/delete16.png" alt="delete"></a> <?php echo $ditem['name']?><br>
 	<?PHP } ?>
 	</td>
 </tr>
 <tr>
 	<td>&nbsp;</td>
 	<td>
-		<input type="hidden" name="id" value="<?=$id?>">
+		<input type="hidden" name="id" value="<?php echo $id?>">
 		<input type="submit" class="button submit" value="Modify">
 		<input type="button" class="button cancel" value="Cancel" onclick="history.go(-1);">
 	</td>

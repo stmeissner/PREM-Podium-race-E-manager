@@ -62,7 +62,7 @@
   <td>Desired team: (max. 2 Drivers/team)<input type="text" name="wanted_team" maxlength="30"></td>
 </tr>
 <tr>
-    <td width="120">Photo:<br><input type="url" name="driver_photo" value="<?=$item['driver_photo']?>" maxlength="200"></td>
+    <td width="120">Photo:<br><input type="url" name="driver_photo" value="<?php echo $item['driver_photo']?>" maxlength="200"></td>
 </tr>
 <tr>
 	<td>

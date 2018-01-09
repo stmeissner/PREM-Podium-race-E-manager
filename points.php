@@ -20,7 +20,7 @@ if(!$result) {
 <div align="right">
 <form action="." method="GET">
 <input type="hidden" name="page" value="points">
-<input type="text" class="search" name="filter" value="<?=$_GET['filter']?>">
+<input type="text" class="search" name="filter" value="<?php echo $_GET['filter']?>">
 </form>
 </div>
 <a href=".?page=point_add">Add ruleset</a>
@@ -88,56 +88,56 @@ while($item = mysqli_fetch_array($result)) {
 ?>
 <tr class="w3-hover-green">
 	<td>
-		<a href=".?page=point_chg&amp;id=<?=$item['id']?>"><img src="images/edit16.png" alt="chg"></a>
-		<a href=".?page=point_rem&amp;id=<?=$item['id']?>"><img src="images/delete16.png" alt="rem"></a>
+		<a href=".?page=point_chg&amp;id=<?php echo $item['id']?>"><img src="images/edit16.png" alt="chg"></a>
+		<a href=".?page=point_rem&amp;id=<?php echo $item['id']?>"><img src="images/delete16.png" alt="rem"></a>
 	</td>
-	<td><?=$item['name']?></td>
-	<td width="22" align="center"><?=$item['rp1']?></td>
-	<td width="22" align="center"><?=$item['rp2']?></td>
-	<td width="22" align="center"><?=$item['rp3']?></td>
-	<td width="22" align="center"><?=$item['rp4']?></td>
-	<td width="22" align="center"><?=$item['rp5']?></td>
-	<td width="22" align="center"><?=$item['rp6']?></td>
-	<td width="22" align="center"><?=$item['rp7']?></td>
-	<td width="22" align="center"><?=$item['rp8']?></td>
-	<td width="22" align="center"><?=$item['rp9']?></td>
-	<td width="22" align="center"><?=$item['rp10']?></td>
-	<td width="22" align="center"><?=$item['rp11']?></td>
-	<td width="22" align="center"><?=$item['rp12']?></td>
-	<td width="22" align="center"><?=$item['rp13']?></td>
-	<td width="22" align="center"><?=$item['rp14']?></td>
-	<td width="22" align="center"><?=$item['rp15']?></td>
-	<td width="22" align="center"><?=$item['rp16']?></td>
-	<td width="22" align="center"><?=$item['rp17']?></td>
-	<td width="22" align="center"><?=$item['rp18']?></td>
-	<td width="22" align="center"><?=$item['rp19']?></td>
-	<td width="22" align="center"><?=$item['rp20']?></td>
-	<td width="22" align="center"><?=$item['rp21']?></td>
-	<td width="22" align="center"><?=$item['rp22']?></td>
-	<td width="22" align="center"><?=$item['rp23']?></td>
-	<td width="22" align="center"><?=$item['rp24']?></td>
-	<td width="22" align="center"><?=$item['rp25']?></td>
-	<td width="22" align="center"><?=$item['rp26']?></td>
-	<td width="22" align="center"><?=$item['rp27']?></td>
-	<td width="22" align="center"><?=$item['rp28']?></td>
-	<td width="22" align="center"><?=$item['rp29']?></td>
-	<td width="22" align="center"><?=$item['rp30']?></td>
-	<td width="22" align="center"><?=$item['rp31']?></td>
-	<td width="22" align="center"><?=$item['rp32']?></td>
-	<td width="22" align="center"><?=$item['rp33']?></td>
-	<td width="22" align="center"><?=$item['rp34']?></td>
-	<td width="22" align="center"><?=$item['rp35']?></td>
-	<td width="22" align="center"><?=$item['rp36']?></td>
-	<td width="22" align="center"><?=$item['rp37']?></td>
-	<td width="22" align="center"><?=$item['rp38']?></td>
-	<td width="22" align="center"><?=$item['rp39']?></td>
-	<td width="22" align="center"><?=$item['rp40']?></td>
-	<td width="22" align="center"><?=$item['qp1']?></td>
-	<td width="22" align="center"><?=$item['qp2']?></td>
-	<td width="22" align="center"><?=$item['qp3']?></td>
-	<td width="22" align="center"><?=$item['qp4']?></td>
-	<td width="22" align="center"><?=$item['qp5']?></td>
-	<td width="22" align="center"><?=$item['fl']?></td>
+	<td><?php echo $item['name']?></td>
+	<td width="22" align="center"><?php echo $item['rp1']?></td>
+	<td width="22" align="center"><?php echo $item['rp2']?></td>
+	<td width="22" align="center"><?php echo $item['rp3']?></td>
+	<td width="22" align="center"><?php echo $item['rp4']?></td>
+	<td width="22" align="center"><?php echo $item['rp5']?></td>
+	<td width="22" align="center"><?php echo $item['rp6']?></td>
+	<td width="22" align="center"><?php echo $item['rp7']?></td>
+	<td width="22" align="center"><?php echo $item['rp8']?></td>
+	<td width="22" align="center"><?php echo $item['rp9']?></td>
+	<td width="22" align="center"><?php echo $item['rp10']?></td>
+	<td width="22" align="center"><?php echo $item['rp11']?></td>
+	<td width="22" align="center"><?php echo $item['rp12']?></td>
+	<td width="22" align="center"><?php echo $item['rp13']?></td>
+	<td width="22" align="center"><?php echo $item['rp14']?></td>
+	<td width="22" align="center"><?php echo $item['rp15']?></td>
+	<td width="22" align="center"><?php echo $item['rp16']?></td>
+	<td width="22" align="center"><?php echo $item['rp17']?></td>
+	<td width="22" align="center"><?php echo $item['rp18']?></td>
+	<td width="22" align="center"><?php echo $item['rp19']?></td>
+	<td width="22" align="center"><?php echo $item['rp20']?></td>
+	<td width="22" align="center"><?php echo $item['rp21']?></td>
+	<td width="22" align="center"><?php echo $item['rp22']?></td>
+	<td width="22" align="center"><?php echo $item['rp23']?></td>
+	<td width="22" align="center"><?php echo $item['rp24']?></td>
+	<td width="22" align="center"><?php echo $item['rp25']?></td>
+	<td width="22" align="center"><?php echo $item['rp26']?></td>
+	<td width="22" align="center"><?php echo $item['rp27']?></td>
+	<td width="22" align="center"><?php echo $item['rp28']?></td>
+	<td width="22" align="center"><?php echo $item['rp29']?></td>
+	<td width="22" align="center"><?php echo $item['rp30']?></td>
+	<td width="22" align="center"><?php echo $item['rp31']?></td>
+	<td width="22" align="center"><?php echo $item['rp32']?></td>
+	<td width="22" align="center"><?php echo $item['rp33']?></td>
+	<td width="22" align="center"><?php echo $item['rp34']?></td>
+	<td width="22" align="center"><?php echo $item['rp35']?></td>
+	<td width="22" align="center"><?php echo $item['rp36']?></td>
+	<td width="22" align="center"><?php echo $item['rp37']?></td>
+	<td width="22" align="center"><?php echo $item['rp38']?></td>
+	<td width="22" align="center"><?php echo $item['rp39']?></td>
+	<td width="22" align="center"><?php echo $item['rp40']?></td>
+	<td width="22" align="center"><?php echo $item['qp1']?></td>
+	<td width="22" align="center"><?php echo $item['qp2']?></td>
+	<td width="22" align="center"><?php echo $item['qp3']?></td>
+	<td width="22" align="center"><?php echo $item['qp4']?></td>
+	<td width="22" align="center"><?php echo $item['qp5']?></td>
+	<td width="22" align="center"><?php echo $item['fl']?></td>
 </tr>
 <?
 }

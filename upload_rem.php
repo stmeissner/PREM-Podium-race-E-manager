@@ -22,18 +22,18 @@ $item = mysqli_fetch_array($result);
 <table border="0">
 <tr>
     <td><strong>File name:</strong></td>
-	<td><?=$item['file'] ?></td>
+	<td><?php echo $item['file'] ?></td>
     <td><strong>File type:</strong></td>
-    <td><?=$item['type'] ?></td>
+    <td><?php echo $item['type'] ?></td>
     <td><strong>Size(KB):</strong></td>
-    <td><?=$item['size'] ?></td>
+    <td><?php echo $item['size'] ?></td>
 </tr>
 <tr>
 	<td>&nbsp;</td>
 	<td>
 		<input type="submit" class="button submit" value="Delete">
 		<input type="button" class="button cancel" value="Cancel" onclick="history.go(-1);">
-		<input type="hidden" name="id" value="<?=$id?>">
+		<input type="hidden" name="id" value="<?php echo $id?>">
 	</td>
 </tr>
 </table>

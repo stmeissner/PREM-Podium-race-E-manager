@@ -31,7 +31,7 @@ if(!$sresult) {
 <table border="0">
 <tr>
 	<td width="120">Page:</td>
-	<td><input type="number" name="page" value="<?=$item['page']?>" min="1" max="7"></td>
+	<td><input type="number" name="page" value="<?php echo $item['page']?>" min="1" max="7"></td>
 </tr>
 <tr>
 	<td>Season:</td>
@@ -39,7 +39,7 @@ if(!$sresult) {
 		<select id="season" name="season" onchange="showOptions();">
 		<option value="0">--NO SEASON--</option>
 		<?PHP while($sitem = mysqli_fetch_array($sresult)) { ?>
-			<option value="<?=$sitem['id']?>"<?=$item['season'] == $sitem['id'] ? " selected=\"1\"" : ""?>><?=$sitem['name']?></option>
+			<option value="<?php echo $sitem['id']?>"<?php echo $item['season'] == $sitem['id'] ? " selected=\"1\"" : ""?>><?php echo $sitem['name']?></option>
 		<?PHP }
         mysqli_free_result($sresult);
         mysqli_free_result($result);
@@ -50,7 +50,7 @@ if(!$sresult) {
 <tr>
 	<td>&nbsp;</td>
 	<td>
-		<input type="hidden" name="id" value="<?=$id?>">
+		<input type="hidden" name="id" value="<?php echo $id?>">
 		<input type="submit" class="button submit" value="Modify">
 		<input type="button" class="button cancel" value="Cancel" onclick="history.go(-1);">
 	</td>

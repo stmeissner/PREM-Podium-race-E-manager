@@ -49,7 +49,7 @@ if(!$result) {
 <div align="right">
 	<form action="." method="GET">
 		<input type="hidden" name="page" value="send_video_url">
-		<input type="text" class="search" name="filter" value="<?=$_GET['filter']?>">
+		<input type="text" class="search" name="filter" value="<?php echo $_GET['filter']?>">
 	</form>
 </div>
 
@@ -72,10 +72,10 @@ if(mysqli_num_rows($result) == 0) {
 		?>
 		<tr class="w3-hover-green">
 			<td>
-				<a href=".?page=send_video_url_rem&amp;id=<?=$item['id']?>"><img src="images/delete16.png" alt="rem"></a>
+				<a href=".?page=send_video_url_rem&amp;id=<?php echo $item['id']?>"><img src="images/delete16.png" alt="rem"></a>
 			</td>
-			<td><?=$item['video_name']?></td>
-			<td><?=$item['video_url']?></td>
+			<td><?php echo $item['video_name']?></td>
+			<td><?php echo $item['video_url']?></td>
 		</tr>
 		<?
 	}

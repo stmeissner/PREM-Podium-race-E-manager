@@ -27,9 +27,9 @@
 		while ($sitem = mysqli_fetch_array($result)) { ?>
 
 		<tr class="w3-hover-blue">
-			<td><?= $sitem['date'] ?></td>
-			<td><?= $sitem['track'] ?></td>
-			<td><?= $sitem['division_name'] ?></td>
+			<td><?php echo  $sitem['date'] ?></td>
+			<td><?php echo  $sitem['track'] ?></td>
+			<td><?php echo  $sitem['division_name'] ?></td>
 		</tr>
 		<?php
 

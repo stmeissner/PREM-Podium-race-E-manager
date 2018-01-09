@@ -30,25 +30,25 @@ if(!$stresult) {
 <table border="0">
 <tr>
 	<td width="120">Name:</td>
-	<td><?=$item['name']?></td>
+	<td><?php echo $item['name']?></td>
 </tr>
 <tr>
 	<td>Division:</td>
-	<td><?=$item['dname']?></td>
+	<td><?php echo $item['dname']?></td>
 </tr>
 <tr>
 	<td>Ruleset:</td>
-	<td><?=$item['rsname']?></td>
+	<td><?php echo $item['rsname']?></td>
 </tr>
 <tr>
 	<td>Ruleset qualifying:</td>
-	<td><?=$item['qrsname']?></td>
+	<td><?php echo $item['qrsname']?></td>
 </tr>
 <tr>
 	<td>Teams:</td>
 	<td>
 	<?PHP while($stitem = mysqli_fetch_array($stresult)) { ?>
-		&bull; <?=$stitem['name']?><br>
+		&bull; <?php echo $stitem['name']?><br>
 	<?PHP } ?>
 	</td>
 </tr>
@@ -59,7 +59,7 @@ if(!$stresult) {
 <tr>
 	<td>&nbsp;</td>
 	<td>
-		<input type="hidden" name="id" value="<?=$id?>">
+		<input type="hidden" name="id" value="<?php echo $id?>">
 		<input type="submit" class="button submit" value="Yes">
 		<input type="button" class="button cancel" value="No" onclick="history.go(-1);">
 	</td>

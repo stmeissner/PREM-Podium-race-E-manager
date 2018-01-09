@@ -20,7 +20,7 @@ if(!$result) {
 <div align="right">
 <form action="." method="GET">
 <input type="hidden" name="page" value="drivers">
-<input type="text" class="search" name="filter" value="<?=$_GET['filter']?>">
+<input type="text" class="search" name="filter" value="<?php echo $_GET['filter']?>">
 </form>
 </div>
 <a href=".?page=driver_add">Add driver</a>
@@ -46,13 +46,13 @@ while($item = mysqli_fetch_array($result)) {
 ?>
 <tr class="w3-hover-green">
 	<td>
-		<a href=".?page=driver_chg&amp;id=<?=$item['id']?>"><img src="images/edit16.png" alt="chg"></a>
-		<a href=".?page=driver_rem&amp;id=<?=$item['id']?>"><img src="images/delete16.png" alt="rem"></a>
+		<a href=".?page=driver_chg&amp;id=<?php echo $item['id']?>"><img src="images/edit16.png" alt="chg"></a>
+		<a href=".?page=driver_rem&amp;id=<?php echo $item['id']?>"><img src="images/delete16.png" alt="rem"></a>
 	</td>
-	<td width=20% ><?=$item['name']?></td>
-	<td width=2% ><?=$item['plate']?></td>
-	<td align="center" width="40px"><img src="images/flags/<?=$item['country']?>.png"</td>
-	<td width="20" align="center"><?=$item['teamcount']?></td>
+	<td width=20% ><?php echo $item['name']?></td>
+	<td width=2% ><?php echo $item['plate']?></td>
+	<td align="center" width="40px"><img src="images/flags/<?php echo $item['country']?>.png"</td>
+	<td width="20" align="center"><?php echo $item['teamcount']?></td>
 </tr>
 <?
 	#old style.css $style = $style == "odd" ? "even" : "odd";

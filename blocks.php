@@ -160,11 +160,11 @@ $active_standings = $_POST["active_standings"];
 
     <tr class="w3-hover-green">
     	<td>
-    		<a href=".?page=standings_chg&amp;id=<?=$item['id']?>"><img src="images/edit16.png" alt="chg"></a>
-    		<a href=".?page=standings_rem&amp;id=<?=$item['id']?>"><img src="images/delete16.png" alt="rem"></a>
+    		<a href=".?page=standings_chg&amp;id=<?php echo $item['id']?>"><img src="images/edit16.png" alt="chg"></a>
+    		<a href=".?page=standings_rem&amp;id=<?php echo $item['id']?>"><img src="images/delete16.png" alt="rem"></a>
     	</td>
-    	<td><?=$item['page']?></td>
-    	<td><?=$item['name']?></td>
+    	<td><?php echo $item['page']?></td>
+    	<td><?php echo $item['name']?></td>
     </tr>
     <?
     }

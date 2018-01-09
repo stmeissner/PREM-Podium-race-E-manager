@@ -106,7 +106,7 @@ $query = "SELECT r.*, d.name dname, rs.name rsname, s.name sname
 					FROM race r
 					JOIN division d ON (d.id = r.division)
 					JOIN point_ruleset rs ON (rs.id = r.ruleset)
-					LEFT JOIN season s ON (s.id = r.season)
+					JOIN season s ON (s.id = r.season)
 					WHERE r.id='$id' ORDER BY r.date DESC";
 
 $result = mysqli_query($link,$query);
@@ -127,28 +127,28 @@ $date = strtotime($item['date']);
 <table border="0" width="100%">
 <tr>
 	<td width="120">Name:</td>
-	<td><?=$item['name']?></td>
+	<td><?php echo $item['name']?></td>
 	<td>Laps:</td>
-	<td><?=$item['laps']?></td>
+	<td><?php echo $item['laps']?></td>
 </tr>
 <tr>
 	<td>Track:</td>
-	<td><?=$item['track']?></td>
+	<td><?php echo $item['track']?></td>
 	<?PHP if($item['season'] == 0) { ?>
 	<td>Division/Ruleset:</td>
-	<td><?=$item['dname']?> / <?=$item['rsname']?></td>
+	<td><?php echo $item['dname']?> / <?php echo $item['rsname']?></td>
 	<?PHP } else { ?>
 	<td>Season / Division:</td>
-	<td><?=$item['sname']?> / <?=$item['dname']?></td>
+	<td><?php echo $item['sname']?> / <?php echo $item['dname']?></td>
 	<?PHP } ?>
 </tr>
 <tr>
 	<td>Date/Time:</td>
 	<td>
-		<?=date("j F Y, H:i", $date)?>
+		<?php echo date("j F Y, H:i", $date)?>
 	</td>
 	<td>Max players:</td>
-	<td><?=$item['maxplayers']?></td>
+	<td><?php echo $item['maxplayers']?></td>
 </tr>
 </table>
 <?PHP if(!$upload) { ?>
@@ -163,7 +163,7 @@ $date = strtotime($item['date']);
 	<td>&nbsp;</td>
 	<td>
 		<input type="submit" class="button submit" value="Upload"/>
-		<input type="hidden" name="id" value="<?=$id?>"/>
+		<input type="hidden" name="id" value="<?php echo $id?>"/>
 		<input type="hidden" name="json" value="1"/>
 	</td>
 </tr>
@@ -240,9 +240,9 @@ function show_driver_combo($dname = '') {
 				$ditem = $arr_race_cars[$did];
 				$drivername = $ditem['DriverName'] . " (" . $ditem['DriverTeam'] . ")";
 				$driver_name = $ditem['DriverName'];
-				$driver_cartype = $ditem['DriverModel'];
-				$driver_ballast = $ditem['DriverBallastKG'];
-				$driver_restrictor = $ditem['DriverRestrictor'];
+					$driver_cartype = $ditem['DriverModel'];
+					$driver_ballast = $ditem['DriverBallastKG'];
+					$driver_restrictor = $ditem['DriverRestrictor'];
 				$dplatequery = "SELECT plate FROM driver where name = '$driver_name'";
 				$dplate = mysqli_fetch_assoc(mysqli_query($link,$dplatequery))['plate'];
 				$grid = $arr_race_result[$x]['Position'];
@@ -282,26 +282,26 @@ function show_driver_combo($dname = '') {
 			}
 			?>
 
-			<tr class="<?=$style?>">
-				<td><?=$drivername . (!empty($drivername) ? "<br/>" : "")?><?PHP show_driver_combo($ditem['DriverName']); ?></td>
-				<td align="center"><input type="text" name="dplate[]" value="<?=$dplate?>" size="3" maxlength="3"></td>
-				<td align="center"><input type="text" name="cartype[]" value="<?=$driver_cartype?>" size="30" maxlength="50"></td>
-				<td align="center"><input type="number" name="ballast[]" value="<?=$driver_ballast?>" min="0" max="999"></td>
-				<td align="center"><input type="number" name="restrictor[]" value="<?=$driver_restrictor?>" min="0" max="100"></td>
-				<td align="center"><input type="text" name="grid[]" value="<?=$grid?>" size="2" maxlength="2"></td>
-				<td align="center"><input type="text" name="pos[]" value="<?=$position?>" size="2" maxlength="2"></td>
-				<td align="center"><input type="text" name="laps[]" value="<?=$laps?>" size="2" maxlength="3"></td>
+			<tr class="<?php echo $style?>">
+				<td><?php echo $drivername . (!empty($drivername) ? "<br/>" : "")?><?PHP show_driver_combo($ditem['DriverName']); ?></td>
+				<td align="center"><input type="text" name="dplate[]" value="<?php echo $dplate?>" size="3" maxlength="3"></td>
+				<td align="center"><input type="text" name="cartype[]" value="<?php echo $driver_cartype?>" size="30" maxlength="50"></td>
+				<td align="center"><input type="number" name="ballast[]" value="<?php echo $driver_ballast?>" min="0" max="999"></td>
+				<td align="center"><input type="number" name="restrictor[]" value="<?php echo $driver_restrictor?>" min="0" max="100"></td>
+				<td align="center"><input type="text" name="grid[]" value="<?php echo $grid?>" size="2" maxlength="2"></td>
+				<td align="center"><input type="text" name="pos[]" value="<?php echo $position?>" size="2" maxlength="2"></td>
+				<td align="center"><input type="text" name="laps[]" value="<?php echo $laps?>" size="2" maxlength="3"></td>
 				<td>
-					<input type="text" name="hour[]" value="<?=$hour?>" style="text-align:right;" size="1" maxlength="2">h
-					<input type="text" name="minute[]" value="<?=$minute?>" style="text-align:right;" size="1" maxlength="2">m
-					<input type="text" name="second[]" value="<?=$second?>" style="text-align:right;" size="1" maxlength="2">s
-					<input type="text" name="ms[]" value="<?=$ms?>" size="2" maxlength="3">
+					<input type="text" name="hour[]" value="<?php echo $hour?>" style="text-align:right;" size="1" maxlength="2">h
+					<input type="text" name="minute[]" value="<?php echo $minute?>" style="text-align:right;" size="1" maxlength="2">m
+					<input type="text" name="second[]" value="<?php echo $second?>" style="text-align:right;" size="1" maxlength="2">s
+					<input type="text" name="ms[]" value="<?php echo $ms?>" size="2" maxlength="3">
 				</td>
-				<td align="center"><input type="checkbox" name="fl[<?=$x?>]"<?=$bestlap_driver==$did?" checked":""?>></td>
+				<td align="center"><input type="checkbox" name="fl[<?php echo $x?>]"<?php echo $bestlap_driver==$did?" checked":""?>></td>
 				<td align="center">
 					<select name="status[]">
 						<?PHP foreach($race_status_s as $i => $s) { ?>
-						<option value="<?=$i?>"<?=$i == $status ? " selected" : ""?>><?=$s?></option>
+						<option value="<?php echo $i?>"<?php echo $i == $status ? " selected" : ""?>><?php echo $s?></option>
 						<?PHP } ?>
 					</select>
 				</td>
@@ -311,8 +311,8 @@ function show_driver_combo($dname = '') {
 			<tr>
 				<td>&nbsp;</td>
 				<td colspan="6">
-					<input type="hidden" name="id" value="<?=$id?>">
-					<input type="hidden" name="season" value="<?=$item['season']?>">
+					<input type="hidden" name="id" value="<?php echo $id?>">
+					<input type="hidden" name="season" value="<?php echo $item['season']?>">
 					<input type="submit" class="button submit" value="Save results"/>
 					<input type="button" class="button cancel" value="Cancel" onclick="history.go(-1);"/>
 				</td>

@@ -43,11 +43,11 @@ if(mysqli_num_rows($result) == 0) {
 		?>
 		<tr class="w3-hover-green">
 			<td>
-				<a href=".?page=remove_news&amp;id=<?=$item['id']?>"><img src="images/delete16.png" alt="rem"></a>
-                <a href=".?page=edit_news&amp;id=<?=$item['id']?>"><img src="images/edit16.png" alt="chg"></a>
+				<a href=".?page=remove_news&amp;id=<?php echo $item['id']?>"><img src="images/delete16.png" alt="rem"></a>
+                <a href=".?page=edit_news&amp;id=<?php echo $item['id']?>"><img src="images/edit16.png" alt="chg"></a>
 			</td>
-			<td><?=$item['day']?></td>
-			<td><?=$item['title']?></td>
+			<td><?php echo $item['day']?></td>
+			<td><?php echo $item['title']?></td>
 		</tr>
 		<?
 	}

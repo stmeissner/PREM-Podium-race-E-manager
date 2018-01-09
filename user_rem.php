@@ -23,14 +23,14 @@ $item = mysqli_fetch_array($result);
 <table border="0">
 <tr>
 	<td>Name:</td>
-	<td><?=$item['name']?></td>
+	<td><?php echo $item['name']?></td>
 </tr>
 <tr>
 	<td>&nbsp;</td>
 	<td>
 		<input type="submit" class="button submit" value="Delete">
 		<input type="button" class="button cancel" value="Cancel" onclick="history.go(-1);">
-		<input type="hidden" name="id" value="<?=$id?>">
+		<input type="hidden" name="id" value="<?php echo $id?>">
 	</td>
 </tr>
 </table>

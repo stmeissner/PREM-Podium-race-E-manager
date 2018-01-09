@@ -23,11 +23,11 @@ $item = mysqli_fetch_array($result);
 <table border="0">
 <tr>
 	<td width="120">Page:</td>
-	<td><?=$item['page']?></td>
+	<td><?php echo $item['page']?></td>
 </tr>
 <tr>
 	<td>Season:</td>
-	<td><?=$item['season']?></td>
+	<td><?php echo $item['season']?></td>
 </tr>
 
 	<?
@@ -41,7 +41,7 @@ $item = mysqli_fetch_array($result);
 <tr>
 	<td>&nbsp;</td>
 	<td>
-		<input type="hidden" name="id" value="<?=$id?>">
+		<input type="hidden" name="id" value="<?php echo $id?>">
 		<input type="submit" class="button submit" value="Yes">
 		<input type="button" class="button cancel" value="No" onclick="history.go(-1);">
 	</td>
