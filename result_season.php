@@ -261,7 +261,7 @@ usort($team, "point_sort");
 <tr class="w3-dark-grey">
 	<td style="vertical-align:bottom" align="center">Pos</td>
 	<td style="vertical-align:bottom" align="center">Driver</td>
-  <td style="vertical-align:bottom" align="center">Nr.</td>
+  <td style="vertical-align:bottom;text-align:right" align="center">Nr.</td>
   <td style="vertical-align:bottom;text-align:center" align="center">Ctry.</td>
 	<td style="vertical-align:bottom;text-align:center" align="center">Car</td>
 	<td style="vertical-align:bottom" align="center">Team</td>
@@ -278,7 +278,7 @@ foreach($driver as $id => $ditem) {
 <tr class="w3-hover-green">
 	<td width="1" align="center"><?php echo ++$pos?>&nbsp;</td>
 	<td align="center"><?php echo $ditem['name']?></td>
-	<td><?php echo $ditem['dplate']?></td>
+	<td style="text-align:right"><?php echo $ditem['dplate']?></td>
   <td style="text-align:center"><img src="images/flags/<?php echo $ditem['dcountry']?>.png"></td>
 	<td style="text-align:center"><img src="images/badges/thumbs/<?php echo $ditem['badge']?>"</td>
 	<td ><?php echo $ditem['team']?></td>
