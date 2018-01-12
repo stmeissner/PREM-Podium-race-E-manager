@@ -138,16 +138,16 @@ if(!$rdresult) {
 </tr>
 <tr>
 	<td colspan="4">
-		<table border="0" cellspacing="0" cellpadding="1" width="100%">
-		<tr class="head">
+		<table class="w3-table-all">
+		<tr class="w3-dark-grey">
 			<td>Driver (Team)</td>
-			<td align="center">Car #</td>
-			<td align="center">Car Type</td>
-			<td align="center">Ballast</td>
-			<td align="center">Restrictor</td>
-			<td align="center">Grid</td>
-			<td align="center">Pos</td>
-			<td align="center">Laps</td>
+			<td>Car #</td>
+			<td>Car Type</td>
+			<td>Ballast</td>
+			<td>Restrictor</td>
+			<td>Grid</td>
+			<td>Pos</td>
+			<td>Laps</td>
 			<td>Time</td>
 			<td align="center"><span class="abbr" title="Fastest Lap">FL</span></td>
 			<td>Status</td>
@@ -189,7 +189,7 @@ if(!$rdresult) {
 				$status = 0;
 			}
 			?>
-			<tr class="<?php echo $style?>">
+			<tr class="w3-hover-green">
 				<td><?PHP show_driver_combo($driver) ?></td>
 				<td align="center"><input type="text" name="dplate[]" value="<?php echo $dplate?>" size="3" maxlength="3"></td>
 				<td align="center"><input type="text" name="cartype[]" value="<?php echo $driver_cartype?>" size="30" maxlength="50"></td>
