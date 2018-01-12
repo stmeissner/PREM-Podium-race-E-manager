@@ -193,8 +193,8 @@ if(!$rdresult) {
 				<td><?PHP show_driver_combo($driver) ?></td>
 				<td align="center"><input type="text" name="dplate[]" value="<?php echo $dplate?>" size="3" maxlength="3"></td>
 				<td align="center"><input type="text" name="cartype[]" value="<?php echo $driver_cartype?>" size="30" maxlength="50"></td>
-				<td align="center"><input type="number" name="ballast[]" value="<?php echo $driver_ballast?>" min="0" max="999"></td>
-				<td align="center"><input type="number" name="restrictor[]" value="<?php echo $driver_restrictor?>" min="0" max="100"></td>
+				<td align="center"><input type="number" style="width: 4em" name="ballast[]" value="<?php echo $driver_ballast?>" min="0" max="999"></td>
+				<td align="center"><input type="number" style="width: 4em" name="restrictor[]" value="<?php echo $driver_restrictor?>" min="0" max="100"></td>
 				<td align="center"><input type="text" name="grid[]" value="<?php echo $grid?>" size="2" maxlength="2"></td>
 				<td align="center"><input type="text" name="pos[]" value="<?php echo $position?>" size="2" maxlength="2"></td>
 				<td align="center"><input type="text" name="laps[]" value="<?php echo $laps?>" size="3" maxlength="3"></td>
