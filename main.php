@@ -88,7 +88,7 @@ if ($exe_news) {
 
 			<div class="w3-center w3-black w3-text-white"><h3><?php echo $title;?>&nbsp;<?php echo $day;?></h3></div>
 
-			<p><div class="w3-padding-large"><?php echo $news;?></div> </p>
+			<p><div class="w3-padding-large"><?php echo $news;?></div></p>
 
 		<?php
 	}

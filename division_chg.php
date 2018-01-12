@@ -28,7 +28,9 @@ $item = mysqli_fetch_array($result);
 </tr>
 <tr>
 	<td>Type:</td>
-	<td><input type="text" name="type" value="<?php echo $item['type']?>" maxlength="20"></td>
+	<td>
+        <label for="type">Type</label>
+        <input type="text" id="type" name="type" value="<?php echo $item['type']?>" maxlength="20"></td>
 </tr>
 <tr>
 	<td>&nbsp;</td>

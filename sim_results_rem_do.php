@@ -10,5 +10,5 @@ $query = "DELETE FROM sim_results WHERE id='$id' LIMIT 1";
 $result = mysqli_query($link,$query);
 if(!$result) error("MySQL Error: " . mysqli_error($link) . "\n");
 
-return_do(".?page=sim_results_add", "Sim_result entry succesfully removed\n");
+return_do(".?page=sim_results_add", "Sim_result entry successfully removed\n");
 ?>

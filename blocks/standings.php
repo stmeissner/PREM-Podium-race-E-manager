@@ -81,7 +81,8 @@ mysqli_free_result($exe_point_ruleset);
 
 
 			<!--Team standing-->
-			<div class="w3-center w3-black w3-text-white"><h2><?php echo $spDetails['seasonName'];?><br /><?php echo $spDetails['seasonDivision'];?></div></h2><div class="w3-center w3-indigo w3-text-white"><h3>Team Standings</h3></div>
+			<div class="w3-center w3-black w3-text-white"><h2><?php echo $spDetails['seasonName'];?><br />
+            <?php echo $spDetails['seasonDivision'];?></div></h2><div class="w3-center w3-indigo w3-text-white"><h3>Team Standings</h3></div>
 			<?php
 			$sql_teams = "SELECT t.id, t.name FROM `team` AS t LEFT JOIN `season_team` AS st ON st.team = t.id WHERE st.season = ".intval($spDetails['season']);
 			$exe_teams = mysqli_query($link,$sql_teams);

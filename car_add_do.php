@@ -37,5 +37,5 @@ $query = "INSERT INTO cars (sim, brand, name, code, badge, horsepower, torque, w
           VALUES ('$sim', '$brand', '$name','$code','$badge','$horsepower','$torque','$weight','$description')";
 $result = mysqli_query($link,$query);
 if(!$result) error("MySQL Error: " . mysqli_error($link) . "\n");
-return_do(".?page=cars", "Car succesfully added\n$msg");
+return_do(".?page=cars", "Car successfully added\n$msg");
 ?>

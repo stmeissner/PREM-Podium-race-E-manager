@@ -50,5 +50,5 @@ if(is_array($team)) {
 	}
 }
 
-return_do(".?page=seasons", "Season succesfully modified\n$msg");
+return_do(".?page=seasons", "Season successfully modified\n$msg");
 ?>

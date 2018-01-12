@@ -1,6 +1,6 @@
 /* ERROR */
 
-error {
+.error {
 	padding: 1px 3px 3px 54px;
 	background: 3px 3px url('images/error48.png') no-repeat;
 	border: 2px solid red;
@@ -8,9 +8,11 @@ error {
 
 /* MSG */
 
-msg {
+.msg {
 	padding: 1px 3px 3px 54px;
 	background: 3px 3px url('images/info48.png') no-repeat;
+	width: 48px;
+	height: 48px;
 	border: 2px solid blue;
 }
 

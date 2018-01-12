@@ -56,6 +56,7 @@
     </select>
   </td>
 </tr>
+ <tr>
   <td>Desired car#:<br><input type="number" name="car_nr" min="1" max="999"></td>
 </tr>
 <tr>

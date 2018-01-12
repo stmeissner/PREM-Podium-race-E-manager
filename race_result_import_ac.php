@@ -240,9 +240,9 @@ function show_driver_combo($dname = '') {
 				$ditem = $arr_race_cars[$did];
 				$drivername = $ditem['DriverName'] . " (" . $ditem['DriverTeam'] . ")";
 				$driver_name = $ditem['DriverName'];
-					$driver_cartype = $ditem['DriverModel'];
-					$driver_ballast = $ditem['DriverBallastKG'];
-					$driver_restrictor = $ditem['DriverRestrictor'];
+				$driver_cartype = $ditem['DriverModel'];
+				$driver_ballast = $ditem['DriverBallastKG'];
+				$driver_restrictor = $ditem['DriverRestrictor'];
 				$dplatequery = "SELECT plate FROM driver where name = '$driver_name'";
 				$dplate = mysqli_fetch_assoc(mysqli_query($link,$dplatequery))['plate'];
 				$grid = $arr_race_result[$x]['Position'];

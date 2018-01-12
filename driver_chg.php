@@ -303,7 +303,6 @@ $teamcount = mysqli_num_rows($tresult);
 					<option value="gs">South Georgia and The South Sandwich Islands</option>
 				</optgroup>
 </select>
-    </select>
   </td>
     <td width="120">Photo:</td>
 	<td><input type="url" name="driver_photo" value="<?php echo $item['driver_photo']?>" maxlength="200"></td>

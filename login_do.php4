@@ -22,7 +22,7 @@ switch($login->login($user, $pass)) {
 		error("MySQL error: " . $login->last_error() . "\n");
 		break;
 	default:
-		error("An unknown error occured: " . $login->last_error() . "\n");
+		error("An unknown error occurred: " . $login->last_error() . "\n");
 		break;
 }
 

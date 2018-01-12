@@ -296,7 +296,7 @@ function showCharsLeft() {
 	<td width="120">Description:</td>
 	<td><textarea maxlength="2048" id="nachricht" onchange="showCharsLeft()"
 		 						onkeyup="showCharsLeft()" name="description"
-		 						cols="60" rows="10" onfocus="if (this.value == 'Type Description, max. 2048 characters') { this.value = ''; }"
+		 						cols="60" rows="10" onfocus="if (this.value === 'Type Description, max. 2048 characters') { this.value = ''; }"
                 >Type Description, max. 2048 characters</textarea></td>
 </tr>
 <tr>

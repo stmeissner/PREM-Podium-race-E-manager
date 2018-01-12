@@ -34,7 +34,7 @@ $item = mysqli_fetch_array($result);
 $rsquery = "SELECT * FROM point_ruleset";
 $rsresult = mysqli_query($link,$rsquery);
 if(!$rsresult) {
-	show_error("MySQL Error: " . mysql_error() . "\n");
+	show_error("MySQL Error: " . mysqli_error($link) . "\n");
 	return;
 }
 if(mysqli_num_rows($rsresult) == 0) {
@@ -43,22 +43,23 @@ if(mysqli_num_rows($rsresult) == 0) {
 }
 while($rsitem = mysqli_fetch_array($rsresult)) {
 	$ruleset[$rsitem['id']] = $rsitem;
-}
+    $ruleset[$rsitem['name']] = $rsitem;
+    }
 
 // Get all teams and driver for this season
 $drquery = "SELECT d.id did, d.name dname, rd.dplate dplate, d.country dcountry, t.id tid, t.name tname, c.*
-	    			FROM season_team st
+	    	FROM season_team st
             JOIN team t ON (st.team = t.id)
             JOIN team_driver td ON (td.team = t.id)
             JOIN driver d ON (d.id = td.driver)
             LEFT JOIN race_driver rd ON (rd.team_driver = td.id)
-	    LEFT JOIN cars c ON (c.code = rd.cartype)
+	        LEFT JOIN cars c ON (c.code = rd.cartype)
             WHERE st.season = $season
             ORDER BY t.name ASC, d.name ASC";
 
 $drresult = mysqli_query($link,$drquery);
 if(!$drresult) {
-	show_error("MySQL Error: " . mysql_error() . "\n");
+	show_error(mysqli_error($link) . "MySQL Error: " . "\n");
 	return;
 }
 
@@ -84,15 +85,15 @@ while($dritem = mysqli_fetch_array($drresult)) {
 }
 
 $rquery = "SELECT r.id race, r.name rname, r.track rtrack, r.ruleset, r.ruleset_qualifying, td.driver, td.team, rd.fastest_lap, rd.grid, rd.status
-				   FROM race r
-					 JOIN race_driver rd ON (rd.race = r.id)
-					 JOIN team_driver td ON (td.id = rd.team_driver)
-					 WHERE r.season=$season AND r.progress = 2 AND (rd.status = 0 OR rd.status = 1)
-					 ORDER BY r.date ASC, rd.position ASC";
+				FROM race r
+				JOIN race_driver rd ON (rd.race = r.id)
+				JOIN team_driver td ON (td.id = rd.team_driver)
+				WHERE r.season=$season AND r.progress = 2 AND (rd.status = 0 OR rd.status = 1)
+				ORDER BY r.date ASC, rd.position ASC";
 
 $rresult = mysqli_query($link,$rquery);
 if(!$rresult) {
-	show_error("MySQL Error: " . mysql_error() . "\n");
+	show_error("MySQL Error: " . mysqli_error($link) . "\n");
 	return;
 }
 
@@ -241,7 +242,7 @@ usort($team, "point_sort");
 <tr class="w3-grey">
 	<td width="20%">Division:</td>
 	<td width="30%"><?php echo $item['dname']?></td>
-	<td width="20%">&nbsp;</td>
+	<td width="20%">Ruleset;</td>
 	<td width="30%"><?php echo $ruleset['name']?><?if(isset($ruleset_qualifying)) echo " (qual: " . $ruleset_qualifying['name'] . ")"?></td>
 </tr>
 <tr class="w3-green">
@@ -259,30 +260,43 @@ usort($team, "point_sort");
 <div class="w3-responsive">
 <table class="w3-table-all">
 <tr class="w3-dark-grey">
-	<td style="vertical-align:bottom" align="center">Pos</td>
-	<td style="vertical-align:bottom" align="center">Driver</td>
+  <td style="vertical-align:bottom" align="center">Pos</td>
+  <td style="vertical-align:bottom" align="center">Driver</td>
+  <td style="vertical-align:bottom;text-align:center" align="center">Car</td>
   <td style="vertical-align:bottom;text-align:right" align="center">Nr.</td>
   <td style="vertical-align:bottom;text-align:center" align="center">Ctry.</td>
-	<td style="vertical-align:bottom;text-align:center" align="center">Car</td>
-	<td style="vertical-align:bottom" align="center">Team</td>
+  <td style="vertical-align:bottom" align="center">Team</td>
 <?PHP for($x = 1; $x <= $race; $x++) { ?>
-	<td width="1" align="center"><javascript:void(0)" class="tablink" title="Click to more details"><div class="w3-topbar w3-bottombar w3-hover-border-red"><a href="?page=result_race&amp;race=<?php echo $races[$x]['id']?>"><img src="img_season_race.php?text=<?php echo urlencode($races[$x]['name'])?>&amp;text2=<?php echo urlencode($races[$x]['track'])?>" alt="<?php echo $x?>"></a></td>
+	<td width="1" align="center"><void(0)" class="tablink" title="Click to more details"><div class="w3-topbar w3-bottombar w3-hover-border-red"><a href="?page=result_race&amp;race=<?php echo $races[$x]['id']?>"><img src="img_season_race.php?text=<?php echo urlencode($races[$x]['name'])?>&amp;text2=<?php echo urlencode($races[$x]['track'])?>" alt="<?php echo $x?>"></a></td>
 <?PHP } ?>
 	<td style="width:50px;vertical-align:bottom;background-color:transparent;text-align:right;color:white;font-weight:bold;">Pts</td>
 </tr>
-<?
+<?php
 $style = "odd";
 $pos = 0;
 foreach($driver as $id => $ditem) {
-?>
+  $dname = $ditem['name'];
+    $badgequery = "SELECT s.id season_id, rd.race race_id, d.name dname, td.id td_id, td.team team,
+                          c.id carid, rd.cartype, c.badge badge, rd.ballast, rd.restrictor
+                      FROM race_driver rd
+                      JOIN cars c on (c.code = rd.cartype)
+                      JOIN team_driver td on (td.id = rd.team_driver)
+                      JOIN driver d on (d.id = td.driver)
+                      JOIN race r on (r.id = rd.race)
+                      JOIN season s on (r.season = s.id)
+                      WHERE s.id = '$season' AND d.name = '$dname'
+                      ORDER BY race_id DESC, '$dname' ASC";
+    $badge = mysqli_fetch_assoc(mysqli_query($link,$badgequery))['badge'];
+   ?>
 <tr class="w3-hover-green">
-	<td width="1" align="center"><?php echo ++$pos?>&nbsp;</td>
-	<td align="center"><?php echo $ditem['name']?></td>
+	<td><?php echo ++$pos?>&nbsp;</td>
+	<td><?php echo $ditem['name']?></td>
+    <td style="text-align:center"><img src="images/badges/thumbs/<?php echo $badge?>"</td>
 	<td style="text-align:right"><?php echo $ditem['dplate']?></td>
-  <td style="text-align:center"><img src="images/flags/<?php echo $ditem['dcountry']?>.png"></td>
-	<td style="text-align:center"><img src="images/badges/thumbs/<?php echo $ditem['badge']?>"</td>
-	<td ><?php echo $ditem['team']?></td>
-<?
+    <td style="text-align:center"><img src="images/flags/<?php echo $ditem['dcountry']?>.png"></td>
+
+    <td align="center"><?=$ditem['team']?></td>
+<?php
 $total = 0;
 for($x = 1; $x <= $race; $x++) {
 	switch($show) {
@@ -349,7 +363,7 @@ for($x = 1; $x <= $race; $x++) {
 	<td style="vertical-align:bottom">Pos</td>
 	<td style="vertical-align:bottom">Team</td>
 <?PHP for($x = 1; $x <= $race; $x++) { ?>
-	<td width="1" align="right"><javascript:void(0)" class="tablink" title="Click to more details"><div class="w3-topbar w3-bottombar w3-hover-border-red"><a href="?page=result_race&amp;race=<?php echo $races[$x]['id']?>"><img src="img_season_race.php?text=<?php echo urlencode($races[$x]['name'])?>&amp;text2=<?php echo urlencode($races[$x]['track'])?>" alt="<?php echo $x?>"></a></td>
+	<td width="1" align="right"><void(0)" class="tablink" title="Click to more details"><div class="w3-topbar w3-bottombar w3-hover-border-red"><a href="?page=result_race&amp;race=<?php echo $races[$x]['id']?>"><img src="img_season_race.php?text=<?php echo urlencode($races[$x]['name'])?>&amp;text2=<?php echo urlencode($races[$x]['track'])?>" alt="<?php echo $x?>"></a></td>
 <?PHP } ?>
 	<td style="width:50px;vertical-align:bottom;background-color:transparent;text-align:right;color:white;font-weight:bold;">Pts</td>
 </tr>

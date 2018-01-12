@@ -10,7 +10,7 @@ if(!defined("USE_MYSQL") || !defined("USE_LOGIN")) {
 <form action="logout_do.php" method="post">
 Are you sure that you want to logout?<br>
 <input type="submit" value="Yes, logout" class="button logout">
-<input type="button" value="No, go back" class="button reset" onclick="javascript:history.go(-1);">
+<input type="button" value="No, go back" class="button reset" onclick="history.go(-1);">
 </form>
 <?PHP } else { ?>
 You are not logged in

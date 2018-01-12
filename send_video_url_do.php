@@ -26,5 +26,5 @@ $result = mysqli_query($link,$query);
 if (!$result)
     error("MySQL Error: " . mysqli_error($link) . "\n");
 
-return_do(".?page=show_videos", "video_url succesfully added\n$msg");
+return_do(".?page=show_videos", "video_url successfully added\n$msg");
 ?>

@@ -14,5 +14,5 @@ $query = "UPDATE driver SET name='$name', plate='$plate', country='$country', dr
 $result = mysqli_query($link,$query);
 if(!$result) error("MySQL Error: " . mysqli_error($link) . "\n");
 
-return_do(".?page=drivers", "Driver succesfully modified\n$msg");
+return_do(".?page=drivers", "Driver successfully modified\n$msg");
 ?>

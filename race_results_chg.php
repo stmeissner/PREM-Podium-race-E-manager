@@ -236,7 +236,7 @@ if(!$rdresult) {
 function showOptions() {
 	var season = ele("season").value;
 
-	if(season == 0) {
+	if(season === 0) {
 		ele("division").style.display = "table-row";
 		ele("ruleset").style.display = "table-row";
 	}

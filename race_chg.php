@@ -57,6 +57,7 @@ if($item['season'] != 0) {
 		$different = true;
 }
 ?>
+<!--suppress ALL -->
 <h1>Modify race</h1>
 
 <form action="race_chg_do.php" method="post">
@@ -73,9 +74,9 @@ if($item['season'] != 0) {
 <td>image_link:</td>
 	<td><input type="url" name="imagelink" value="<?php echo $item['imagelink']?>" maxlength="200"></td>
 </tr>
-<td>Forum link:</td>
+<!--suppress HtmlUnknownTag -->
+    <td>Forum link:</td>
 	<td><input type="url" name="forumlink" value="<?php echo $item['forumlink']?>" maxlength="200"></td>
-</tr>
 <tr>
 	<td>Laps:</td>
 	<td><input type="text" name="laps" value="<?php echo $item['laps']?>" maxlength="3" size="3"></td>
@@ -185,7 +186,7 @@ function showOptions() {
 	var season = ele("season").value;
 	var chk_diff_ruleset = ele("chk_diff_ruleset").checked;
 
-	if(season == 0) {
+	if(season === 0) {
 		ele("diff_ruleset").style.display = "none";
 		ele("division").style.display = "table-row";
 		ele("ruleset").style.display = "table-row";

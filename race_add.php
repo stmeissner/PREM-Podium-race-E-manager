@@ -26,6 +26,7 @@ if(!$rresult) {
 	return;
 }
 ?>
+<!--suppress ALL -->
 <h1>Add race</h1>
 
 <form action="race_add_do.php" method="post">
@@ -154,7 +155,7 @@ function showOptions() {
 	var season = ele("season").value;
 	var chk_diff_ruleset = ele("chk_diff_ruleset").checked;
 
-	if(season == 0) {
+	if(season === 0) {
 		ele("diff_ruleset").style.display = "none";
 		ele("division").style.display = "table-row";
 		ele("ruleset").style.display = "table-row";

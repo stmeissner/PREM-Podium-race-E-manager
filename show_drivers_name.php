@@ -35,7 +35,6 @@ if (!$exe_drivers) {
 <td><h1>3rd<img src="images/cup3rd.png" alt="" width="100" height="100" /></h1></td>
 <td></td>
 </tr>
-</tr>
 <?
 while ($sitem = mysqli_fetch_array($exe_drivers)) {
 	if ($sitem['driver_photo'] == '') { $url = 'images/helmet.png' ; } else { $url = $sitem['driver_photo']; }

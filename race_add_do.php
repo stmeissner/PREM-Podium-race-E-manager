@@ -34,7 +34,8 @@ $link = mysqlconnect(); // call mysql function to get the link to the database
 // Take division and ruleset from season
 if($season != 0) {
 	$query = "SELECT division, ruleset, ruleset_qualifying FROM season s WHERE id='$season'";
-	$result = mysqli_query($link,$query);
+    /** @noinspection PhpParamsInspection */
+    $result = mysqli_query($link,$query);
 	if(!$result) error("MySQL error: " . mysqli_error($link) . "\n");
 	if(mysqli_num_rows($result) == 0) error("Season does not exist\n");
 

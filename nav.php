@@ -62,7 +62,7 @@
     <a href="?page=blocks" class="w3-hover-red">Blocks_setup</a>
     <a href="?page=upload" class="w3-hover-red">Upload_file</a>
     <a href="?page=users" class="w3-hover-red">Admins</a>
-    <a href="?page=logout" class="w3-hover-red">Logout</a></li>
+    <a href="?page=logout" class="w3-hover-red">Logout</a>
     </div>
   </li>
 </ul>

@@ -33,7 +33,6 @@ Your uploads files will be in http://your_installation_url/uploads/your_file_nam
         <?php
  }
  ?>
-</div>
 
 
 <!--php upload code-->

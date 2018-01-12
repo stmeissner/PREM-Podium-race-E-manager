@@ -16,10 +16,11 @@ $news = htmlspecialchars($news);
 ?>
 
 <form method="post" action="index.php?page=edit_news">
-    <table border="0">
+<table border="0">
+  <tr>
 	<td width="120">title:</td>
 	<td><input type="text" name="title" maxlength="30" value="<?php echo $title;?>"></td>
-</tr>
+  </tr>
 </table>
     <textarea id="tinyeditor" name="news" cols="50" rows="15"><?php echo $news; ?></textarea>
     <input type="hidden" name="id" value="<?php echo $id;?>">

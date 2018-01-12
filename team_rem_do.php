@@ -8,6 +8,7 @@ require_once("functions.php"); // import mysql function
 $link = mysqlconnect(); // call mysql function to get the link to the database
 
 // Check if drivers are related to the team
+/** @noinspection SpellCheckingInspection */
 $dquery = "SELECT d.name FROM team_driver td JOIN driver d ON (td.driver = d.id) WHERE team='$id'";
 $dresult = mysqli_query($link,$dquery);
 if(!$dresult) {
@@ -25,5 +26,5 @@ $query = "DELETE FROM team WHERE id='$id'";
 $result = mysqli_query($link,$query);
 if(!$result) error("MySQL Error: " . mysqli_error($link) . "\n");
 
-return_do(".?page=teams", "Team succesfully deleted\n$msg");
+return_do(".?page=teams", "Team successfully deleted\n$msg");
 ?>
