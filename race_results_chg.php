@@ -140,17 +140,17 @@ if(!$rdresult) {
 	<td colspan="4">
 		<table class="w3-table-all">
 		<tr class="w3-dark-grey">
-			<td>Driver (Team)</td>
-			<td>Car #</td>
-			<td>Car Type</td>
-			<td>Ballast</td>
-			<td>Restrictor</td>
-			<td>Grid</td>
-			<td>Pos</td>
-			<td>Laps</td>
-			<td>Time</td>
-			<td align="center"><span class="abbr" title="Fastest Lap">FL</span></td>
-			<td>Status</td>
+			<td style="text-align: center;">Driver (Team)</td>
+			<td style="text-align: center;" style="text-align: center;" style="text-align: center;" style="text-align: center;" style="text-align: center;" style="text-align: center;" style="text-align: center;" style="text-align: center;">Car #</td>
+			<td style="text-align: center;" style="text-align: center;" style="text-align: center;" style="text-align: center;" style="text-align: center;" style="text-align: center;" style="text-align: center;">Car Type</td>
+			<td style="text-align: center;" style="text-align: center;" style="text-align: center;" style="text-align: center;" style="text-align: center;" style="text-align: center;">Ballast</td>
+			<td style="text-align: center;" style="text-align: center;" style="text-align: center;" style="text-align: center;" style="text-align: center;">Restrictor</td>
+			<td style="text-align: center;" style="text-align: center;" style="text-align: center;" style="text-align: center;">Grid</td>
+			<td style="text-align: center;" style="text-align: center;" style="text-align: center;">Pos</td>
+			<td style="text-align: center;" style="text-align: center;">Laps</td>
+			<td style="text-align: center;">Time</td>
+			<td style="text-align: center;"><span class="abbr" title="Fastest Lap">FL</span></td>
+			<td style="text-align: center;">Status</td>
 		</tr>
 		<?PHP $style = "odd"; ?>
 		<?PHP for($x = 0; $x < $item['maxplayers']; $x++) {
@@ -190,22 +190,22 @@ if(!$rdresult) {
 			}
 			?>
 			<tr class="w3-hover-green">
-				<td><?PHP show_driver_combo($driver) ?></td>
-				<td align="center"><input type="text" name="dplate[]" value="<?php echo $dplate?>" size="3" maxlength="3"></td>
-				<td align="center"><input type="text" name="cartype[]" value="<?php echo $driver_cartype?>" size="30" maxlength="50"></td>
-				<td align="center"><input type="number" style="width: 4em" name="ballast[]" value="<?php echo $driver_ballast?>" min="0" max="999"></td>
-				<td align="center"><input type="number" style="width: 4em" name="restrictor[]" value="<?php echo $driver_restrictor?>" min="0" max="100"></td>
-				<td align="center"><input type="text" name="grid[]" value="<?php echo $grid?>" size="2" maxlength="2"></td>
-				<td align="center"><input type="text" name="pos[]" value="<?php echo $position?>" size="2" maxlength="2"></td>
-				<td align="center"><input type="text" name="laps[]" value="<?php echo $laps?>" size="3" maxlength="3"></td>
-				<td>
+				<td style="text-align: center;"><?PHP show_driver_combo($driver) ?></td>
+				<td style="text-align: center;"><input type="text" name="dplate[]" value="<?php echo $dplate?>" size="3" maxlength="3"></td>
+				<td style="text-align: center;"><input type="text" name="cartype[]" value="<?php echo $driver_cartype?>" size="30" maxlength="50"></td>
+				<td style="text-align: center;"><input type="number" style="width: 4em" name="ballast[]" value="<?php echo $driver_ballast?>" min="0" max="999"></td>
+				<td style="text-align: center;"><input type="number" style="width: 4em" name="restrictor[]" value="<?php echo $driver_restrictor?>" min="0" max="100"></td>
+				<td style="text-align: center;"><input type="text" name="grid[]" value="<?php echo $grid?>" size="2" maxlength="2"></td>
+				<td style="text-align: center;"><input type="text" name="pos[]" value="<?php echo $position?>" size="2" maxlength="2"></td>
+				<td style="text-align: center;"><input type="text" name="laps[]" value="<?php echo $laps?>" size="3" maxlength="3"></td>
+				<td style="text-align: center;">
 					<input type="text" name="hour[]" value="<?php echo $hour?>" style="text-align:right;" size="1" maxlength="2">h
 					<input type="text" name="minute[]" value="<?php echo $minute?>" style="text-align:right;" size="1" maxlength="2">m
 					<input type="text" name="second[]" value="<?php echo $second?>" style="text-align:right;" size="1" maxlength="2">s
 					<input type="text" name="ms[]" value="<?php echo $ms?>" size="2" maxlength="3">
 				</td>
-				<td align="center"><input type="checkbox" name="fl[<?php echo $x?>]"<?php echo $fl==1?" checked":""?>></td>
-				<td align="center">
+				<td style="text-align: center;"><input type="checkbox" name="fl[<?php echo $x?>]"<?php echo $fl==1?" checked":""?>></td>
+				<td style="text-align: center;">
 					<select name="status[]">
 						<?PHP foreach($race_status_s as $i => $s) { ?>
 						<option value="<?php echo $i?>"<?php echo $i == $status ? " selected" : ""?>><?php echo $s?></option>
