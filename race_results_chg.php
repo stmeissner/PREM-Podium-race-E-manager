@@ -193,8 +193,8 @@ if(!$rdresult) {
 				<td style="text-align: center; padding: 0px;"><?PHP show_driver_combo($driver) ?></td>
 				<td style="text-align: center; padding: 0px;"><input type="text" name="dplate[]" value="<?php echo $dplate?>" size="2" maxlength="3"></td>
 				<td style="text-align: center; padding: 0px;"><input type="text" name="cartype[]" value="<?php echo $driver_cartype?>" size="20" maxlength="50"></td>
-				<td style="text-align: center; padding: 0px;"><input type="number" style="width: 4em" name="ballast[]" value="<?php echo $driver_ballast?>" min="0" max="999"></td>
-				<td style="text-align: center; padding: 0px;"><input type="number" style="width: 4em" name="restrictor[]" value="<?php echo $driver_restrictor?>" min="0" max="100"></td>
+				<td style="text-align: center; padding: 0px;"><input type="number" style="width: 4em" name="ballast[]" value="<?php echo $driver_ballast?>" min="0" max="200" step="5"></td>
+				<td style="text-align: center; padding: 0px;"><input type="number" style="width: 4em" name="restrictor[]" value="<?php echo $driver_restrictor?>" min="0" max="100" step="5"></td>
 				<td style="text-align: center; padding: 0px;"><input type="text" name="grid[]" value="<?php echo $grid?>" size="1" maxlength="2"></td>
 				<td style="text-align: center; padding: 0px;"><input type="text" name="pos[]" value="<?php echo $position?>" size="1" maxlength="2"></td>
 				<td style="text-align: center; padding: 0px;"><input type="text" name="laps[]" value="<?php echo $laps?>" size="1" maxlength="3"></td>
