@@ -137,7 +137,8 @@ if($item['ruleset_qualifying'] != 0) {
 		else
 			echo "Unofficial race results\n";
 	}
-
+	$platestyle = "style=\"background-color:rgba(5, 5, 5, 0.8);width: 2.3em;border-radius:5px;color:white;
+												 background-clip:content-box;text-align:center;padding:1px;font-weight:bold;\"";
 	?>
 	</strong>
 	</div>
@@ -155,7 +156,7 @@ if($item['ruleset_qualifying'] != 0) {
 	<td>Driver</td>
     <td style="text-align: center;">Car</td>
     <td style="text-align: center;">&nbsp;</td>
-	<td style="text-align: right;">Nr.</td>
+	<td style="text-align: center;">Nr.</td>
 	<td style="text-align: center;">Cntry.</td>
 	<td>Team</td>
 	<?PHP if($item['progress'] != RACE_NEW) { ?>
@@ -208,7 +209,7 @@ while($ditem = mysqli_fetch_array($dresult)) {
 	<td><?php echo $ditem['dname']?></td>
     <td style="text-align: center;"><img src="images/badges/thumbs/<?php echo $ditem['badge']?>"></td>
     <td><?php echo $ditem['name']?></td>
-	<td style="text-align: right;"><?php echo $ditem['dplate']?></td>
+	<td <?php echo $platestyle?>><?php echo $ditem['dplate']?></td>
 	<td style="text-align: center;"><img src="images/flags/<?php echo $ditem['dcountry']?>.png"></td>
 	<td><?php echo $ditem['tname']?></td>
 	<?PHP if($item['progress'] != RACE_NEW) { ?>

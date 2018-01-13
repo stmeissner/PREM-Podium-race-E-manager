@@ -263,7 +263,7 @@ usort($team, "point_sort");
   <td style="vertical-align:bottom" align="center">Pos</td>
   <td style="vertical-align:bottom" align="center">Driver</td>
   <td style="vertical-align:bottom;text-align:center" align="center">Car</td>
-  <td style="vertical-align:bottom;text-align:right" align="center">Nr.</td>
+  <td style="vertical-align:bottom;text-align:center" align="center">Nr.</td>
   <td style="vertical-align:bottom;text-align:center" align="center">Ctry.</td>
   <td style="vertical-align:bottom" align="center">Team</td>
 <?PHP for($x = 1; $x <= $race; $x++) { ?>
@@ -274,6 +274,8 @@ usort($team, "point_sort");
 <?php
 $style = "odd";
 $pos = 0;
+$platestyle = "style=\"background-color:rgba(5, 5, 5, 0.8);width: 2.3em;border-radius:5px;color:white;
+											 background-clip:content-box;text-align:center;padding:1px;font-weight:bold;\"";
 foreach($driver as $id => $ditem) {
   $dname = $ditem['name'];
     $badgequery = "SELECT s.id season_id, rd.race race_id, d.name dname, td.id td_id, td.team team,
@@ -288,12 +290,12 @@ foreach($driver as $id => $ditem) {
                       ORDER BY race_id DESC, '$dname' ASC";
     $badge = mysqli_fetch_assoc(mysqli_query($link,$badgequery))['badge'];
    ?>
-<tr class="w3-hover-green">
+<tr class="w3-hover-green" style="vertical-align:center";>
 	<td><?php echo ++$pos?>&nbsp;</td>
 	<td><?php echo $ditem['name']?></td>
-    <td style="text-align:center"><img src="images/badges/thumbs/<?php echo $badge?>"</td>
-	<td style="text-align:right"><?php echo $ditem['dplate']?></td>
-    <td style="text-align:center"><img src="images/flags/<?php echo $ditem['dcountry']?>.png"></td>
+  <td style="text-align:center"><img src="images/badges/thumbs/<?php echo $badge?>"</td>
+	<td <?php echo $platestyle?>><?php echo $ditem['dplate']?></td>
+  <td style="text-align:center"><img src="images/flags/<?php echo $ditem['dcountry']?>.png"></td>
 
     <td align="center"><?=$ditem['team']?></td>
 <?php
