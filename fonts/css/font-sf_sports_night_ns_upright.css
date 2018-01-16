@@ -4,8 +4,8 @@
 
 @font-face {
     font-family: 'sports';
-    src: url('../fonts/sports-webfont.woff2') format('woff2'),
-         url('../fonts/sports-webfont.woff') format('woff');
+    src: url('../fonts/font-sf_sports_night_ns_upright.woff2') format('woff2'),
+         url('../fonts/font-sf_sports_night_ns_upright.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
