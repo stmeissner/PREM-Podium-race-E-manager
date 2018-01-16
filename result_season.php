@@ -274,8 +274,7 @@ usort($team, "point_sort");
 <?php
 $style = "odd";
 $pos = 0;
-$platestyle = "style=\"background-color:rgba(5, 5, 5, 0.8);width: 2.3em;border-radius:5px;color:white;
-											 background-clip:content-box;text-align:center;padding:1px;font-weight:bold;\"";
+$platestyle = "style=\"background-color:rgba(5, 5, 5, 0.8);width: 2.3em;border-radius:5px;color:white;background-clip:content-box;vertical-align:middle;font-family: 'sports', Fallback, sans-serif;text-align:center;padding:1px;\"";
 foreach($driver as $id => $ditem) {
   $dname = $ditem['name'];
     $badgequery = "SELECT s.id season_id, rd.race race_id, d.name dname, td.id td_id, td.team team,

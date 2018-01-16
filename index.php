@@ -42,15 +42,19 @@ if ($page != "error") {
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     -->
 	<link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="stylesheet" type="text/css" href="lato.css">
+  <link rel="stylesheet" type="text/css" href="lato.css">
 	<link rel="stylesheet" type="text/css" href="w3.css">
-	<link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="fonts/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="fonts/css/font-sf_sports_night_ns_upright.css">
+
+
 
 
 	<style>
 	body {font-family: "Lato", sans-serif}
 	.mySlides {display: none}
 	</style>
+
 
 	<script src="tinymce/js/tinymce/tinymce.min.js"></script>
 	<script type="text/javascript">
