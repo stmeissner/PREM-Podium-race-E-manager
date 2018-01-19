@@ -123,7 +123,7 @@ $item = mysqli_fetch_array($result);
 $date = strtotime($item['date']);
 ?>
 <h1>Import Assetto Corsa JSON</h1>
-
+<h3> Attention: You have to save all drivers to the DB, even those who didn´t start the race!</h3>
 <table border="0" width="100%">
 <tr>
 	<td width="120">Name:</td>
@@ -218,6 +218,7 @@ function show_driver_combo($dname = '') {
 }
 
 ?>
+
 <form action="race_results_chg_do.php" method="post">
 		<table border="0" cellspacing="0" cellpadding="1" width="100%">
 		<tr class="head">
