@@ -47,13 +47,13 @@ while($rsitem = mysqli_fetch_array($rsresult)) {
     }
 
 // Get all teams and driver for this season
-$drquery = "SELECT d.id did, d.name dname, rd.dplate dplate, d.country dcountry, t.id tid, t.name tname, c.*
+$drquery = "SELECT d.id did, d.name dname, d.country dcountry, t.id tid, t.name tname, c.*
 	    	FROM season_team st
             JOIN team t ON (st.team = t.id)
             JOIN team_driver td ON (td.team = t.id)
             JOIN driver d ON (d.id = td.driver)
             LEFT JOIN race_driver rd ON (rd.team_driver = td.id)
-	        LEFT JOIN cars c ON (c.code = rd.cartype)
+	          LEFT JOIN cars c ON (c.code = rd.cartype)
             WHERE st.season = $season
             ORDER BY t.name ASC, d.name ASC";
 
@@ -75,8 +75,6 @@ while($dritem = mysqli_fetch_array($drresult)) {
 	}
 	$driver[$dritem['did']]['name'] = $dritem['dname'];
 	$driver[$dritem['did']]['team'] = $dritem['tname'];
-	$driver[$dritem['did']]['dplate'] = $dritem['dplate'];
-	$driver[$dritem['did']]['badge'] = $dritem['badge'];
 	$driver[$dritem['did']]['dcountry'] = $dritem['dcountry'];
 	$driver[$dritem['did']]['points'] = 0;
 	$driver[$dritem['did']]['pointsrace'] = array();
