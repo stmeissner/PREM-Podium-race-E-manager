@@ -275,7 +275,7 @@ $pos = 0;
 $platestyle = "style=\"background-color:rgba(5, 5, 5, 0.8);width: 2.3em;border-radius:5px;color:white;background-clip:content-box;vertical-align:middle;font-family: 'sports', Fallback, sans-serif;text-align:center;padding:1px;\"";
 foreach($driver as $id => $ditem) {
   $dname = $ditem['name'];
-    $badgequery = "SELECT s.id season_id, rd.race race_id, d.name dname, d.plate dplate, td.id td_id, td.team team,
+    $badgequery = "SELECT s.id season_id, rd.race race_id, d.name dname, rd.dplate dplate, td.id td_id, td.team team,
                           c.id carid, rd.cartype, c.badge badge, rd.ballast, rd.restrictor
                       FROM race_driver rd
                       JOIN cars c on (c.code = rd.cartype)
@@ -284,7 +284,7 @@ foreach($driver as $id => $ditem) {
                       JOIN race r on (r.id = rd.race)
                       JOIN season s on (r.season = s.id)
                       WHERE s.id = '$season' AND d.name = '$dname'
-                      ORDER BY race_id DESC, '$dname' ASC";
+                      ORDER BY rd.race DESC, '$dname' ASC";
     $badge = mysqli_fetch_assoc(mysqli_query($link,$badgequery))['badge'];
 		$dplate = mysqli_fetch_assoc(mysqli_query($link,$badgequery))['dplate'];
    ?>
