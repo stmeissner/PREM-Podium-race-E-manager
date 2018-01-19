@@ -277,7 +277,7 @@ $pos = 0;
 $platestyle = "style=\"background-color:rgba(5, 5, 5, 0.8);width: 2.3em;border-radius:5px;color:white;background-clip:content-box;vertical-align:middle;font-family: 'sports', Fallback, sans-serif;text-align:center;padding:1px;\"";
 foreach($driver as $id => $ditem) {
   $dname = $ditem['name'];
-    $badgequery = "SELECT s.id season_id, rd.race race_id, d.name dname, td.id td_id, td.team team,
+    $badgequery = "SELECT s.id season_id, rd.race race_id, d.name dname, d.plate dplate, td.id td_id, td.team team,
                           c.id carid, rd.cartype, c.badge badge, rd.ballast, rd.restrictor
                       FROM race_driver rd
                       JOIN cars c on (c.code = rd.cartype)
@@ -288,12 +288,13 @@ foreach($driver as $id => $ditem) {
                       WHERE s.id = '$season' AND d.name = '$dname'
                       ORDER BY race_id DESC, '$dname' ASC";
     $badge = mysqli_fetch_assoc(mysqli_query($link,$badgequery))['badge'];
+		$dplate = mysqli_fetch_assoc(mysqli_query($link,$badgequery))['dplate'];
    ?>
 <tr class="w3-hover-green" style="vertical-align:center";>
 	<td><?php echo ++$pos?>&nbsp;</td>
 	<td><?php echo $ditem['name']?></td>
   <td style="text-align:center"><img src="images/badges/thumbs/<?php echo $badge?>"</td>
-	<td <?php echo $platestyle?>><?php echo $ditem['dplate']?></td>
+	<td <?php echo $platestyle?>><?php echo $dplate?></td>
   <td style="text-align:center"><img src="images/flags/<?php echo $ditem['dcountry']?>.png"></td>
 
     <td align="center"><?=$ditem['team']?></td>
