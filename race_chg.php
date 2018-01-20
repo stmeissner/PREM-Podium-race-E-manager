@@ -85,6 +85,7 @@ if($item['season'] != 0) {
 <td>Replay:</td>
 	<td><select name="replay">
 			<optgroup label="(replays in /replays/)">
+			<option disabled>────────────────</option>
 			</optgroup>
 			<option value="<?php echo $item['replay']?>" selected="selected">Press F5</option>
 	<?php

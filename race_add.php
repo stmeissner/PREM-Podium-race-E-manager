@@ -54,6 +54,7 @@ if(!$rresult) {
 	<td>Replay:</td>
 		<td><select name="replay">
 				<optgroup label="(replays in /replays/)">
+				<option disabled>────────────────</option>
 				</optgroup>
 				<option value="" selected="selected"></option>
 		<?php
