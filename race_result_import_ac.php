@@ -1,6 +1,16 @@
 <?PHP if(!defined("CONFIG")) exit(); ?>
 <?PHP if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
 <?
+
+function searcharray($value, $key, $array) {
+   foreach ($array as $k => $val) {
+       if ($val[$key] == $value) {
+           return $k;
+       }
+   }
+   return null;
+}
+
 if(isset($_GET['id']))
 	$id = addslashes($_GET['id']);
 elseif(isset($_POST['id']))
@@ -8,7 +18,7 @@ elseif(isset($_POST['id']))
 
 if(isset($_POST['json'])) {
 	$upload = false;
-	switch($_FILES['userfile']['error']) {
+	switch($_FILES['racefile']['error']) {
 	case UPLOAD_ERR_OK:
 		$upload = true;
 		break;
@@ -59,13 +69,25 @@ if(isset($_POST['json'])) {
 				$driver[count($driver) - 1][strtolower($elem)] = $text;
 			}
 		}
+		# Get the Qualy JSON file
+		$qualyfile = file_get_contents($_FILES['qualyfile']['tmp_name']);
+		$qualyjson = json_decode($qualyfile, true);
 
-		# Parse the JSON file
-		$file = file_get_contents($_FILES['userfile']['tmp_name']);
-		$json = json_decode($file, true);
+		foreach($qualyjson["Result"] as $key => $row) {
+			$gridpos[$key] = $key + 1;
+			$arr_qualy_result[] = array(
+				'DriverId' => $row['CarId'],
+				'BestLap' => $row['BestLap'],
+				'GridPos' => $key + 1
+			  );
+					}
+
+		# Parse the Race JSON file
+		$racefile = file_get_contents($_FILES['racefile']['tmp_name']);
+		$racejson = json_decode($racefile, true);
 		$bestlap = false;
 
-		foreach($json["Cars"] as $key => $row) {
+		foreach($racejson["Cars"] as $key => $row) {
 			$arr_race_cars[$row['CarId']] = array(
 				'DriverName' => $row['Driver']['Name'],
 				'DriverTeam' => $row['Driver']['Team'],
@@ -75,7 +97,7 @@ if(isset($_POST['json'])) {
 			);
 		}
 
-		foreach($json["Result"] as $key => $row) {
+		foreach($racejson["Result"] as $key => $row) {
 			$position[$key] = $key + 1;
 			$arr_race_result[] = array(
 				'DriverId' => $row['CarId'],
@@ -91,7 +113,7 @@ if(isset($_POST['json'])) {
 
 		}
 
-		foreach($json["Laps"] as $key => $row) {
+		foreach($racejson["Laps"] as $key => $row) {
 			$arr_race_laps[$row['CarId']][] = array(
 				'Timestamp' => $row['Timestamp'],
 				'LapTime' => $row['LapTime'],
@@ -121,9 +143,10 @@ if(mysqli_num_rows($result) == 0){
 $item = mysqli_fetch_array($result);
 
 $date = strtotime($item['date']);
+
 ?>
 <h1>Import Assetto Corsa JSON</h1>
-<h3> Attention: You have to save all drivers to the DB, even those who didn´t start the race!</h3>
+<h3> Attention: You have to save all drivers to the DB, even those which didn´t start the race!</h3>
 <table border="0" width="100%">
 <tr>
 	<td width="120">Name:</td>
@@ -156,8 +179,12 @@ $date = strtotime($item['date']);
 <form action=".?page=race_result_import_ac" method="post" enctype="multipart/form-data">
 <table border="0" cellspacing="0" cellpadding="2">
 <tr>
-	<td>JSON file:</td>
-	<td><input type="file" name="userfile"/></td>
+	<td>QUALIFY JSON file:</td>
+	<td><input type="file" name="qualyfile"/></td>
+</tr>
+<tr>
+	<td>RACE JSON file:</td>
+	<td><input type="file" name="racefile"/></td>
 </tr>
 <tr>
 	<td>&nbsp;</td>
@@ -220,8 +247,8 @@ function show_driver_combo($dname = '') {
 ?>
 
 <form action="race_results_chg_do.php" method="post">
-		<table border="0" cellspacing="0" cellpadding="1" width="100%">
-		<tr class="head">
+		<table class="w3-table-all">
+		<tr class="w3-dark-grey">
 			<td>Driver (Team)</td>
 			<td align="center">Car #</td>
 			<td align="center">Car Type</td>
@@ -246,8 +273,8 @@ function show_driver_combo($dname = '') {
 				$driver_restrictor = $ditem['DriverRestrictor'];
 				$dplatequery = "SELECT plate FROM driver where name = '$driver_name'";
 				$dplate = mysqli_fetch_assoc(mysqli_query($link,$dplatequery))['plate'];
-				$grid = $arr_race_result[$x]['Position'];
-				if($grid == 0) $grid = "";
+        $grid = array_search($did, array_column($arr_qualy_result,'DriverId'));
+        $grid = $grid +1;
 				$position = $arr_race_result[$x]['Position'];
 				if($position == 0) $position = "";
 				if (isset($arr_race_laps[$did])) $laps = count($arr_race_laps[$did]); else $laps = 0;
@@ -266,7 +293,6 @@ function show_driver_combo($dname = '') {
 				if ($time == 0)
 					$status = 3;
 
-
 			} else {
 				$drivername = "";
 				$ditem['DriverName'] = "";
@@ -283,15 +309,16 @@ function show_driver_combo($dname = '') {
 			}
 			?>
 
-			<tr class="<?php echo $style?>">
+
+			<tr class="w3-hover-green" style="vertical-align: middle;">
 				<td><?php echo $drivername . (!empty($drivername) ? "<br/>" : "")?><?PHP show_driver_combo($ditem['DriverName']); ?></td>
-				<td align="center"><input type="text" name="dplate[]" value="<?php echo $dplate?>" size="3" maxlength="3"></td>
-				<td align="center"><input type="text" name="cartype[]" value="<?php echo $driver_cartype?>" size="30" maxlength="50"></td>
-				<td align="center"><input type="number" name="ballast[]" value="<?php echo $driver_ballast?>" min="0" max="999"></td>
-				<td align="center"><input type="number" name="restrictor[]" value="<?php echo $driver_restrictor?>" min="0" max="100"></td>
-				<td align="center"><input type="text" name="grid[]" value="<?php echo $grid?>" size="2" maxlength="2"></td>
-				<td align="center"><input type="text" name="pos[]" value="<?php echo $position?>" size="2" maxlength="2"></td>
-				<td align="center"><input type="text" name="laps[]" value="<?php echo $laps?>" size="2" maxlength="3"></td>
+				<td align="center"><input type="text" name="dplate[]" value="<?php echo $dplate?>" size="2" maxlength="3"></td>
+				<td align="center"><input type="text" name="cartype[]" value="<?php echo $driver_cartype?>" size="20" maxlength="50"></td>
+				<td align="center"><input type="number" name="ballast[]" style="width: 4em" value="<?php echo $driver_ballast?>" min="0" max="200" step="5"></td>
+				<td align="center"><input type="number" name="restrictor[]" style="width: 4em" value="<?php echo $driver_restrictor?>" min="0" max="100" step="5"></td>
+				<td align="center"><input type="text" name="grid[]" value="<?php echo $grid?>" size="1" maxlength="2"></td>
+				<td align="center"><input type="text" name="pos[]" value="<?php echo $position?>" size="1" maxlength="2"></td>
+				<td align="center"><input type="text" name="laps[]" value="<?php echo $laps?>" size="1" maxlength="3"></td>
 				<td>
 					<input type="text" name="hour[]" value="<?php echo $hour?>" style="text-align:right;" size="1" maxlength="2">h
 					<input type="text" name="minute[]" value="<?php echo $minute?>" style="text-align:right;" size="1" maxlength="2">m
