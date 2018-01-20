@@ -273,8 +273,15 @@ function show_driver_combo($dname = '') {
 				$driver_restrictor = $ditem['DriverRestrictor'];
 				$dplatequery = "SELECT plate FROM driver where name = '$driver_name'";
 				$dplate = mysqli_fetch_assoc(mysqli_query($link,$dplatequery))['plate'];
-        $grid = array_search($did, array_column($arr_qualy_result,'DriverId'));
-        $grid = $grid +1;
+        if (isset($arr_qualy_result))
+          {
+            $grid = array_search($did, array_column($arr_qualy_result,'DriverId'));
+            $grid = $grid +1;
+          }
+          else
+            {
+              $grid = "";
+            }
 				$position = $arr_race_result[$x]['Position'];
 				if($position == 0) $position = "";
 				if (isset($arr_race_laps[$did])) $laps = count($arr_race_laps[$did]); else $laps = 0;
