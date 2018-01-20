@@ -31,26 +31,42 @@ if(!$rresult) {
 
 <form action="race_add_do.php" method="post">
 <table border="0">
-<tr>
-	<td width="120">Name:</td>
-	<td><input type="text" name="name" maxlength="30"></td>
-</tr>
-<tr>
-	<td>Track:</td>
-	<td><input type="text" name="track" maxlength="30"></td>
-</tr>
-<tr>
-	<td>image_link:</td>
-	<td><input type="url" name="imagelink" maxlength="200"></td>
-</tr>
-<tr>
-	<td>Forum link:</td>
-	<td><input type="url" name="forumlink" maxlength="200"></td>
-</tr>
-<tr>
-	<td>Laps:</td>
-	<td><input type="text" name="laps" maxlength="3" size="3"></td>
-</tr>
+	<tr style="width: 10em">
+		<td width="120">Name:</td>
+		<td><input type="text" name="name" value="<?php echo $item['name']?>" maxlength="30"></td>
+	</tr>
+	<tr>
+		<td style="width: 10em">Track:</td>
+		<td><input type="text" name="track" value="<?php echo $item['track']?>" maxlength="30"></td>
+	</tr>
+	<tr>
+	<td>Imagelink:</td>
+		<td><input type="url" name="imagelink" value="<?php echo $item['imagelink']?>" size=100% maxlength="200"></td>
+	</tr>
+	<tr>
+	  <td>Forum link:</td>
+		<td><input type="url" name="forumlink" value="<?php echo $item['forumlink']?>" size=100% maxlength="200"></td>
+	</tr>
+	<tr>
+	<td>Simresults Link:</td>
+		<td><input type="url" name="simresults" value="<?php echo $item['simresults']?>" size=100% maxlength="200"></td>
+	</tr><tr>
+	<td>Replay:</td>
+		<td><select name="replay">
+				<optgroup label="(replays in /replays/)">
+				</optgroup>
+				<option value="" selected="selected"></option>
+		<?php
+				 foreach(glob(dirname(__FILE__) . '/replays/*') as $filename){
+				 $filename = basename($filename);
+				 echo "<option value='" . $filename . "'>".$filename."</option>";
+			}
+	?></td>
+	</tr>
+	<tr>
+		<td>Laps:</td>
+		<td><input type="text" name="laps" value="<?php echo $item['laps']?>" maxlength="3" size="3"></td>
+	</tr>
 <tr>
 	<td>Season:</td>
 	<td>

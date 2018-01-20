@@ -115,9 +115,10 @@ if(!$rdresult) {
 	</td>
 	<td>Max players:</td>
 	<td><?php echo $item['maxplayers']?></td>
-<tr>
+</tr>
+<!--<tr>
     <td>Replay link:</td>
-	<td><i class="fa fa-link"></i><input type="url" style="width:500px;" name="replay" value="<?php echo $item['replay']?>" maxlength="200"></td>
+	<td><i class="fa fa-link"></i><input type="url" style="width:500px;" name="replay" value="<?php /*echo $item['replay']*/?>" maxlength="200"></td>
 </tr>
 <tr>
 	<td>Upload result file to Simresults:</a></td>
@@ -126,8 +127,8 @@ if(!$rdresult) {
 <tr>
     <td>Simresults URL:</td>
 	<td><div class="input-group margin-bottom-sm">
-	<i class="fa fa-link"></i><input type="url" style="width:500px;" name="simresults" value="<?php echo $item['simresults']?>" maxlength="200"></div></td>
-</tr>
+	<i class="fa fa-link"></i><input type="url" style="width:500px;" name="simresults" value="<?php /*echo $item['simresults']*/?>" maxlength="200"></div></td>
+</tr>-->
 <tr>
 	<td>
 	Official result?
@@ -141,13 +142,13 @@ if(!$rdresult) {
 		<table class="w3-table-all">
 		<tr class="w3-dark-grey">
 			<td style="text-align: center;">Driver (Team)</td>
-			<td style="text-align: center;" style="text-align: center;" style="text-align: center;" style="text-align: center;" style="text-align: center;" style="text-align: center;" style="text-align: center;" style="text-align: center;">Car #</td>
-			<td style="text-align: center;" style="text-align: center;" style="text-align: center;" style="text-align: center;" style="text-align: center;" style="text-align: center;" style="text-align: center;">Car Type</td>
-			<td style="text-align: center;" style="text-align: center;" style="text-align: center;" style="text-align: center;" style="text-align: center;" style="text-align: center;">Ballast</td>
-			<td style="text-align: center;" style="text-align: center;" style="text-align: center;" style="text-align: center;" style="text-align: center;">Restrictor</td>
-			<td style="text-align: center;" style="text-align: center;" style="text-align: center;" style="text-align: center;">Grid</td>
-			<td style="text-align: center;" style="text-align: center;" style="text-align: center;">Pos</td>
-			<td style="text-align: center;" style="text-align: center;">Laps</td>
+			<td style="text-align: center;">Car #</td>
+			<td style="text-align: center;">Car Type</td>
+			<td style="text-align: center;">Ballast</td>
+			<td style="text-align: center;">Restrictor</td>
+			<td style="text-align: center;">Grid</td>
+			<td style="text-align: center;">Pos</td>
+			<td style="text-align: center;">Laps</td>
 			<td style="text-align: center;">Time</td>
 			<td style="text-align: center;"><span class="abbr" title="Fastest Lap">FL</span></td>
 			<td style="text-align: center;">Status</td>

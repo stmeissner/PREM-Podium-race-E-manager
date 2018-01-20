@@ -7,8 +7,8 @@ require_once("results_functions.php");
 
 $id = addslashes($_POST['id']);
 $season = addslashes($_POST['season']);
-$replay = htmlspecialchars($_POST['replay']);
-$simresults = htmlspecialchars($_POST['simresults']);
+//$replay = htmlspecialchars($_POST['replay']);
+//$simresults = htmlspecialchars($_POST['simresults']);
 $official = isset($_POST['official']) ? 1 : 0;
 $driver = $_POST['driver'];
 $cartype = $_POST['cartype'];
@@ -120,7 +120,7 @@ $progress = RACE_NEW;
 if($has_qualifying) $progress = RACE_QUALIFYING;
 if($has_race) $progress = RACE_RACE;
 
-$query = "UPDATE race SET result_official='$official', progress='$progress', replay='$replay', simresults='$simresults' WHERE id='$id'";
+$query = "UPDATE race SET result_official='$official', progress='$progress' /*,replay='$replay', simresults='$simresults'*/ WHERE id='$id'";
 $result = mysqli_query($link,$query);
 if(!$result) error("MySQL Error: " . mysqli_error($link) . "\n");
 

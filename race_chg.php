@@ -61,22 +61,39 @@ if($item['season'] != 0) {
 <h1>Modify race</h1>
 
 <form action="race_chg_do.php" method="post">
-<table border="0">
-<tr>
+<table class="w3-table-all">
+<tr style="width: 10em">
 	<td width="120">Name:</td>
 	<td><input type="text" name="name" value="<?php echo $item['name']?>" maxlength="30"></td>
 </tr>
 <tr>
-	<td>Track:</td>
+	<td style="width: 10em">Track:</td>
 	<td><input type="text" name="track" value="<?php echo $item['track']?>" maxlength="30"></td>
 </tr>
 <tr>
-<td>image_link:</td>
-	<td><input type="url" name="imagelink" value="<?php echo $item['imagelink']?>" maxlength="200"></td>
+<td>Imagelink:</td>
+	<td><input type="url" name="imagelink" value="<?php echo $item['imagelink']?>" size=100% maxlength="200"></td>
 </tr>
-<!--suppress HtmlUnknownTag -->
-    <td>Forum link:</td>
-	<td><input type="url" name="forumlink" value="<?php echo $item['forumlink']?>" maxlength="200"></td>
+<tr>
+  <td>Forum link:</td>
+	<td><input type="url" name="forumlink" value="<?php echo $item['forumlink']?>" size=100% maxlength="200"></td>
+</tr>
+<tr>
+<td>Simresults Link:</td>
+	<td><input type="url" name="simresults" value="<?php echo $item['simresults']?>" size=100% maxlength="200"></td>
+</tr><tr>
+<td>Replay:</td>
+	<td><select name="replay">
+			<optgroup label="(replays in /replays/)">
+			</optgroup>
+			<option value="<?php echo $item['replay']?>" selected="selected">Press F5</option>
+	<?php
+			 foreach(glob(dirname(__FILE__) . '/replays/*') as $filename){
+			 $filename = basename($filename);
+			 echo "<option value='" . $filename . "'>".$filename."</option>";
+		}
+?></td>
+</tr>
 <tr>
 	<td>Laps:</td>
 	<td><input type="text" name="laps" value="<?php echo $item['laps']?>" maxlength="3" size="3"></td>
@@ -92,8 +109,8 @@ if($item['season'] != 0) {
 		</select>
 	</td>
 </tr>
-<tr id="diff_ruleset">
-	<td>Different ruleset:</td>
+<tr>
+	<td>Different Ruleset:</td>
 	<td><input id="chk_diff_ruleset" name="diff_ruleset" type="checkbox" onchange="showOptions();"<?php echo $different?" checked=\"1\"":""?>/></td>
 </tr>
 <tr id="division">

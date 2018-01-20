@@ -16,6 +16,8 @@ $date = date("Y-m-d H:i:s",$date);
 $maxplayers = addslashes($_POST['maxplayers']);
 $imagelink = htmlspecialchars($_POST['imagelink']);
 $forumlink = htmlspecialchars($_POST['forumlink']);
+$simresults = htmlspecialchars($_POST['simresults']);
+$replay = htmlspecialchars($_POST['replay']);
 
 $error = "";
 
@@ -23,7 +25,7 @@ if(empty($name)) $error .= "You must fill in a name\n";
 if(empty($track)) $error .= "You must fill in a track\n";
 if(empty($laps)) $error .= "You must fill in the number of laps\n";
 if(empty($maxplayers)) $error .= "You must fill in the number of max players\n";
-if(empty($imagelink)) $error .= "You must fill in a image_url\n";
+//if(empty($imagelink)) $error .= "You must fill in a image_url\n";
 
 if(!empty($error)) error($error);
 
@@ -48,7 +50,11 @@ if($season != 0) {
 	}
 }
 
-$query = "UPDATE race SET name='$name', track='$track', laps='$laps', season='$season', division='$division', ruleset='$ruleset', ruleset_qualifying='$ruleset_qualifying', date='$date', maxplayers='$maxplayers', imagelink='$imagelink', forumlink='$forumlink' WHERE id='$id'";
+$query = "UPDATE race SET name='$name', track='$track', laps='$laps', season='$season', division='$division',
+													ruleset='$ruleset', ruleset_qualifying='$ruleset_qualifying', date='$date',
+													maxplayers='$maxplayers', imagelink='$imagelink', forumlink='$forumlink',
+													simresults='$simresults', replay='$replay'
+													WHERE id='$id'";
 $result = mysqli_query($link,$query);
 if(!$result) error("MySQL Error: " . mysqli_error($link) . "\n");
 

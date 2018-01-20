@@ -112,7 +112,7 @@ if($item['ruleset_qualifying'] != 0) {
 </tr>
 <tr class="w3-grey">
     <td>Replay:</td>
-    <td><a href="<?php echo $item['replay']?>" target="_blank"><img src="images/replay.png" alt="replay"></a></td>
+    <td><a href="../replays/<?php echo $item['replay']?>" target="_blank"><img src="images/replay.png" alt="replay"></a></td>
 		<td>Link to Forumthread:</td>
     <td><a href="<?php echo $item['forumlink']?>" target="_blank"><img src="images/forum.png" alt="Discussion"></a></td>
 
