@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Erstellungszeit: 04. Jan 2018 um 22:52
+-- Erstellungszeit: 20. Jan 2018 um 18:12
 -- Server-Version: 5.7.20-0ubuntu0.16.04.1
 -- PHP-Version: 7.0.22-0ubuntu0.16.04.1
 
@@ -47,13 +47,25 @@ CREATE TABLE `cars` (
   `sim` varchar(32) NOT NULL,
   `brand` varchar(32) NOT NULL,
   `name` varchar(32) NOT NULL,
-  `code` varchar(32) NOT NULL,
+  `code` varchar(40) DEFAULT NULL,
   `badge` varchar(128) NOT NULL,
   `horsepower` varchar(10) NOT NULL,
   `torque` varchar(10) NOT NULL,
   `weight` varchar(10) NOT NULL,
   `description` varchar(2048) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `config`
+--
+
+CREATE TABLE `config` (
+  `id` tinyint(1) NOT NULL,
+  `default_language` varchar(15) NOT NULL,
+  `rules` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -77,10 +89,10 @@ CREATE TABLE `driver` (
   `id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL DEFAULT '',
   `plate` varchar(3) DEFAULT NULL,
-  `country` varchar(2) CHARACTER SET ascii DEFAULT NULL,
-  `1st` int(30) DEFAULT NULL,
-  `2nd` int(30) DEFAULT NULL,
-  `3rd` int(30) DEFAULT NULL,
+  `country` varchar(2) DEFAULT NULL,
+  `1st` int(30) NOT NULL,
+  `2nd` int(30) NOT NULL,
+  `3rd` int(30) NOT NULL,
   `driver_photo` varchar(200) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -180,13 +192,13 @@ CREATE TABLE `race` (
   `division` int(11) NOT NULL DEFAULT '0',
   `ruleset` int(11) NOT NULL DEFAULT '0',
   `ruleset_qualifying` int(11) NOT NULL DEFAULT '0',
-  `date` timestamp NOT NULL DEFAULT '2000-01-01 11:00:00',
+  `date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `maxplayers` int(11) NOT NULL DEFAULT '0',
   `result_official` tinyint(1) NOT NULL DEFAULT '0',
   `progress` int(11) NOT NULL DEFAULT '0',
-  `imagelink` varchar(200) DEFAULT NULL,
-  `replay` varchar(200) DEFAULT NULL,
-  `simresults` varchar(200) DEFAULT NULL,
+  `imagelink` varchar(200) NOT NULL,
+  `replay` varchar(200) NOT NULL,
+  `simresults` varchar(200) NOT NULL,
   `forumlink` varchar(200) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -205,7 +217,10 @@ CREATE TABLE `race_driver` (
   `laps` int(11) DEFAULT NULL,
   `time` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
-  `dplate` varchar(3) DEFAULT NULL
+  `dplate` varchar(3) DEFAULT NULL,
+  `cartype` varchar(40) DEFAULT NULL,
+  `ballast` smallint(3) NOT NULL,
+  `restrictor` tinyint(3) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -334,6 +349,13 @@ CREATE TABLE `user` (
   `active` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+--
+-- Daten für Tabelle `user`
+--
+
+INSERT INTO `user` (`id`, `name`, `passwd`, `active`) VALUES
+(1, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -353,7 +375,7 @@ CREATE TABLE `video` (
 --
 DROP TABLE IF EXISTS `team_driver_top3`;
 
-CREATE VIEW `team_driver_top3`  AS  select `race_driver`.`team_driver` AS `team_driver`,sum((case when (`race_driver`.`position` = 1) then 1 else 0 end)) AS `position_1_count`,sum((case when (`race_driver`.`position` = 2) then 1 else 0 end)) AS `position_2_count`,sum((case when (`race_driver`.`position` = 3) then 1 else 0 end)) AS `position_3_count` from `race_driver` group by `race_driver`.`team_driver` order by `position_1_count` desc ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `team_driver_top3`  AS  select `race_driver`.`team_driver` AS `team_driver`,sum((case when (`race_driver`.`position` = 1) then 1 else 0 end)) AS `position_1_count`,sum((case when (`race_driver`.`position` = 2) then 1 else 0 end)) AS `position_2_count`,sum((case when (`race_driver`.`position` = 3) then 1 else 0 end)) AS `position_3_count` from `race_driver` group by `race_driver`.`team_driver` order by sum((case when (`race_driver`.`position` = 1) then 1 else 0 end)) desc ;
 
 --
 -- Indizes der exportierten Tabellen
@@ -371,6 +393,12 @@ ALTER TABLE `blocks`
 -- Indizes für die Tabelle `cars`
 --
 ALTER TABLE `cars`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indizes für die Tabelle `config`
+--
+ALTER TABLE `config`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -484,52 +512,57 @@ ALTER TABLE `video`
 -- AUTO_INCREMENT für Tabelle `blocks`
 --
 ALTER TABLE `blocks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT für Tabelle `cars`
 --
 ALTER TABLE `cars`
-  MODIFY `id` smallint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` smallint(4) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT für Tabelle `config`
+--
+ALTER TABLE `config`
+  MODIFY `id` tinyint(1) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT für Tabelle `division`
 --
 ALTER TABLE `division`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT für Tabelle `driver`
 --
 ALTER TABLE `driver`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT für Tabelle `languages`
 --
 ALTER TABLE `languages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT für Tabelle `main_news`
 --
 ALTER TABLE `main_news`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT für Tabelle `point_ruleset`
 --
 ALTER TABLE `point_ruleset`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT für Tabelle `race`
 --
 ALTER TABLE `race`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT für Tabelle `rules_table`
 --
 ALTER TABLE `rules_table`
-  MODIFY `id` tinyint(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` tinyint(1) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT für Tabelle `season`
 --
 ALTER TABLE `season`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT für Tabelle `sim_results`
 --
@@ -544,12 +577,12 @@ ALTER TABLE `standing_pages`
 -- AUTO_INCREMENT für Tabelle `team`
 --
 ALTER TABLE `team`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT für Tabelle `team_driver`
 --
 ALTER TABLE `team_driver`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT für Tabelle `uploads`
 --
@@ -559,7 +592,7 @@ ALTER TABLE `uploads`
 -- AUTO_INCREMENT für Tabelle `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT für Tabelle `video`
 --
