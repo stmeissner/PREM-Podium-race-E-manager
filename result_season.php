@@ -135,7 +135,7 @@ while($ritem = mysqli_fetch_array($rresult)) {
 }
 
 // calculate provisionals (hardcoded to the two lowest results) in case of more than two races completed
-// TODO check which array size to be used here
+
 if (count($races) > 2) {
 
 	foreach($driver as $id => $ditem) {
