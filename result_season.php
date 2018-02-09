@@ -162,9 +162,9 @@ if (count($races) > $prov_quantity) {
     //sum of the provisionals per driver
 		$sum_prov = array_sum($provisionals);
 		// set the provisionals to zero
-		foreach($provisionals as &$value)
-			{$value = 0;
-	   }
+		//foreach($provisionals as &$value)
+			//{$value = 0;
+	  // }
 		// add it to driver
 		$ditem['provisionals'] = $provisionals;
 		// recalculate points total
