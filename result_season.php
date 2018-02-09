@@ -134,12 +134,12 @@ while($ritem = mysqli_fetch_array($rresult)) {
 
 }
 
-// calculate provisionals (hardcoded to the two lowest results) in case of more than two races completed
-
-if (count($races) > 2) {
+// calculate provisionals according to the value set in the season setting
+$prov_quantity = 2;
+//$prov_quantity = 2*(-1);
+if (count($races) > $prov_quantity) {
 
 	foreach($driver as $id => $ditem) {
-
 		// array for races in which the driver started
 		$points = $ditem['pointsrace'];
 		// array for all races including DNS
@@ -157,26 +157,18 @@ if (count($races) > 2) {
 
 		// sort points in descending order
 		arsort($tempPoints);
-		// get last element in Array
-		$last = end($tempPoints);
-		// get key of last element
-		$lastKey = key($tempPoints);
-		// get last second element in Array
-		$secondlast = prev($tempPoints);
-		// get key of second last element
-		$secondlastKey = key($tempPoints);
 		// keep the keys and values for the results that were removed, need to mark those in the results table
-		$provisionals = array(
-			$lastKey => $last,
-			$secondlastKey => $secondlast
-		);
+		$provisionals = array_slice($tempPoints, -$prov_quantity, $prov_quantity, true);
+    //sum of the provisionals per driver
+		$sum_prov = array_sum($provisionals);
+		// set the provisionals to zero
+		foreach($provisionals as &$value)
+			{$value = 0;
+	   }
 		// add it to driver
 		$ditem['provisionals'] = $provisionals;
-		// set lowest two results to zero
-		$ditem['pointsrace'][$lastKey] = 0;
-		$ditem['pointsrace'][$secondlastKey] = 0;
 		// recalculate points total
-		$ditem['points'] = $ditem['points'] - $last - $secondlast;
+		$ditem['points'] = $ditem['points'] - $sum_prov;
 		// update information on drivers array
 		$driver[$id]= $ditem;
 	}
@@ -184,12 +176,10 @@ if (count($races) > 2) {
 	// recalculate team points taking provisionals into account
 	// go through all the teams
 	foreach($team as $id => $titem) {
-
 		// collect provisionals of each team
 		$teamProvisionalPoints = 0;
 		// go through all the drivers
 		foreach($driver as $did => $ditem) {
-
 			// collect provisionals of each team driver
 			$driverProvisionalPoints = 0;
 			// get all drivers of a team
