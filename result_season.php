@@ -243,7 +243,7 @@ usort($team, "point_sort");
 </table>
 </div>
 </div>
-<table><tr><td><h2>Drivers</h2></td><td><p>&nbsp;(If provisionals are given, they appear in red squares)</p></tr></table>
+<table><tr><td><h2>Drivers</h2></td></table>
 <div class="w3-container">
 <div class="w3-responsive">
 <table class="w3-table-all">
@@ -354,7 +354,7 @@ for($x = 1; $x <= $race; $x++) {
 </div>
 </div>
 
-<table><tr><td><h2>Teams</h2></td><td><p>&nbsp;(If driver provisionals are given, they appear in red squares)</p></tr></table>
+<table><tr><td><h2>Teams</h2></td></table>
 <div class="w3-container">
 <div class="w3-responsive">
 <table class="w3-table-all">
