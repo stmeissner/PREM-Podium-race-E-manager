@@ -342,8 +342,9 @@ for($x = 1; $x <= $race; $x++) {
 }
 ?>
 </table>
-<?php $color_withdrawn = "style=\"background-color:rgba(255, 0, 0, 0.8); border-radius:5px;
-					color:white; background-clip: content-box; text-align:center; padding:1px\"";?>
+<?php $color_withdrawn = "style=\"background-color:rgba(255, 0, 0, 0.8); border-radius:5px; color:white; background-clip: content-box; text-align:center; padding:1px\"";
+$color = "style=\"background-color:rgba(70, 70, 255, 0.5); border-radius:5px; color:white; background-clip: content-box; text-align:center; padding:1px\"";
+?>
 
 <table>
 <tr>
@@ -421,6 +422,9 @@ for($x = 1; $x <= $race; $x++) {
 
 } ?>
 </table>
+<?php $color_withdrawn = "style=\"background-color:rgba(255, 0, 0, 0.8); border-radius:5px; color:white; background-clip: content-box; text-align:center; padding:1px\"";
+$color = "style=\"background-color:rgba(70, 70, 255, 0.5); border-radius:5px; color:white; background-clip: content-box; text-align:center; padding:1px\"";
+?>
 <table>
 <tr>
 	<td <?php echo $color?>><?php echo "provisional"?></td>
