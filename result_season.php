@@ -136,7 +136,7 @@ while($ritem = mysqli_fetch_array($rresult)) {
 
 // calculate provisionals according to the value set in the season setting
 $prov_quantity = 2;
-//$prov_quantity = 2*(-1);
+
 if (count($races) > $prov_quantity) {
 
 	foreach($driver as $id => $ditem) {
