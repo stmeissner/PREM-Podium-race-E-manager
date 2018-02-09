@@ -135,8 +135,8 @@ while($ritem = mysqli_fetch_array($rresult)) {
 }
 
 // calculate provisionals according to the value set in the season setting
-$prov_quantity = 2;
-
+$prov_quantity = $item['prov_quantity'];
+if ($prov_quantity > 0) {
 if (count($races) > $prov_quantity) {
 
 	foreach($driver as $id => $ditem) {
@@ -212,7 +212,7 @@ if (count($races) > $prov_quantity) {
 		$team[$id]= $titem;
 	}
 }
-
+}
 // sort drivers and teams by points
 usort($driver, "point_sort");
 usort($team, "point_sort");
@@ -230,8 +230,8 @@ usort($team, "point_sort");
 <tr class="w3-grey">
 	<td width="20%">Division:</td>
 	<td width="30%"><?php echo $item['dname']?></td>
-	<td width="20%">Ruleset;</td>
-	<td width="30%"><?php echo $ruleset['name']?><?if(isset($ruleset_qualifying)) echo " (qual: " . $ruleset_qualifying['name'] . ")"?></td>
+	<td width="20%">Provisionals per Driver:</td>
+	<td width="30%"><?php echo $item['prov_quantity']?></td>
 </tr>
 <tr class="w3-green">
 	<td colspan="4" align="center">
@@ -243,7 +243,7 @@ usort($team, "point_sort");
 </table>
 </div>
 </div>
-<table><tr><td><h2>Drivers</h2></td><td><p>&nbsp;(Red results are provisionals, 2 given)</p></tr></table>
+<table><tr><td><h2>Drivers</h2></td><td><p>&nbsp;(If provisionals are given, they appear in red squares)</p></tr></table>
 <div class="w3-container">
 <div class="w3-responsive">
 <table class="w3-table-all">
@@ -295,7 +295,7 @@ for($x = 1; $x <= $race; $x++) {
 		$provisionals = $ditem['provisionals'];
 		if (array_key_exists($x, $provisionals)) {
 			// mark provisional in reddish color
-			 $color = "style=\"background-color:rgba(255, 99, 71, 0.5); border-radius:5px;
+			 $color = "style=\"background-color:rgba(70, 70, 255, 0.5); border-radius:5px;
 			 					 color:white; background-clip: content-box; text-align:center; padding:1px\"";
 			 // show original points but do not take them into account
 			 $data = $provisionals[$x];
@@ -308,7 +308,7 @@ for($x = 1; $x <= $race; $x++) {
 		$provisionals = $ditem['provisionals'];
 		if (array_key_exists($x, $provisionals)) {
 			// mark provisional in reddish color
-			$color = "style=\"background-color:rgba(255, 99, 71, 0.5); border-radius:5px;
+			$color = "style=\"background-color:rgba(70, 70, 255, 0.5); border-radius:5px;
 								color:white; background-clip: content-box; text-align:center; padding:1px\"";
 			 // show original points but do not take them into account
 			 $data = $provisionals[$x];
@@ -325,7 +325,7 @@ for($x = 1; $x <= $race; $x++) {
 		$provisionals = $ditem['provisionals'];
 		if (array_key_exists($x, $provisionals)) {
 			// mark provisional in reddish color
-			$color = "style=\"background-color:rgba(255, 99, 71, 0.5); border-radius:5px;
+			$color = "style=\"background-color:rgba(70, 70, 255, 0.5); border-radius:5px;
 								color:white; background-clip: content-box; text-align:center; padding:1px\"";
 		} else {
 			// do not mark valuable results in a different color
@@ -339,13 +339,22 @@ for($x = 1; $x <= $race; $x++) {
 	<td style="background-color:transparent; text-align: right; color:black; font-weight: bold;"><?php echo !empty($ditem['points']) ? $ditem['points'] : "0" ?></td>
 </tr>
 <?
+}
+?>
+</table>
+<?php $color_withdrawn = "style=\"background-color:rgba(255, 0, 0, 0.8); border-radius:5px;
+					color:white; background-clip: content-box; text-align:center; padding:1px\"";?>
 
-} ?>
+<table>
+<tr>
+	<td <?php echo $color?>><?php echo "provisional"?></td>
+	<td <?php echo $color_withdrawn?>><?php echo "withdrawn"?></td>
+</tr>
 </table>
 </div>
 </div>
 
-<table><tr><td><h2>Teams</h2></td><td><p>&nbsp;(Red results containing provisionals of the teams drivers)</p></tr></table>
+<table><tr><td><h2>Teams</h2></td><td><p>&nbsp;(If driver provisionals are given, they appear in red squares)</p></tr></table>
 <div class="w3-container">
 <div class="w3-responsive">
 <table class="w3-table-all">
@@ -378,7 +387,7 @@ for($x = 1; $x <= $race; $x++) {
 		$provisionals = $titem['provisionals'];
 		if (array_key_exists($x, $provisionals)) {
 			// mark provisional in reddish color
-			$color = "style=\"background-color:rgba(255, 99, 71, 0.5); border-radius:5px;
+			$color = "style=\"background-color:rgba(70, 70, 255, 0.5); border-radius:5px;
 								color:white; background-clip: content-box; text-align:center; padding:1px\"";
 		} else {
 			// do not mark valuable results in a different color
@@ -389,7 +398,7 @@ for($x = 1; $x <= $race; $x++) {
 		$provisionals = $titem['provisionals'];
 		if (array_key_exists($x, $provisionals)) {
 			// mark provisional in reddish color
-			$color = "style=\"background-color:rgba(255, 99, 71, 0.5); border-radius:5px;
+			$color = "style=\"background-color:rgba(70, 70, 255, 0.5); border-radius:5px;
 								color:white; background-clip: content-box; text-align:center; padding:1px\"";
 			 // show original points but do not take them into account
 			 $data = !empty($titem['pointsrace'][$x]) ? $titem['pointsrace'][$x] : "-";
@@ -411,6 +420,12 @@ for($x = 1; $x <= $race; $x++) {
 <?
 
 } ?>
+</table>
+<table>
+<tr>
+	<td <?php echo $color?>><?php echo "provisional"?></td>
+	<td <?php echo $color_withdrawn?>><?php echo "withdrawn"?></td>
+</tr>
 </table>
 </div>
 </div>

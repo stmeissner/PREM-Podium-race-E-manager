@@ -118,6 +118,10 @@ if(!$stresult) {
 <tr>
 	<td>Series logo for Simresults:</td>
 	<td><input type="url" name="series_logo_simresults" maxlength="200" value="<?php echo $item['series_logo_simresults']?>"</td>
+	<tr>
+		<td>Provisionals per driver:</td>
+		<td><input type="text" name="prov_quantity" maxlength="1" size="2" value="<?php echo $item['prov_quantity']?>"</td>
+	</tr>
 </tr>
 <tr>
 	<td>Teams:</td>

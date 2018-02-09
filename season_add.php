@@ -74,6 +74,10 @@ if(mysqli_num_rows($rsresult) == 0) {
 	<td><input type="url" name="series_logo_simresults" maxlength="200"></td>
 </tr>
 <tr>
+	<td>Provisionals per driver:</td>
+	<td><input type="text" name="prov_quantity" maxlength="1" size="2" value="0"></td>
+</tr>
+<tr>
 	<td>&nbsp;</td>
 	<td>
 		<input type="submit" class="button submit" value="Add">
