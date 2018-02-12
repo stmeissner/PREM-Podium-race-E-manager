@@ -265,18 +265,18 @@ $pos = 0;
 $platestyle = "style=\"background-color:rgba(5, 5, 5, 0.8);width: 2.3em;border-radius:5px;color:white;background-clip:content-box;vertical-align:middle;font-family: 'sports', Fallback, sans-serif;text-align:center;padding:1px;\"";
 foreach($driver as $id => $ditem) {
   $dname = $ditem['name'];
-    $badgequery = "SELECT s.id season_id, rd.race race_id, d.name dname, rd.dplate dplate, td.id td_id, td.team team,
-                          c.id carid, rd.cartype, c.badge badge, rd.ballast, rd.restrictor
-                      FROM race_driver rd
-                      JOIN cars c on (c.code = rd.cartype)
-                      JOIN team_driver td on (td.id = rd.team_driver)
-                      JOIN driver d on (d.id = td.driver)
-                      JOIN race r on (r.id = rd.race)
-                      JOIN season s on (r.season = s.id)
-                      WHERE s.id = '$season' AND d.name = '$dname'
-                      ORDER BY rd.race DESC, '$dname' ASC";
-    $badge = mysqli_fetch_assoc(mysqli_query($link,$badgequery))['badge'];
-		$dplate = mysqli_fetch_assoc(mysqli_query($link,$badgequery))['dplate'];
+    $aquery = "SELECT s.id season_id, rd.race race_id, d.name dname, rd.dplate dplate, td.id td_id, td.team team,
+                      c.id carid, rd.cartype, c.badge badge, rd.ballast, rd.restrictor
+	                      FROM race_driver rd
+	                      JOIN cars c on (c.code = rd.cartype)
+	                      JOIN team_driver td on (td.id = rd.team_driver)
+	                      JOIN driver d on (d.id = td.driver)
+	                      JOIN race r on (r.id = rd.race)
+	                      JOIN season s on (r.season = s.id)
+	                      WHERE s.id = '$season' AND d.name = '$dname'
+	                      ORDER BY rd.race DESC, '$dname' ASC";
+    $badge = mysqli_fetch_assoc(mysqli_query($link,$aquery))['badge'];
+		$dplate = mysqli_fetch_assoc(mysqli_query($link,$aquery))['dplate'];
    ?>
 <tr class="w3-hover-green" style="vertical-align:center";>
 	<td><?php echo ++$pos?>&nbsp;</td>
@@ -284,9 +284,10 @@ foreach($driver as $id => $ditem) {
   <td style="text-align:center"><img src="images/badges/thumbs/<?php echo $badge?>"</td>
 	<td <?php echo $platestyle?>><?php echo $dplate?></td>
   <td style="text-align:center"><img src="images/flags/<?php echo $ditem['dcountry']?>.png"></td>
+  <td align="center"><?=$ditem['team']?></td>
 
-    <td align="center"><?=$ditem['team']?></td>
 <?php
+
 $total = 0;
 for($x = 1; $x <= $race; $x++) {
 	switch($show) {
@@ -303,7 +304,8 @@ for($x = 1; $x <= $race; $x++) {
 			// do not mark valuable results in a different color
 			$color = "style=\"background-color:transparent; padding:1px; text-align: center; color:black\"";
 		}
-		break;
+			break;
+
 	case SHOW_INCREMENTAL:
 		$provisionals = $ditem['provisionals'];
 		if (array_key_exists($x, $provisionals)) {
@@ -333,6 +335,7 @@ for($x = 1; $x <= $race; $x++) {
 		}
 		break;
 	}
+
 	?>
 	<td width="1" <?php echo $color?>><?php echo $data?></td>
 <?PHP } ?>
@@ -342,14 +345,14 @@ for($x = 1; $x <= $race; $x++) {
 }
 ?>
 </table>
-<?php $color_withdrawn = "style=\"background-color:rgba(255, 0, 0, 0.8); border-radius:5px; color:white; background-clip: content-box; text-align:center; padding:1px\"";
+
+<?php
 $color = "style=\"background-color:rgba(70, 70, 255, 0.5); border-radius:5px; color:white; background-clip: content-box; text-align:center; padding:1px\"";
 ?>
 
 <table>
 <tr>
 	<td <?php echo $color?>><?php echo "provisional"?></td>
-	<td <?php echo $color_withdrawn?>><?php echo "withdrawn"?></td>
 </tr>
 </table>
 </div>
@@ -422,13 +425,12 @@ for($x = 1; $x <= $race; $x++) {
 
 } ?>
 </table>
-<?php $color_withdrawn = "style=\"background-color:rgba(255, 0, 0, 0.8); border-radius:5px; color:white; background-clip: content-box; text-align:center; padding:1px\"";
+<?php
 $color = "style=\"background-color:rgba(70, 70, 255, 0.5); border-radius:5px; color:white; background-clip: content-box; text-align:center; padding:1px\"";
 ?>
 <table>
 <tr>
 	<td <?php echo $color?>><?php echo "provisional"?></td>
-	<td <?php echo $color_withdrawn?>><?php echo "withdrawn"?></td>
 </tr>
 </table>
 </div>

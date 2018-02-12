@@ -24,6 +24,7 @@ $ms = $_POST['ms'];
 $fl = $_POST['fl'];
 $status = $_POST['status'];
 $dplate = $_POST['dplate'];
+$withdrawn = isset($_POST['withdrawn']) ? 1 : 0;
 
 function has_duplicates($ar, $values_ok) {
 	$has = array();
@@ -120,7 +121,7 @@ $progress = RACE_NEW;
 if($has_qualifying) $progress = RACE_QUALIFYING;
 if($has_race) $progress = RACE_RACE;
 
-$query = "UPDATE race SET result_official='$official', progress='$progress' /*,replay='$replay', simresults='$simresults'*/ WHERE id='$id'";
+$query = "UPDATE race SET result_official='$official', progress='$progress', withdrawn='$withdrawn'  WHERE id='$id'";
 $result = mysqli_query($link,$query);
 if(!$result) error("MySQL Error: " . mysqli_error($link) . "\n");
 
