@@ -129,6 +129,8 @@ if(!$rdresult) {
 	<td><div class="input-group margin-bottom-sm">
 	<i class="fa fa-link"></i><input type="url" style="width:500px;" name="simresults" value="<?php /*echo $item['simresults']*/?>" maxlength="200"></div></td>
 </tr>-->
+</table>
+<table>
 <tr>
 	<td>
 	Official result?
@@ -136,7 +138,15 @@ if(!$rdresult) {
 	<td colspan="3">
 	<input type="checkbox" name="official"<?php echo $item['result_official']=='1'?" checked=\"1\"":""?>>
 	</td>
+	<td>
+	Withdraw Race?
+	</td>
+	<td colspan="3">
+	<input type="checkbox" name="withdrawn"<?php echo $item['withdrawn']=='1'?" checked=\"1\"":""?>>
+	</td>
 </tr>
+</table>
+<table>
 <tr>
 	<td colspan="4">
 		<table class="w3-table-all">
