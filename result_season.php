@@ -316,7 +316,7 @@ for($x = 1; $x <= $race; $x++) {
 		  break;
 
 	case SHOW_INCREMENTAL:
-		$provisionals = $ditem['provisionals'];
+				$provisionals = $ditem['provisionals'];
 		if (array_key_exists($x, $provisionals)) {
 			// mark provisional in blue color
 			$color = $color_provisional;
@@ -325,17 +325,18 @@ for($x = 1; $x <= $race; $x++) {
 		} else {
 			// do not mark valuable results in a different color
 			$color = $color_empty;
-			// take points into account
 			$total += $ditem['pointsrace'][$x];
 			$data = $total;
 		}
+
 		//check if the race is marked as withdrawn
 	 if ($races[$x]['withdrawn'] == 1)
 	 {
 		 $color = $color_withdrawn;
+		 $data = "-";
 	 }
 		break;
-		
+
 	case SHOW_POSITIONS:
 		$data = !empty($ditem['position'][$x]) ? $ditem['position'][$x] : "-";
 		$provisionals = $ditem['provisionals'];
