@@ -82,12 +82,12 @@ while($dritem = mysqli_fetch_array($drresult)) {
 	$driver[$dritem['did']]['provisionals'] = array();
 }
 
-$rquery = "SELECT r.id race, r.name rname, r.track rtrack, r.ruleset, r.ruleset_qualifying, td.driver, td.team, rd.fastest_lap, rd.grid, rd.status
-				FROM race r
-				JOIN race_driver rd ON (rd.race = r.id)
-				JOIN team_driver td ON (td.id = rd.team_driver)
-				WHERE r.season=$season AND r.progress = 2 AND (rd.status = 0 OR rd.status = 1)
-				ORDER BY r.date ASC, rd.position ASC";
+$rquery = "SELECT r.id race, r.name rname, r.track rtrack, r.withdrawn, r.ruleset, r.ruleset_qualifying, td.driver, td.team, rd.fastest_lap, rd.grid, rd.status
+							FROM race r
+							JOIN race_driver rd ON (rd.race = r.id)
+							JOIN team_driver td ON (td.id = rd.team_driver)
+							WHERE r.season=$season AND r.progress = 2 AND (rd.status = 0 OR rd.status = 1)
+							ORDER BY r.date ASC, rd.position ASC";
 
 $rresult = mysqli_query($link,$rquery);
 if(!$rresult) {
@@ -108,6 +108,7 @@ while($ritem = mysqli_fetch_array($rresult)) {
 		$races[$race]['id'] = $ritem['race'];
 		$races[$race]['name'] = $ritem['rname'];
 		$races[$race]['track'] = $ritem['rtrack'];
+		$races[$race]['withdrawn'] = $ritem['withdrawn'];
 		$last_race = $ritem['race'];
 	}
 
@@ -131,7 +132,6 @@ while($ritem = mysqli_fetch_array($rresult)) {
 		$driver[$ritem['driver']]['pointsqualifyingrace'][$race] = points_race($ritem['grid'], $ruleset[$ritem['ruleset_qualifying']]);
 		$driver[$ritem['driver']]['pointsqualifyingraceinc'][$race] = $driver[$ritem['driver']]['pointsqualifying'];
 	}
-
 }
 
 // calculate provisionals according to the value set in the season setting
@@ -254,6 +254,7 @@ usort($team, "point_sort");
   <td style="vertical-align:bottom;text-align:center" align="center">Nr.</td>
   <td style="vertical-align:bottom;text-align:center" align="center">Ctry.</td>
   <td style="vertical-align:bottom" align="center">Team</td>
+
 <?PHP for($x = 1; $x <= $race; $x++) { ?>
 	<td width="1" align="center"><void(0)" class="tablink" title="Click to more details"><div class="w3-topbar w3-bottombar w3-hover-border-red"><a href="?page=result_race&amp;race=<?php echo $races[$x]['id']?>"><img src="img_season_race.php?text=<?php echo urlencode($races[$x]['name'])?>&amp;text2=<?php echo urlencode($races[$x]['track'])?>" alt="<?php echo $x?>"></a></td>
 <?PHP } ?>
@@ -263,6 +264,10 @@ usort($team, "point_sort");
 $style = "odd";
 $pos = 0;
 $platestyle = "style=\"background-color:rgba(5, 5, 5, 0.8);width: 2.3em;border-radius:5px;color:white;background-clip:content-box;vertical-align:middle;font-family: 'sports', Fallback, sans-serif;text-align:center;padding:1px;\"";
+$color_provisional = "style=\"background-color:rgba(70, 70, 255, 0.5); border-radius:5px; color:white; background-clip: content-box; text-align:center; padding:1px\"";
+$color_withdrawn = "style=\"background-color:rgba(255, 70, 70, 0.5); border-radius:5px; color:white; background-clip: content-box; text-align:center; padding:1px\"";
+$color_empty = "style=\"background-color:transparent; padding: 1px; text-align: center; color:black\"";
+
 foreach($driver as $id => $ditem) {
   $dname = $ditem['name'];
     $aquery = "SELECT s.id season_id, rd.race race_id, d.name dname, rd.dplate dplate, td.id td_id, td.team team,
@@ -277,7 +282,7 @@ foreach($driver as $id => $ditem) {
 	                      ORDER BY rd.race DESC, '$dname' ASC";
     $badge = mysqli_fetch_assoc(mysqli_query($link,$aquery))['badge'];
 		$dplate = mysqli_fetch_assoc(mysqli_query($link,$aquery))['dplate'];
-   ?>
+		   ?>
 <tr class="w3-hover-green" style="vertical-align:center";>
 	<td><?php echo ++$pos?>&nbsp;</td>
 	<td><?php echo $ditem['name']?></td>
@@ -287,7 +292,6 @@ foreach($driver as $id => $ditem) {
   <td align="center"><?=$ditem['team']?></td>
 
 <?php
-
 $total = 0;
 for($x = 1; $x <= $race; $x++) {
 	switch($show) {
@@ -295,44 +299,59 @@ for($x = 1; $x <= $race; $x++) {
 		$data = !empty($ditem['pointsrace'][$x]) ? $ditem['pointsrace'][$x] : "-";
 		$provisionals = $ditem['provisionals'];
 		if (array_key_exists($x, $provisionals)) {
-			// mark provisional in reddish color
-			 $color = "style=\"background-color:rgba(70, 70, 255, 0.5); border-radius:5px;
-			 					 color:white; background-clip: content-box; text-align:center; padding:1px\"";
+			// mark provisional in blue color
+			 $color = $color_provisional;
 			 // show original points but do not take them into account
 			 $data = $provisionals[$x];
 		} else {
 			// do not mark valuable results in a different color
-			$color = "style=\"background-color:transparent; padding:1px; text-align: center; color:black\"";
+			$color = $color_empty;
 		}
-			break;
+
+		 //check if the race is marked as withdrawn
+		if ($races[$x]['withdrawn'] == 1)
+		{
+			$color = $color_withdrawn;
+		}
+		  break;
 
 	case SHOW_INCREMENTAL:
 		$provisionals = $ditem['provisionals'];
 		if (array_key_exists($x, $provisionals)) {
-			// mark provisional in reddish color
-			$color = "style=\"background-color:rgba(70, 70, 255, 0.5); border-radius:5px;
-								color:white; background-clip: content-box; text-align:center; padding:1px\"";
+			// mark provisional in blue color
+			$color = $color_provisional;
 			 // show original points but do not take them into account
 			 $data = $provisionals[$x];
 		} else {
 			// do not mark valuable results in a different color
-			$color = "style=\"background-color:transparent; padding: 1px; text-align: center; color:black\"";
+			$color = $color_empty;
 			// take points into account
 			$total += $ditem['pointsrace'][$x];
 			$data = $total;
 		}
+		//check if the race is marked as withdrawn
+	 if ($races[$x]['withdrawn'] == 1)
+	 {
+		 $color = $color_withdrawn;
+	 }
 		break;
+		
 	case SHOW_POSITIONS:
 		$data = !empty($ditem['position'][$x]) ? $ditem['position'][$x] : "-";
 		$provisionals = $ditem['provisionals'];
 		if (array_key_exists($x, $provisionals)) {
-			// mark provisional in reddish color
-			$color = "style=\"background-color:rgba(70, 70, 255, 0.5); border-radius:5px;
-								color:white; background-clip: content-box; text-align:center; padding:1px\"";
+			// mark provisional in blue color
+			$color = $color_provisional;
+
 		} else {
 			// do not mark valuable results in a different color
-			$color = "style=\"background-color:transparent; padding: 1px; text-align: center; color:black\"";
+			$color = $color_empty;
 		}
+		//check if the race is marked as withdrawn
+	 if ($races[$x]['withdrawn'] == 1)
+	 {
+		 $color = $color_withdrawn;
+	 }
 		break;
 	}
 
@@ -343,16 +362,14 @@ for($x = 1; $x <= $race; $x++) {
 </tr>
 <?
 }
+
 ?>
 </table>
 
-<?php
-$color = "style=\"background-color:rgba(70, 70, 255, 0.5); border-radius:5px; color:white; background-clip: content-box; text-align:center; padding:1px\"";
-?>
-
 <table>
 <tr>
-	<td <?php echo $color?>><?php echo "provisional"?></td>
+	<td <?php echo $color_provisional?>><?php echo "&nbsp;provisional&nbsp;"?></td>
+	<td <?php echo $color_withdrawn?>><?php echo "&nbsp;withdrawn&nbsp;"?></td>
 </tr>
 </table>
 </div>
@@ -390,30 +407,39 @@ for($x = 1; $x <= $race; $x++) {
 		// mark provisional results
 		$provisionals = $titem['provisionals'];
 		if (array_key_exists($x, $provisionals)) {
-			// mark provisional in reddish color
-			$color = "style=\"background-color:rgba(70, 70, 255, 0.5); border-radius:5px;
-								color:white; background-clip: content-box; text-align:center; padding:1px\"";
+			// mark provisional in blue color
+			$color = $color_provisional;
+
 		} else {
 			// do not mark valuable results in a different color
-			$color = "style=\"background-color:transparent; padding: 1px; text-align: center; color:black\"";
+			$color = $color_empty;
 		}
+		//check if the race is marked as withdrawn
+	 if ($races[$x]['withdrawn'] == 1)
+	 {
+		 $color = $color_withdrawn;
+	 }
 		break;
 	case SHOW_INCREMENTAL:
 		$provisionals = $titem['provisionals'];
 		if (array_key_exists($x, $provisionals)) {
-			// mark provisional in reddish color
-			$color = "style=\"background-color:rgba(70, 70, 255, 0.5); border-radius:5px;
-								color:white; background-clip: content-box; text-align:center; padding:1px\"";
+			// mark provisional in blue color
+			$color = $color_provisional;
 			 // show original points but do not take them into account
 			 $data = !empty($titem['pointsrace'][$x]) ? $titem['pointsrace'][$x] : "-";
 			 //$data = $titem['pointsrace'][$x];
 		} else {
 			// do not mark valuable results in a different color
-			$color = "style=\"background-color:transparent; padding: 1px; text-align: center; color:black\"";
+			$color = $color_empty;
 			// take points into account
 			$total += $titem['pointsrace'][$x];
 			$data = $total;
 		}
+		//check if the race is marked as withdrawn
+	 if ($races[$x]['withdrawn'] == 1)
+	 {
+		 $color = $color_withdrawn;
+	 }
 		break;
 	}
 	?>
@@ -425,12 +451,11 @@ for($x = 1; $x <= $race; $x++) {
 
 } ?>
 </table>
-<?php
-$color = "style=\"background-color:rgba(70, 70, 255, 0.5); border-radius:5px; color:white; background-clip: content-box; text-align:center; padding:1px\"";
-?>
+
 <table>
 <tr>
-	<td <?php echo $color?>><?php echo "provisional"?></td>
+	<td <?php echo $color_provisional?>><?php echo "&nbsp;provisional&nbsp;"?></td>
+	<td <?php echo $color_withdrawn?>><?php echo "&nbsp;withdrawn&nbsp;"?></td>
 </tr>
 </table>
 </div>
