@@ -222,16 +222,16 @@ usort($team, "point_sort");
 <div class="w3-responsive">
 <table class="w3-table-all">
 <tr class="w3-dark-grey">
-	<td width="20%">Name:</td>
-	<td width="30%"><?php echo $item['name']?></td>
-	<td width="20%">Races:</td>
+	<td width="5%">Name:</td>
+	<td width="10%"><?php echo $item['name']?></td>
+	<td width="15%">Races:</td>
 	<td width="30%"><?php echo $item['racecount']?></td>
 </tr>
 <tr class="w3-grey">
-	<td width="20%">Division:</td>
-	<td width="30%"><?php echo $item['dname']?></td>
-	<td width="20%">Provisionals per Driver:</td>
-	<td width="30%"><?php echo $item['prov_quantity']?></td>
+	<td>Division:</td>
+	<td><?php echo $item['dname']?></td>
+	<td>Provisionals/Driver (incl. withdrawn Races):</td>
+	<td><?php echo $item['prov_quantity']?></td>
 </tr>
 <tr class="w3-green">
 	<td colspan="4" align="center">
