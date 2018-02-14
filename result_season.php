@@ -419,6 +419,7 @@ for($x = 1; $x <= $race; $x++) {
 	 if ($races[$x]['withdrawn'] == 1)
 	 {
 		 $color = $color_withdrawn;
+
 	 }
 		break;
 	case SHOW_INCREMENTAL:
@@ -440,6 +441,7 @@ for($x = 1; $x <= $race; $x++) {
 	 if ($races[$x]['withdrawn'] == 1)
 	 {
 		 $color = $color_withdrawn;
+		  $data = "-";
 	 }
 		break;
 	}
