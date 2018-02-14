@@ -224,7 +224,7 @@ usort($team, "point_sort");
 <tr class="w3-dark-grey">
 	<td width="5%">Name:</td>
 	<td width="10%"><?php echo $item['name']?></td>
-	<td width="15%">Races:</td>
+	<td width="25%">Races:</td>
 	<td width="30%"><?php echo $item['racecount']?></td>
 </tr>
 <tr class="w3-grey">
