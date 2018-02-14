@@ -230,7 +230,7 @@ usort($team, "point_sort");
 <tr class="w3-grey">
 	<td>Division:</td>
 	<td><?php echo $item['dname']?></td>
-	<td>Provisionals/Driver (incl. withdrawn Races):</td>
+	<td>Provisionals/Driver (incl. withdrawned Races):</td>
 	<td><?php echo $item['prov_quantity']?></td>
 </tr>
 <tr class="w3-green">
