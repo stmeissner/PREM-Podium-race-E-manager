@@ -121,7 +121,7 @@ if($item['ruleset_qualifying'] != 0) {
 	<td colspan="4">
 	<div align="center">
 	<strong>
-	<?
+	<?php
 	if($item['progress'] == RACE_NEW) {
 		echo "Race is planned\n";
 	}
@@ -137,15 +137,31 @@ if($item['ruleset_qualifying'] != 0) {
 		else
 			echo "Unofficial race results\n";
 	}
-	$platestyle = "style=\"background-color:rgba(5, 5, 5, 0.8);width: 2.3em;border-radius:5px;color:white;vertical-align:middle;background-clip:content-box;font-family: 'sports', Fallback, sans-serif;text-align:center;padding:1px;\"";
 	?>
 	</strong>
 	</div>
 	</td>
 </tr>
+<?php
+if (!empty($item['comment'])) {
+ ?>
 </table>
+<table class="w3-table-all">
+	<tr class="w3-deep-orange">
+		<td colspan="4">
+		<div align="center">
+		<strong>
+		Race Commision: <?php echo $item['comment']?>
+	</strong>
+	</div>
+	</td>
+	</tr>
+</table>
+<?PHP } ?>
 </div>
 </div>
+<?php $platestyle = "style=\"background-color:rgba(5, 5, 5, 0.8);width: 2.3em;border-radius:5px;color:white;vertical-align:middle;
+										 background-clip:content-box;font-family: 'sports', Fallback, sans-serif;text-align:center;padding:1px;\"";?>
 
 <div class="w3-container">
 <div class="w3-responsive">

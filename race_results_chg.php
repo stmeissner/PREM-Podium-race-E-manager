@@ -1,5 +1,6 @@
 <?PHP if(!defined("CONFIG")) exit(); ?>
 <?PHP if(!isset($login)) { show_error("You do not have administrator rights\n"); return; } ?>
+
 <?
 require_once("results_functions.php");
 
@@ -116,19 +117,7 @@ if(!$rdresult) {
 	<td>Max players:</td>
 	<td><?php echo $item['maxplayers']?></td>
 </tr>
-<!--<tr>
-    <td>Replay link:</td>
-	<td><i class="fa fa-link"></i><input type="url" style="width:500px;" name="replay" value="<?php /*echo $item['replay']*/?>" maxlength="200"></td>
-</tr>
-<tr>
-	<td>Upload result file to Simresults:</a></td>
-	<td><a href="http://simresults.net" target="_blank"><i class="fa fa-upload fa-4x" aria-hidden="true"></i></td>
-</tr>
-<tr>
-    <td>Simresults URL:</td>
-	<td><div class="input-group margin-bottom-sm">
-	<i class="fa fa-link"></i><input type="url" style="width:500px;" name="simresults" value="<?php /*echo $item['simresults']*/?>" maxlength="200"></div></td>
-</tr>-->
+
 </table>
 <table>
 <tr>
@@ -145,6 +134,10 @@ if(!$rdresult) {
 	<input type="checkbox" name="withdrawn"<?php echo $item['withdrawn']=='1'?" checked=\"1\"":""?>>
 	</td>
 </tr>
+<tr>
+	<td>Race Comment (max. 200 char)</td>
+	<td><textarea maxlength="200" name="comment" cols="70" rows="3"><?echo $item['comment'];?></textarea></td>
+	</tr>
 </table>
 <table>
 <tr>
