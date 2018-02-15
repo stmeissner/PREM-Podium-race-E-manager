@@ -151,7 +151,7 @@ if (!empty($item['comment'])) {
 		<td colspan="4">
 		<div align="center">
 		<strong>
-		Race Commision: <?php echo $item['comment']?>
+		Race Commission: <?php echo $item['comment']?>
 	</strong>
 	</div>
 	</td>
