@@ -142,9 +142,9 @@ if (count($races) > $prov_quantity) {
 	foreach($driver as $id => $ditem) {
 		// array for races in which the driver started
 		$points = $ditem['pointsrace'];
+
 		// array for all races including DNS
 		$tempPoints = array();
-
 		for($x = 1; $x <= $race; $x++) {
 			if (empty($ditem['pointsrace'][$x])) {
 				// driver did not take part in the race
@@ -222,17 +222,15 @@ usort($team, "point_sort");
 <div class="w3-responsive">
 <table class="w3-table-all">
 <tr class="w3-dark-grey">
-	<td width="5%">Name:</td>
-	<td width="10%"><?php echo $item['name']?></td>
-	<td width="25%">Races:</td>
-	<td width="30%"><?php echo $item['racecount']?></td>
-</tr>
-<tr class="w3-grey">
-	<td>Division:</td>
-	<td><?php echo $item['dname']?></td>
-	<td>Provisionals/Driver (incl. withdrawned Races):</td>
-	<td><?php echo $item['prov_quantity']?></td>
-</tr>
+	<td>Name:&nbsp;<?php echo $item['name']?></td>
+	<td>Races:&nbsp;<?php echo $item['racecount']?></td>
+	<td>Division:&nbsp;<?php echo $item['dname']?></td>
+	<td>Provisionals/Driver:&nbsp;<?php
+$count_withdrawn = array_search('1', array_column($races, 'withdrawn'));
+$real_prov = $item['prov_quantity'] - $count_withdrawn;
+	echo "$real_prov"?></td>
+	</tr>
+
 <tr class="w3-green">
 	<td colspan="4" align="center">
 		<a href=".?page=result_season&amp;season=<?php echo $season?>&amp;show=<?php echo SHOW_POINTS?>">points per race</a> |
@@ -369,8 +367,16 @@ for($x = 1; $x <= $race; $x++) {
 
 <table>
 <tr>
+<?php
+$count_withdrawn = array_search('1', array_column($races, 'withdrawn'));
+
+if (count($races) > $prov_quantity) { ?>
 	<td <?php echo $color_provisional?>><?php echo "&nbsp;provisional&nbsp;"?></td>
-	<td <?php echo $color_withdrawn?>><?php echo "&nbsp;withdrawn&nbsp;"?></td>
+<?php }
+
+if (!empty($count_withdrawn)) { ?>
+	<td <?php echo $color_withdrawn?>><?php echo "&nbsp;withdrawn"?></td>
+<?php } ?>
 </tr>
 </table>
 </div>
@@ -450,15 +456,21 @@ for($x = 1; $x <= $race; $x++) {
 <?PHP } ?>
 	<td style="background-color:transparent; text-align: right; color:black; font-weight: bold;"><?php echo !empty($titem['points']) ? $titem['points'] : "0" ?></td>
 </tr>
-<?
 
-} ?>
+<?php } ?>
+
 </table>
 
 <table>
 <tr>
-	<td <?php echo $color_provisional?>><?php echo "&nbsp;provisional&nbsp;"?></td>
-	<td <?php echo $color_withdrawn?>><?php echo "&nbsp;withdrawn&nbsp;"?></td>
+	<?php
+	if (count($races) > $prov_quantity) { ?>
+		<td <?php echo $color_provisional?>><?php echo "&nbsp;provisional&nbsp;"?></td>
+	<?php }
+
+	if (!empty($count_withdrawn)) { ?>
+		<td <?php echo $color_withdrawn?>><?php echo "&nbsp;withdrawn"?></td>
+	<?php } ?>
 </tr>
 </table>
 </div>
@@ -480,12 +492,11 @@ for($x = 1; $x <= $race; $x++) {
 <?PHP } ?>
 	<td width="1" align="right">Pts</td>
 </tr>
-<?
 
+<?php
 $pos = 0;
 foreach($driver as $id => $ditem) {
 ?>
-
 <tr class="w3-hover-green">
 	<td width="1" align="right"><?php echo ++$pos?>&nbsp;</td>
 	<td><?php echo $ditem['name']?></td>
