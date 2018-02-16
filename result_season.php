@@ -375,7 +375,7 @@ if (count($races) > $prov_quantity) { ?>
 <?php }
 
 if (!empty($count_withdrawn)) { ?>
-	<td <?php echo $color_withdrawn?>><?php echo "&nbsp;withdrawn"?></td>
+	<td <?php echo $color_withdrawn?>><?php echo "&nbsp;withdrawn&nbsp;"?></td>
 <?php } ?>
 </tr>
 </table>
@@ -469,7 +469,7 @@ for($x = 1; $x <= $race; $x++) {
 	<?php }
 
 	if (!empty($count_withdrawn)) { ?>
-		<td <?php echo $color_withdrawn?>><?php echo "&nbsp;withdrawn"?></td>
+		<td <?php echo $color_withdrawn?>><?php echo "&nbsp;withdrawn&nbsp;"?></td>
 	<?php } ?>
 </tr>
 </table>
