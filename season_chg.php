@@ -76,7 +76,7 @@ if(!$stresult) {
 <form action="season_chg_do.php" method="post">
 <table class="w3-table-all">
 <tr>
-	<td style="vertical-align:middle;width:15%;">Name:</td>
+	<td style="vertical-align:middle;width:25%;">Name:</td>
 	<td style="vertical-align:middle"><input type="text" name="name" value="<?php echo $item['name']?>" size="35" maxlength="30"></td>
 </tr>
 <tr>
@@ -126,7 +126,7 @@ if(!$stresult) {
 <tr>
 	<td style="vertical-align:top">Teams:</td>
 	<td>
-		<?
+		<?php
 		for($x = 0; $x < $item['maxteams']; $x++) {
 			if($stitem = mysqli_fetch_array($stresult))
 				show_team_combo($stitem['team']);
