@@ -74,14 +74,14 @@ if(!$stresult) {
 <h1>Modify season</h1>
 
 <form action="season_chg_do.php" method="post">
-<table border="0">
+<table class="w3-table-all">
 <tr>
-	<td width="120">Name:</td>
-	<td><input type="text" name="name" value="<?php echo $item['name']?>" maxlength="20"></td>
+	<td style="vertical-align:middle;width:15%;">Name:</td>
+	<td style="vertical-align:middle"><input type="text" name="name" value="<?php echo $item['name']?>" size="35" maxlength="30"></td>
 </tr>
 <tr>
-	<td>Division:</td>
-	<td>
+	<td style="vertical-align:middle">Division:</td>
+	<td style="vertical-align:middle">
 	<select name="division">
 	<?PHP while($diitem = mysqli_fetch_array($diresult)) { ?>
 		<option value="<?php echo $diitem['id']?>"<?php echo ($diitem['id'] == $item['division']) ? " selected" : ""?>><?php echo $diitem['name']?></option>
@@ -90,8 +90,8 @@ if(!$stresult) {
 	</td>
 </tr>
 <tr>
-	<td>Ruleset:</td>
-	<td>
+	<td style="vertical-align:middle">Ruleset:</td>
+	<td style="vertical-align:middle">
 	<select name="ruleset">
 	<?PHP while($rsitem = mysqli_fetch_array($rsresult)) { ?>
 		<option value="<?php echo $rsitem['id']?>"<?php echo ($rsitem['id'] == $item['ruleset']) ? " selected" : ""?>><?php echo $rsitem['name']?></option>
@@ -100,8 +100,8 @@ if(!$stresult) {
 	</td>
 </tr>
 <tr>
-	<td>Ruleset qualifying:</td>
-	<td>
+	<td style="vertical-align:middle">Ruleset qualifying:</td>
+	<td style="vertical-align:middle">
 	<select name="ruleset_qualifying">
 	<?PHP mysqli_data_seek($rsresult, 0); ?>
 	<option value="0">&nbsp;</option>
@@ -112,19 +112,19 @@ if(!$stresult) {
 	</td>
 </tr>
 <tr>
-	<td>Max teams:</td>
+	<td style="vertical-align:middle">Max teams:</td>
 	<td><input type="text" name="maxteams" maxlength="3" size="2" value="<?php echo $item['maxteams']?>"></td>
 </tr>
 <tr>
-	<td>Series logo for Simresults:</td>
-	<td><input type="url" name="series_logo_simresults" maxlength="200" value="<?php echo $item['series_logo_simresults']?>"</td>
+	<td style="vertical-align:middle">Series logo for Simresults:</td>
+	<td style="vertical-align:middle"><input type="url" name="series_logo_simresults" maxlength="200" size="50" value="<?php echo $item['series_logo_simresults']?>"</td>
 	<tr>
-		<td>Provisionals per driver:</td>
-		<td><input type="text" name="prov_quantity" maxlength="1" size="2" value="<?php echo $item['prov_quantity']?>"</td>
-	</tr>
+		<td style="vertical-align:middle">Summary of Provisionals and <br>withdrawned races per driver:</td>
+		<td style="vertical-align:middle"><input type="text" name="prov_quantity" maxlength="1" size="2" value="<?php echo $item['prov_quantity']?>"</td>
+		</tr>
 </tr>
 <tr>
-	<td>Teams:</td>
+	<td style="vertical-align:top">Teams:</td>
 	<td>
 		<?
 		for($x = 0; $x < $item['maxteams']; $x++) {
