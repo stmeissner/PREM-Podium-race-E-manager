@@ -91,7 +91,7 @@ if(!$rdresult) {
 <br/>
 
 <form action="race_results_chg_do.php" method="post">
-<table border="0" width="100%">
+<table class="w3-table-all">
 <tr>
 	<td width="120">Name:</td>
 	<td><?php echo $item['name']?></td>
@@ -117,23 +117,25 @@ if(!$rdresult) {
 	<td>Max players:</td>
 	<td><?php echo $item['maxplayers']?></td>
 </tr>
-
 </table>
-<table>
+<?php echo "<br>";?>
+<table class="w3-table-all">
 <tr>
-	<td>
+	<td style="text-align: left;">
 	Official result?
 	</td>
-	<td colspan="3">
+	<td style="text-align: left;">
 	<input type="checkbox" name="official"<?php echo $item['result_official']=='1'?" checked=\"1\"":""?>>
 	</td>
-	<td>
+</tr>
+<tr>
+	<td style="text-align: left;">
 	Withdraw Race?
 	</td>
-	<td colspan="3">
-	<input type="checkbox" name="withdrawn"<?php echo $item['withdrawn']=='1'?" checked=\"1\"":""?>>
+	<td style="text-align: left;">
+	<input type="checkbox" name="withdrawn"<?php echo $item['withdrawn']=='1'?" checked=\"1\"":""?>> (You need a ruleset with all points set to 0 and you have to apply it to this race. You can edit this in the race chg form)
 	</td>
-</tr>
+	</tr>
 <tr>
 	<td>Race Comment (max. 200 char)</td>
 	<td><textarea maxlength="200" name="comment" cols="70" rows="3"><?echo $item['comment'];?></textarea></td>
