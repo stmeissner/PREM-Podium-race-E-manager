@@ -73,14 +73,17 @@ if(isset($_POST['json'])) {
 		$qualyfile = file_get_contents($_FILES['qualyfile']['tmp_name']);
 		$qualyjson = json_decode($qualyfile, true);
 
+if (isset($qualyfile)) {
 		foreach($qualyjson["Result"] as $key => $row) {
 			$gridpos[$key] = $key + 1;
-			$arr_qualy_result[] = array(
+			$arr_qualy_result[] = [
 				'DriverId' => $row['CarId'],
 				'BestLap' => $row['BestLap'],
 				'GridPos' => $key + 1
-			  );
-					}
+			  ];
+				  };
+		               };
+
 
 		# Parse the Race JSON file
 		$racefile = file_get_contents($_FILES['racefile']['tmp_name']);
